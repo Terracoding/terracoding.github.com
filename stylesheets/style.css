@@ -1,0 +1,87 @@
+/* Override some defaults */
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+body {
+  padding: 20px 50px 50px 50px;
+  font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#777;
+  font-weight:300;
+}
+
+.nav {
+  background: #FFF;
+}
+.nav, .navbar-inner {
+  background: #FFF;
+  border: none;
+  box-shadow: none;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.container > footer p {
+  text-align: center; /* center align it with the container */
+}
+
+/* The white background content wrapper */
+.content {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+}
+/* tag_box ======================================================== */
+
+.tag_box {
+	list-style:none;
+	margin:0;
+	padding:5px 0 ;
+	overflow:hidden;
+}
+.tag_box li {
+	line-height:28px;
+}
+.tag_box.inline li {
+	float:left;
+}
+.tag_box a {
+	padding: 3px 6px;
+	margin: 2px;
+	background: #eee;
+	color:#005F6B;
+	border-radius: 3px;
+	text-decoration:none;
+}
+.tag_box a span{
+	vertical-align:super;
+	font-size:0.8em;
+}
+.tag_box a.active {
+	background:#57A957;
+	border:1px solid #4C964D;
+	color:#FFF;
+}
+
+pre code {background-color: transparent;}
+
+.main-content {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color:#222;
+  margin:0 0 20px;
+}
+h1, h2, h3 {
+  line-height:1.1;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 17px;
+}
+.page-header h1 {
+  font-size: 21px;
+}

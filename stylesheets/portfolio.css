@@ -1,0 +1,58 @@
+.item {
+	border-bottom-color: #e6e6e6;
+	border-bottom-width: 1px;
+	border-left-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	text-shadow: 0px 1px #fefffe;
+	color: #4c4c4c;
+	position: relative;
+	padding: 5px;
+	margin: 5px;
+  overflow: auto;
+}
+
+.item-image {
+  float: right;
+	position: relative;
+	border-style: solid;
+	border-color: #bcbcbc;
+	background-color:white;
+	margin: 5px 5px 5px 20px;
+  border-width: 1px;
+  padding: 3px 3px 0px 3px;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.item-image img {
+  border: 0;
+}
+
+.item ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+.item-title {
+	position: relative;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.item-platform {
+	margin: 10px;
+}
+
+.item-description {
+	margin: 10px;
+}
+
+.item-download-link {
+	margin: 10px;
+}
+
+.item-download-link a {
+
+}
