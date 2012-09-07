@@ -14,43 +14,34 @@
     <!-- Le styles -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/stylesheets/style.css?body=1" rel="stylesheet" type="text/css" media="all">
-    <link href="/stylesheets/highlight.css?body=1" rel="stylesheet" type="text/css" media="all">
-    <link href="/stylesheets/portfolio.css?body=1" rel="stylesheet" type="text/css" media="all">
-
-    <!-- Le fav and touch icons -->
-  <!-- Update these with your own images
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-  -->
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' type='text/css' media='screen' title='no title' charset='utf-8'>
+    <link rel='stylesheet' href='/stylesheets/typekit.css' type='text/css' media='screen' title='no title' charset='utf-8'>
+    <link rel='stylesheet' href='/stylesheets/style.css' type='text/css' media='screen' title='no title' charset='utf-8'>
+    <link rel='stylesheet' href='/stylesheets/main.css' type='text/css' media='screen' title='no title' charset='utf-8'>
   </head>
 
   <body>
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/">{{ site.title }}</a>
-          <ul class="nav pull-right">
-            {% assign pages_list = site.pages %}
-            {% assign group = 'navigation' %}
-            {% include JB/pages_list %}
-          </ul>
+    <div class='main-wrapper'>
+    <div class='body-wrapper'>
+    <div class='wrapper'>
+      <div class='header'>
+        <div class='logo'><img src='/assets/images/banner.png' alt='Banner' /></div>
+        <div class="navigation">
+          <li><a href="/index.html">Home</a></li>
+          {% assign pages_list = site.pages %}
+          {% assign group = 'navigation' %}
+          {% include JB/pages_list %}
         </div>
+        <div class='clear'></div>
       </div>
+    <div class='content'>
+      {{ content }}
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="main-content">
-          {{ content }}
-        </div>
-      </div>
-
-      <footer>
-        <p>&copy; TerraCoding LTD 2012</p>
-      </footer>
-    </div>
-    {% include JB/analytics %}
+  </div>
+  <div class='footer inner-shadow'>
+    <p><a href="http://twitter.com/terracoding">Follow us on Twitter!</a></p>
+    Copyright &copy; 2012 TerraCoding LTD
+  </div>
+  {% include JB/analytics %}
   </body>
 </html>

@@ -12,6 +12,7 @@ group: navigation
 </ul>
 
 
+<div class="page-list">
 {% for category in site.categories %} 
   <h2 id="{{ category[0] }}-ref">{{ category[0] | join: "/" }}</h2>
   <ul>
@@ -19,4 +20,4 @@ group: navigation
     {% include JB/pages_list %}
   </ul>
 {% endfor %}
-
+</div>

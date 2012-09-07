@@ -27,7 +27,7 @@ body {
 /* The white background content wrapper */
 .content {
   background-color: #fff;
-  padding: 20px;
+  padding: 20px 30px 20px 30px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
 }
 /* tag_box ======================================================== */
@@ -35,7 +35,8 @@ body {
 .tag_box {
 	list-style:none;
 	margin:0;
-	padding:5px 0 ;
+  margin-bottom:10px;
+	padding: 5px 0;
 	overflow:hidden;
 }
 .tag_box li {
@@ -51,6 +52,7 @@ body {
 	color:#005F6B;
 	border-radius: 3px;
 	text-decoration:none;
+  font-size: 13px;
 }
 .tag_box a span{
 	vertical-align:super;
@@ -71,7 +73,6 @@ pre code {background-color: transparent;}
 
 h1, h2, h3, h4, h5, h6 {
   color:#222;
-  margin:0 0 20px;
 }
 h1, h2, h3 {
   line-height:1.1;
@@ -82,6 +83,4 @@ h2 {
 h3 {
   font-size: 17px;
 }
-.page-header h1 {
-  font-size: 21px;
-}
+

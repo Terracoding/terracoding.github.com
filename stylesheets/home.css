@@ -1,0 +1,83 @@
+.masthead {
+  text-align: left;
+  font-weight: 300;
+  color: #6D6D6D;
+  margin: auto 20px 20px 20px;
+}
+
+.masthead .text {
+  margin-right: 300px;
+}
+
+.masthead h1 {
+  padding-top: 30px;
+  font-size: 31px;
+  font-style: normal;
+  font-variant: normal;
+  margin-bottom: 30px;
+  color: #414141;
+}
+
+.masthead ul {
+  margin: 20px;
+  list-style: none;
+}
+
+.masthead ul li {
+  font-weight: normal;
+  padding: 5px;
+  color: #9D9D9D;
+  font-weight: 100;
+}
+
+.masthead p {
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.masthead .btn {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.preview {
+  float: right;
+  border: none;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+}
+
+.carousel {
+  width:410px;
+  float: right;
+  padding: none;
+  height: 760px;
+}
+
+img.ios {
+  width:396px;
+  height: 744px;
+}
+
+.carousel .item {-webkit-transition: opacity 3s; -moz-transition: opacity 3s; -ms-transition: opacity 3s; -o-transition: opacity 3s; transition: opacity 3s;}
+.carousel .active.left {left:0;opacity:0;z-index:2;}
+.carousel .next {left:0;opacity:1;z-index:1;}
+
+.masthead2 {
+  text-align: center;
+  float: none;
+  margin: auto;
+}
+.masthead2 .preview {
+  text-align: center;
+  margin: auto;
+  max-width: 700px;
+  float: none;
+}
+.masthead2 .text {
+  text-align: center;
+  float: none;
+  margin: auto;
+}
+
