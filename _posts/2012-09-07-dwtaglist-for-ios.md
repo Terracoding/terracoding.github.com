@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "DWTagList for iOS"
-category: 
+category: Tutorial
 author: Dominic Wroblewski
 twitter: domness
-tags: []
+tags: [ios, tutorial]
 ---
 {% include JB/setup %}
 
