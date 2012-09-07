@@ -165,7 +165,7 @@ hr.soften {
   margin-top: 40px;
 }
 .posts {
-  padding-left: 10px;
+  padding-left: 0px;
 }
 .posts li {
   list-style-type: none;
@@ -176,10 +176,16 @@ hr.soften {
   margin-bottom: 0px;
 }
 .post-header {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
-.page-header h1, .post-header h1 {
+.page-header h1 {
   font-size: 27px;
+}
+.post-header h1 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #444;
 }
 .page-detail {
   font-size: 14px;

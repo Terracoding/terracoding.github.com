@@ -7,15 +7,14 @@ layout: default
   <div class="span8">
     {% for post in site.posts limit:10 %}
     <div class='project'>
-      <div class='text'>
-        <div class="title">{{ post.title }}</div>
-        <p>{{ post.date | date_to_string }}</p>
-        <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
-        
-        <p><a class="btn btn-primary" href="{{ post.url }}">Read More &raquo;</a></p>
+      <div class="post-header">
+        <h1>{{ post.title }}</h1>
+        <div class="page-detail">{{ post.date | date_to_string }}</div>
       </div>
+      <p>{{ post.content | strip_html | truncatewords: 50 }}</p>  
+      <p><a class="btn btn-primary" href="{{ post.url }}">Read More &raquo;</a></p>
     </div>
-    {% endfor %}
+  {% endfor %}
   </div>
   <div class="span3">
     <h2>Archive</h2>
