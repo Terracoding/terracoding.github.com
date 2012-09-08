@@ -75,9 +75,9 @@ a:hover {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  -moz-box-shadow: 0 1px 6px #606060;
-  -webkit-box-shadow: 0 1px 6px #606060;
-  box-shadow: 0 1px 6px #606060;
+  -moz-box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.3);
   z-index: 1;
 }
 .footer {
