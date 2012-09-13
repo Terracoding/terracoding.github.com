@@ -221,3 +221,7 @@ hr.soften {
   margin-left: 25px;
   list-style-type: none;
 }
+#links {
+  margin-left: 0px;
+  list-style-type: none;
+}

@@ -39,6 +39,12 @@
     {% include JB/comments %}
   </div>
   <div class="span3">
+    <h2>Links</h2>
+    <ul id="links">
+      {% assign pages_list = site.pages %}
+      {% assign group = 'navigation' %}
+      {% include JB/pages_list %}
+    </ul>
     <h4>Published</h4>
     <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
 
