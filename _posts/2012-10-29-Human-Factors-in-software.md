@@ -53,7 +53,7 @@ Now we have a hypothesis about the market, we have to go out and study that mark
 
 So you can say "they're not doing x because of y", and then you have to go back to what their original motivations and needs are.  You then say maybe that is not what we should be doing, maybe that is not the solution here. You can start experimenting with what you think could be a solution.
 
-A lot of people think that research is a big undertaking, but the amount of guerrilla research I have done going to cafes and saying I'll buy you a coffee if I can sit down with you for 5 mins.... It's well worth it.
+A lot of people think that research is a big undertaking, but the amount of guerrilla research I have done going to cafés and saying I'll buy you a coffee if I can sit down with you for 5 mins.... It's well worth it.
 
 ###4. What is ISO 25062:2006? Any other standards worth mentioning?
 
@@ -64,7 +64,7 @@ This is a scientifically replicable experiment that anyone can re-perform.
 There is also a framework for research that has been in place since the 1940s which is an international standard, that no one seems to know about, which is [ISO 9241-210:2010](http://www.iso.org/iso/catalogue_detail.htm?csnumber=52075),
 Ergonomics of Human-System Interaction -- Part 210: Human-centred design for interactive systems.
 
-###5. What's the differene between the ISO 25062:2006 format and, say, testing a prototype with users, for a startup product?
+###5. What's the difference between the ISO 25062:2006 format and, say, testing a prototype with users, for a startup product?
 
 **Ash:** People get confused about usability testing, they tend to think that it is all done in a lab, in a fake environment performing a series of made up tests.  This is called Summative Usability Testing. Which is a far cry from formative testing, which is what I described earlier - where you sit down with someone in a cafe. 
 
@@ -84,7 +84,7 @@ Whereas formative testing is 99% of usability testing, and people get it confuse
 
 I liken it to a ship going across the ocean. A few degrees off course at the beginning may be unnoticeable at first, but by the end of the journey can equate to 100s of miles from the target destination.  As I alluded to earlier, people confuse summative and formative usability testing and see it as this big expensive, hard to set up thing. This is why it's always left to the end. 
 
-Whereas, if you have defined who it is you are building this for in the first place, one of the first things you do is find out where they are. They are going to be on certain forums or groups, in certain areas in a cafe.... Find out where they are and go and hang out in those types of places. For the price of a coffee, or nothing at all, it is amazing how grateful people are when you ask them about a piece of software they think is being developed for them!
+Whereas, if you have defined who it is you are building this for in the first place, one of the first things you do is find out where they are. They are going to be on certain forums or groups, in certain areas in a café.... Find out where they are and go and hang out in those types of places. For the price of a coffee, or nothing at all, it is amazing how grateful people are when you ask them about a piece of software they think is being developed for them!
 
 
 ###7. What resources would you recommend for those embarking on building a new user centric software?
