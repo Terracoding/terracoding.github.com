@@ -17,6 +17,13 @@ layout: default
   {% endfor %}
   </div>
   <div class="span3">
+    <h2>Links</h2>
+    <ul id="links">
+      {% assign pages_list = site.pages %}
+      {% assign group = 'navigation' %}
+      {% include JB/pages_list %}
+    </ul>
+    <br/>
     <h2>Archive</h2>
     <ul class="posts">
       {% for post in site.posts limit:10 %}

@@ -2,9 +2,12 @@
   <div class="span8">
     <div class="post-header">
       <h1>{{ page.title }} <small>{{ site.tagline }}</small></h1>
+      {% unless page.author == nil %}
+      <img class="post-image" src="/assets/images/{{ page.author }}.png" />
+      {% endunless %}
       <div class="page-detail">{{ page.date | date_to_string }}</div>
       {% unless page.author == nil %}
-      <div class="page-detail">Written by <a href="http://www.twitter.com/{{ page.twitter }}">{{ page.author }}</a></div>
+      <div class="page-detail post-author">Written by <a href="http://www.twitter.com/{{ page.twitter }}">{{ page.author }}</a></div>
       {% endunless %}
     </div>
     {{ content }}
@@ -39,6 +42,12 @@
     {% include JB/comments %}
   </div>
   <div class="span3">
+    <h2>Links</h2>
+    <ul id="links">
+      {% assign pages_list = site.pages %}
+      {% assign group = 'navigation' %}
+      {% include JB/pages_list %}
+    </ul>
     <h4>Published</h4>
     <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
 
