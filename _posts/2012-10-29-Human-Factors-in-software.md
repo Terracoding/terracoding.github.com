@@ -4,7 +4,7 @@ title: "Building Software for Humans - Interview with Ash Donaldson"
 category: Interview
 author: Iz El-Bahnasy
 twitter: elbahnasy
-tags: ["human factors", "UX", "design", "lean"]
+tags: ["human factors", "UX", "design", "lean", "interviews"]
 ---
 {% include JB/setup %}
 
