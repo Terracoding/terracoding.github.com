@@ -10,7 +10,7 @@ tags: ["human factors", "UX", "design", "lean"]
 
 ![Human Factors in Software, Ash Donaldson](http://farm5.staticflickr.com/4151/5119935194_b55ff0391d.jpg "Ash Donaldson")
 
-Eight o'clcok on a Friday spring morning at a Darling Harbour cafe, Sydney. The smell of coffee in the air, pen and paper were all ready for an interview with Ash Donaldson, one of Sydney's most profound Behavioural / User Experience Designers, and a [TEDx speaker](http://tedxcanberra.org/talks/ash-donaldson-cognitive-dissonance/).
+Eight o'clock on a Friday spring morning at a Darling Harbour cafe, Sydney. The smell of coffee in the air, pen and paper were all ready for an interview with Ash Donaldson, one of Sydney's most profound Behavioural / User Experience Designers, and a [TEDx speaker](http://tedxcanberra.org/talks/ash-donaldson-cognitive-dissonance/).
 
 I first met Ash during my time at CommunityEngine, a Sydney Northern Beaches startup.  When he joined, the word on the the street was that we had struck gold with his hire.  A few months later, upon a seating reshuffle, I found myself sitting at the desk behind Ash.  Since then we became buddies!
 
