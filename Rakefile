@@ -1,5 +1,6 @@
 require "rubygems"
 require 'rake'
+require 'yaml'
 
 SOURCE = "."
 CONFIG = {
@@ -12,22 +13,24 @@ CONFIG = {
 # Usage: rake post title="A Title"
 desc "Begin a new post in #{CONFIG['posts']}"
 task :post do
+  abort("File 'author.yml' does not exist, please copy and update your sample file.") unless File.exist?("author.yml")
   abort("rake aborted: '#{CONFIG['posts']}' directory not found.") unless FileTest.directory?(CONFIG['posts'])
+  author_details = YAML.load_file("author.yml")
   title = ENV["title"] || "new-post"
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   filename = File.join(CONFIG['posts'], "#{Time.now.strftime('%Y-%m-%d')}-#{slug}.#{CONFIG['post_ext']}")
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
-  
+
   puts "Creating new post: #{filename}"
   open(filename, 'w') do |post|
     post.puts "---"
     post.puts "layout: post"
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
     post.puts "category: "
-    post.puts "author: Dominic Wroblewski"
-    post.puts "twitter: domness"
+    post.puts "author: #{author_details["name"]}"
+    post.puts "twitter: #{author_details["handle"]}"
     post.puts "tags: []"
     post.puts "---"
     post.puts "{% include JB/setup %}"
