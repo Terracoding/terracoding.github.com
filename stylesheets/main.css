@@ -186,7 +186,9 @@ hr.soften {
   font-size: 29px;
   font-weight: normal;
   margin-bottom: 10px;
-  color: #444;
+}
+.post-header a:hover {
+  text-decoration: none;
 }
 .page-detail {
   font-size: 14px;

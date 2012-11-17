@@ -8,7 +8,7 @@ layout: default
     {% for post in site.posts limit:10 %}
     <div class='project'>
       <div class="post-header">
-        <h1>{{ post.title }}</h1>
+        <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
         <div class="page-detail">{{ post.date | date_to_string }}</div>
       </div>
       <p>{{ post.content | strip_html | truncatewords: 50 }}</p>  
