@@ -17,6 +17,8 @@ layout: default
   {% endfor %}
   </div>
   <div class="span3">
+    <a href="/feed.xml"><img src="/assets/images/feed-icon-14x14.png" /></a>
+    <br/>
     <h2>Links</h2>
     <ul id="links">
       {% assign pages_list = site.pages %}
