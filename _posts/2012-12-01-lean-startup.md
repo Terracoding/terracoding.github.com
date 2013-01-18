@@ -10,4 +10,4 @@ tags: [lean, startup, business, mvp]
 
 Today I want to present a few slides to a group of people about the Lean Startup methodology. Here is something that I came up with:
 
-{% fdf192c01dc10130cba112313d16105c %}
+[Click here to view the presentation](https://speakerdeck.com/domness/lean-startups)
