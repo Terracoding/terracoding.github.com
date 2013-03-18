@@ -22,7 +22,7 @@ body {
 }
 p {
   font-family: proxima-nova, 'Helvetica Neue', Helvetica, sans-serif;
-  font-weight: normal;
+  font-weight: 300;
   font-size: 15px;
 }
 a {
