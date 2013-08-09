@@ -44,6 +44,6 @@ So we decided that notifications should be consumed outside of email or smart ph
 
 We also decided that a good way to decide if a notification is important is when "the team" thinks it's important.  So we decided to build a way for a team to consume notifications as a collective.
 
-This is what we have been working on. It's called [Arrivals] (http://www.arrivals-app.com).If you're interested, signup and we'll be happy to speak to you :)
+This is what we have been working on. It's called [Arrivals] (http://www.arrivals-app.com). If you're interested, signup and we'll be happy to speak to you :)
 
 Do you also get notification overload when using many collaboration apps?  Do you have a process in place to manage it all? We would love to know your thoughts below.
