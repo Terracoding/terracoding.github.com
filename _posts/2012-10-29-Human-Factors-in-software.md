@@ -78,7 +78,7 @@ The standard tells you what sorts of things you should be recording, and what me
 
 Whereas formative testing is 99% of usability testing, and people get it confused. They think of usability testing as one type.  Formative usability testing is best done in context. So you go to peoples' work place and you do a cognitive walkthrough, to start with, then you do some paper prototyping, then you do some light mock ups. You go through those iterations but it is best to do it in context so that you can see how the environment impacts upon their behaviour in completing a task.
 
-###6. Here at TerraCoding, we work with greenfield projects and startups.  In terms of product development, what advice would you give to startup folks at the start of a product development cycle?
+###6. Here at Terracoding, we work with greenfield projects and startups.  In terms of product development, what advice would you give to startup folks at the start of a product development cycle?
 
 **Ash:** Take your idea and objectively put it in front of people. Put a few drawings of the flow on paper and have a few screens for people to see. 
 

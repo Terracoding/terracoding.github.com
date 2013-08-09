@@ -4,7 +4,7 @@ exclude: [".rbenv-version", "README.md", "Rakefile"]
 auto: true
 pygments: true
 
-title : TerraCoding
+title : Terracoding
 tagline:
 author :
   name : Dominic Wroblewski
@@ -40,6 +40,6 @@ JB :
   sharing :
     provider : [tweet, plusone, like, reddit]
 
-name: "TerraCoding"
-description: "TerraCoding Blog"
+name: "Terracoding"
+description: "Terracoding Blog"
 url: "http://terracoding.github.com"

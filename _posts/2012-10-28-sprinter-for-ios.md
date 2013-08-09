@@ -10,7 +10,7 @@ tags: [sprint.ly, ios, iphone, ipad, development, apps]
 
 Recently I have been working closely with the Sprint.ly team to work on the development of our new app for iOS, named "Sprinter".
 
-Sprinter is an iOS app that enables the user to access all their projects and items that are held on the Sprint.ly website. It works very similar to a Kanban board. Behind the scenes we have been testing the app with a number of close friends of TerraCoding to try out our latest new product.
+Sprinter is an iOS app that enables the user to access all their projects and items that are held on the Sprint.ly website. It works very similar to a Kanban board. Behind the scenes we have been testing the app with a number of close friends of Terracoding to try out our latest new product.
 
 Over the past few days I have been packaging up the app ready for the public! Although not yet fully ready for release, we are making a few last minute fixes and getting the final testing ready for a proper release early November.
 
