@@ -105,7 +105,7 @@ One of the things we like about Google docs is being be on the same page as your
 
 ![Evernote](https://lh3.ggpht.com/si0cgkp2rkVX5JhhBYrtZ4cy2I1hZcrx8aiz-v8MjvPykfhT7-YAM2B8MNi0OCF9AQ=w300 "Evernote")  
 
-We share a Terracoding notebook between us on Evernote.  There we store thigns like blog post examples, email templates, interviews and genral notes.  We all use Evernote individually so why not make it the team's note taking app.
+We share a Terracoding notebook between us on Evernote.  There we store things like blog post examples, email templates, interviews and genral notes.  We all use Evernote individually so why not make it the team's note taking app.
 
 
 Do you work in a distributed team? What other apps do you use that help streamline your workflow.  We would love your feedback :)
