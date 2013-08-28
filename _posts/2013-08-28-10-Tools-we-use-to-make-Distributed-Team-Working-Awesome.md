@@ -20,13 +20,13 @@ There is no doubt that without tech, distributed working would be difficult, mak
 
 **1. [Trello](http://www.trello.com)**  
 
-![Trello](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvAbQ20erMIe-BxuTSzW5zziGQECvqXv_euCjyCoVadco5D3j7zw "Trello")
+![Trello](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvAbQ20erMIe-BxuTSzW5zziGQECvqXv_euCjyCoVadco5D3j7zw "Trello")  
 
 We love Trello, and we use it for all sort of cases.  From a simple task lists, Business Model Canvases, it's represented in Trello boards.
 
 ***2. [Sprintly](http://www.sprint.ly).***  
 
-![Sprintly](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_tcBaLC6Exm8K8J803H-XCdnmXciIU880Bur6oZ0TdUwm1Ad9 "Sprintly")
+![Sprintly](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_tcBaLC6Exm8K8J803H-XCdnmXciIU880Bur6oZ0TdUwm1Ad9 "Sprintly")  
 Sprintly is a beautifully designed Kanaban board app.  We use it to manage our client or in-house software projects as part of our Agile development efforts.
 
 One of the philosophies behind Sprintly's design is that human's are bad at time estimation.  So the app focuses on enhancing communication and integrating third party solutions, as oppose to focusing on story estimations.
@@ -37,7 +37,7 @@ We have also built a couple of workflow tool for Sprinty, which are available he
 
 ***3. [Sqwiggle](http://www.sqwiggle.com)***  
 
-![Sqwiggle](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRediEZHDijK9FDBpzQfoX_GpQYl2gCZFKI5rqY_kJrBlqWWJfx "Sprintly")
+![Sqwiggle](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRediEZHDijK9FDBpzQfoX_GpQYl2gCZFKI5rqY_kJrBlqWWJfx "Sprintly")  
 
 Our friends at Sqwiggle have developed an awesome app that essentially gives you a sense of being in the company of your team mates, even though (in our case) we're on opposite sides of the world.
 
@@ -61,7 +61,7 @@ Now there is a plethora of cloud apps, from spreadsheets to drawing apps to mind
 
 This is what the inspiration from Bundll came from.  We wanted a central organised work reference system that we can use to find anything related to our projects; without having to rely on memory as to whether a piece of work resides either in Evernote or Dropbox for example.
 
-Bundlll is currenlty in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)
+Bundlll is currenlty in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)  
 
 ***6. [Dropbox](http://www.dropbox.com)***  
 
@@ -71,7 +71,7 @@ Dropbox stores most of our files in our shared foler.  Everyone is in sync; a no
 
 ***7. [Hipchat](https://www.hipchat.com)***  
 
-![Hipchat](http://cdn.appstorm.net/windows.appstorm.net/files/2012/05/HipChat.png "Dropbox")
+![Hipchat](http://cdn.appstorm.net/windows.appstorm.net/files/2012/05/HipChat.png "Dropbox")  
 
 A big reason for using Hipchat is the ability to integrate webhooks for our Continuous Integration server, for Errbit error reports and for activities on Sprintly.
 
@@ -81,7 +81,7 @@ We use Hipchat for general communications and we are big fans of the Hipchat emo
 
 ***8. [Github](http://www.github.com)***  
 
-![Github](https://si0.twimg.com/profile_images/651575553/twittergithub2.png "Github")
+![Github](https://si0.twimg.com/profile_images/651575553/twittergithub2.png "Github")  
 
 Github is vital for our distributed work.  Our Github repositories host most of our code.  We use the Gitflow framework as a guide for collaborating on a codebase.
 
@@ -93,7 +93,7 @@ One of the things we like about Google docs is being be on the same page as your
 
 ***10. [Evernote](http://www.evernote.com)***  
 
-![Evernote](https://lh3.ggpht.com/si0cgkp2rkVX5JhhBYrtZ4cy2I1hZcrx8aiz-v8MjvPykfhT7-YAM2B8MNi0OCF9AQ=w300 "Evernote")
+![Evernote](https://lh3.ggpht.com/si0cgkp2rkVX5JhhBYrtZ4cy2I1hZcrx8aiz-v8MjvPykfhT7-YAM2B8MNi0OCF9AQ=w300 "Evernote")  
 
 We share a Terracoding notebook between us on Evernote.  There we store thigns like blog post examples, email templates, interviews and genral notes.  We all use Evernote individually so why not make it the team's note taking app.
 
