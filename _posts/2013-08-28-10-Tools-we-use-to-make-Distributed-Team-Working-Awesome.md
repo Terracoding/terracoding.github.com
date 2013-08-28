@@ -9,6 +9,7 @@ tags: ["distributed team", "collaboration", "remote working"]
 {% include JB/setup %}
 
 ![Sharpest tool in the shed, by Lachlan Donald](http://farm3.staticflickr.com/2851/9408028555_396725f058.jpg "tools")
+
 Sharpest tool in the shed, by Lachlan Donald  
 
 "Distributed Team working" is a hot topic at the moment.  Great companies such as 37Signals embrace ability to work with talent spread across the globe.  The advantages are clear:
