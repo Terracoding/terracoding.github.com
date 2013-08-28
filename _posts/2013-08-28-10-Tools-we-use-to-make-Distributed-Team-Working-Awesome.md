@@ -66,7 +66,7 @@ Now there is a plethora of cloud apps, from spreadsheets to drawing apps to mind
 
 This is what the inspiration from Bundlll came from.  We wanted a central organised work reference system that we can use to find anything related to our projects; without having to rely on memory as to whether a piece of work resides either in Evernote or Dropbox for example.
 
-Bundlll is currenlty in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)  
+Bundlll is currently in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)  
 
 
 ***6. [Dropbox](http://www.dropbox.com)***  
@@ -84,7 +84,7 @@ A big reason for using HipChat is the ability to integrate webhooks for our Cont
 
 In other words, whenever we have a new software build, we receive a message on hip chat containing the build status (passing or failing).  Also, if an error occurs on any of our apps we get a notification in our HipChat in the within the project's specific room.
 
-We use HipChat for general communications and we are big fans of the [HipChat emoj!](http://hipchat-emoticons.nyh.name/)
+We use HipChat for general communications and we are big fans of the [HipChat emoji!](http://hipchat-emoticons.nyh.name/)
 
 
 ***8. [Github](http://www.github.com)***  
