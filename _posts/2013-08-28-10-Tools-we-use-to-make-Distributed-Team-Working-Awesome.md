@@ -24,9 +24,11 @@ There is no doubt that without tech, distributed working would be difficult, mak
 
 We love Trello, and we use it for all sort of cases.  From a simple task lists, Business Model Canvases, it's represented in Trello boards.
 
+
 ***2. [Sprintly](http://www.sprint.ly).***  
 
 ![Sprintly](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_tcBaLC6Exm8K8J803H-XCdnmXciIU880Bur6oZ0TdUwm1Ad9 "Sprintly")  
+
 Sprintly is a beautifully designed Kanaban board app.  We use it to manage our client or in-house software projects as part of our Agile development efforts.
 
 One of the philosophies behind Sprintly's design is that human's are bad at time estimation.  So the app focuses on enhancing communication and integrating third party solutions, as oppose to focusing on story estimations.
@@ -34,6 +36,7 @@ One of the philosophies behind Sprintly's design is that human's are bad at time
 Because we love Sprintly, we developed an iPhone / iPad app for it. This makes it super easy and fast to add, and track stories: Sprintly in your pocket!
 
 We have also built a couple of workflow tool for Sprinty, which are available here.
+
 
 ***3. [Sqwiggle](http://www.sqwiggle.com)***  
 
@@ -45,9 +48,11 @@ Sqwiggle is video / chat collaboration app.  Unlike other video apps we know of,
 access
 With one click on a team mate's snapshot you are instantly connected.  Conversations generally tend to be short on Sqwiggle (a quick query and back to work).  It feels great being able to have instant access to team mates.
 
+
 ***4. Facebook Groups***  
 
 We tried out a number of enterprise social networking solutions.  Facebook's private groups is a great fit for the small team that we are.  We already use Facebook socially, and the interface is clean, and responsive.
+
 
 ***5. [Bundlll](http://www.bundlll.com)***  
 
@@ -63,11 +68,13 @@ This is what the inspiration from Bundll came from.  We wanted a central organis
 
 Bundlll is currenlty in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)  
 
+
 ***6. [Dropbox](http://www.dropbox.com)***  
 
 ![Dropbox](http://blogs.evergreen.edu/seedsandcircuits/files/2013/05/Dropbox-Art.jpg "Dropbox")
 
 Dropbox stores most of our files in our shared foler.  Everyone is in sync; a no brainer.
+
 
 ***7. [Hipchat](https://www.hipchat.com)***  
 
@@ -79,11 +86,13 @@ In other words, whenever we have a new software build, we receive a message on h
 
 We use Hipchat for general communications and we are big fans of the Hipchat emojies!
 
+
 ***8. [Github](http://www.github.com)***  
 
 ![Github](https://si0.twimg.com/profile_images/651575553/twittergithub2.png "Github")  
 
 Github is vital for our distributed work.  Our Github repositories host most of our code.  We use the Gitflow framework as a guide for collaborating on a codebase.
+
 
 ***9. Google Docs***  
 
@@ -91,10 +100,12 @@ Github is vital for our distributed work.  Our Github repositories host most of 
 
 One of the things we like about Google docs is being be on the same page as your team mate, quite literally! Realtime collaboration on a docuemnt is great!
 
+
 ***10. [Evernote](http://www.evernote.com)***  
 
 ![Evernote](https://lh3.ggpht.com/si0cgkp2rkVX5JhhBYrtZ4cy2I1hZcrx8aiz-v8MjvPykfhT7-YAM2B8MNi0OCF9AQ=w300 "Evernote")  
 
 We share a Terracoding notebook between us on Evernote.  There we store thigns like blog post examples, email templates, interviews and genral notes.  We all use Evernote individually so why not make it the team's note taking app.
+
 
 Do you work in a distributed team? What other apps do you use that help streamline your workflow.  We would love your feedback :)
