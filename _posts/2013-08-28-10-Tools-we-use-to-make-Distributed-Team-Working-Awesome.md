@@ -29,13 +29,13 @@ We love Trello, and we use it for all sort of cases.  From a simple task lists, 
 
 ![Sprintly](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_tcBaLC6Exm8K8J803H-XCdnmXciIU880Bur6oZ0TdUwm1Ad9 "Sprintly")  
 
-Sprintly is a beautifully designed Kanaban board app.  We use it to manage our client or in-house software projects as part of our Agile development efforts.
+Sprintly is a beautifully designed Kanban board app.  We use it to manage our client or in-house software projects as part of our Agile development efforts.
 
 One of the philosophies behind Sprintly's design is that human's are bad at time estimation.  So the app focuses on enhancing communication and integrating third party solutions, as oppose to focusing on story estimations.
 
 Because we love Sprintly, we developed an iPhone / iPad app for it. This makes it super easy and fast to add, and track stories: Sprintly in your pocket!
 
-We have also built a couple of workflow tool for Sprinty, which are available here.
+We have also built a couple of workflow tool for Sprintly, which are available here.
 
 
 ***3. [Sqwiggle](http://www.sqwiggle.com)***  
@@ -64,7 +64,7 @@ The problem back then was it was difficult to access work outside the office, es
 
 Now there is a plethora of cloud apps, from spreadsheets to drawing apps to mind mapping apps.  The problem now is that by using many of these apps (which we do), the team's work lives in the apps themselves rather than being in an organised structure (i.e. what the network drive was).  When the work is scattered across many team collaboration tools, it is difficult to get a handle on where particular pieces of work could be located.
 
-This is what the inspiration from Bundll came from.  We wanted a central organised work reference system that we can use to find anything related to our projects; without having to rely on memory as to whether a piece of work resides either in Evernote or Dropbox for example.
+This is what the inspiration from Bundlll came from.  We wanted a central organised work reference system that we can use to find anything related to our projects; without having to rely on memory as to whether a piece of work resides either in Evernote or Dropbox for example.
 
 Bundlll is currenlty in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)  
 
@@ -73,18 +73,18 @@ Bundlll is currenlty in closed beta, [but we would love to have you on the beta 
 
 ![Dropbox](http://blogs.evergreen.edu/seedsandcircuits/files/2013/05/Dropbox-Art.jpg "Dropbox")
 
-Dropbox stores most of our files in our shared foler.  Everyone is in sync; a no brainer.
+Dropbox stores most of our files in our shared folder.  Everyone is in sync; a no brainer.
 
 
-***7. [Hipchat](https://www.hipchat.com)***  
+***7. [HipChat](https://www.hipchat.com)***  
 
-![Hipchat](http://cdn.appstorm.net/windows.appstorm.net/files/2012/05/HipChat.png "Dropbox")  
+![HipChat](http://cdn.appstorm.net/windows.appstorm.net/files/2012/05/HipChat.png "Dropbox")  
 
-A big reason for using Hipchat is the ability to integrate webhooks for our Continuous Integration server, for Errbit error reports and for activities on Sprintly.
+A big reason for using HipChat is the ability to integrate webhooks for our Continuous Integration server, for Errbit error reports and for activities on Sprintly.
 
-In other words, whenever we have a new software build, we receive a message on hip chat containing the build status (passing or failing).  Also, if an error occurs on any of our apps we get a notification in our Hipchat in the within the project's specific room.
+In other words, whenever we have a new software build, we receive a message on hip chat containing the build status (passing or failing).  Also, if an error occurs on any of our apps we get a notification in our HipChat in the within the project's specific room.
 
-We use Hipchat for general communications and we are big fans of the Hipchat emojies!
+We use HipChat for general communications and we are big fans of the [HipChat emoj!](http://hipchat-emoticons.nyh.name/)
 
 
 ***8. [Github](http://www.github.com)***  
@@ -98,14 +98,14 @@ Github is vital for our distributed work.  Our Github repositories host most of 
 
 ![Google Docs](http://0.jsucdn.com/instructionaltech/files/2012/02/M-GoogleDocs.jpg?75f79a "Google Docs")
 
-One of the things we like about Google docs is being be on the same page as your team mate, quite literally! Realtime collaboration on a docuemnt is great!
+One of the things we like about Google docs is being be on the same page as your team mate, quite literally! Realtime collaboration on a document is great!
 
 
 ***10. [Evernote](http://www.evernote.com)***  
 
 ![Evernote](https://lh3.ggpht.com/si0cgkp2rkVX5JhhBYrtZ4cy2I1hZcrx8aiz-v8MjvPykfhT7-YAM2B8MNi0OCF9AQ=w300 "Evernote")  
 
-We share a Terracoding notebook between us on Evernote.  There we store things like blog post examples, email templates, interviews and genral notes.  We all use Evernote individually so why not make it the team's note taking app.
+We share a Terracoding notebook between us on Evernote.  There we store things like blog post examples, email templates, interviews and general notes.  We all use Evernote individually so why not make it the team's note taking app.
 
 
 Do you work in a distributed team? What other apps do you use that help streamline your workflow.  We would love your feedback :)
