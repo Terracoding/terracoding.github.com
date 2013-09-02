@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Solution for a Distributed Team Problem"
-category: Arrivals_app
+category: Apps
 author: Iz El-Bahnasy
 twitter: elbahnasy
 tags: ["distributed team", "collaboration", "email notifications"]
