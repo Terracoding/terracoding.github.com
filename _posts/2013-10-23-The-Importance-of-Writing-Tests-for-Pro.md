@@ -29,7 +29,7 @@ After some time debugging, the developer concludes that the bug was caused by a 
 
 "We can, but it will be difficult to: 'draw up construction plans for a house, when we don't even know what's between the walls and what's under the floor'! "
 
-The keyword in focus here is construction plans.
+The keyword in focus here is ***construction plans***.
 
 <br />
 **Automated Testing as a Hidden Cost Saving**
@@ -55,18 +55,22 @@ A software product that lacks adequate automated tests is like building a skyscr
 
 In construction (where I first started out), building a structure from design plans is a given; it is standard everyday work.  You would not get approval otherwise.  Without plans, you would not know what to build and in what sequence.
 
-Now, the argument against this analogy would be: in software we build from a product spec, which is synonymous to construction plans for a building.
+Now, the argument against this analogy would be: in software we build from a product spec.  i.e. it is the product spec that is synonymous to construction plans for a building, not the tests.
 
 That is correct.
 
-However, construction plans are also used by engineers to carry out maintenance work.  What automated testing offers is a way to automatically make sure that a product still works to the spec when a change is made.  The alternative is expensive human resources who manually test the product.
+However, consider this: Construction plans are used by engineers as a reference for carrying out maintenance work.  Maintenance in construction takes place on a schedule or when required (which typically isn't often).  This is when software projects are always changing and continuously evolving (i.e. maintenance takes place more often).
 
-If the luxury of automation in maintenance was available in construction, a lot of money would be saved.  In fact, there are efforts in construction to use 3D simulation technologies to make use of automation, leading to cost savings.
+Unlike a construction project, a software application rarely becomes the final product when first released.
+
+What automated testing offers is a way to automatically make sure that a product still works to the spec when a change is made.  The alternative is expensive human resources who manually test the product.
+
+If the luxury of automation in maintenance was available in construction, a lot of money would be saved.  In fact, there are efforts in construction to use 3D modeling technologies to make use of automation, leading to cost savings.
 
 <br />
 **Different Techniques for Testing**
 
-Some of the naming conventions used by developers to describe techniques for testing and designing software include Test Driven Development, Test First Development and Behavioural Driven Development.  There are differences between these techniques, and choices are made subjectively.
+Some of the naming conventions used by developers to describe techniques for testing and designing software include [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_development), [Test First Development] (http://www.extremeprogramming.org/rules/testfirst.html) and [Behaviour Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development).  There are differences between these techniques, and choices are made subjectively.
 
 However, no matter what methodology your developer chooses, the take away here is the importance of a good test suite as a primary expectation when commissioning developers.
 
