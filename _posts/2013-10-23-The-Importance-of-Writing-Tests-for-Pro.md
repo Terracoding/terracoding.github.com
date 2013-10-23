@@ -13,7 +13,7 @@ tags: ["Test Driven Development", "TDD", "Automated Tests"]
 Construction Plan by cbmd, source: Flikr
 
 <br />
-**The example goes like this:**
+**The Example goes like this:**
 
 Just as the developer thinks it will be a smooth morning, they are bombarded with error reports or bug tickets on entrance to the office; the 5 year old software is broken again!
 
@@ -32,7 +32,7 @@ After some time debugging, the developer concludes that the bug was caused by a 
 The keyword in focus here is construction plans.
 
 <br />
-**Automated Testing as a Hidden Costs Saving**
+**Automated Testing as a Hidden Cost Saving**
 
 When it comes to collaboration on a software project, It is important for the technical team to have visibility into why feature decisions are made and how new features play out in the market.
 
