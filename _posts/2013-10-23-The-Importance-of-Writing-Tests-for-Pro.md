@@ -36,7 +36,7 @@ The keyword in focus here is construction plans.
 
 When it comes to collaboration on a software project, It is important for the technical team to have visibility into why feature decisions are made and how new features play out in the market.
 
-This is just as important as for product owners (or the business development team) to have enough visibility into what is 'under the hood', and the infrastructure work required for building or changing fearures.
+This is just as important as for product owners (or the business development team) to have enough visibility into what is 'under the hood', and the infrastructure work required for building or changing features.
 
 Automated testing is an integral part of any feature implementation.  A great automated test suite forms the solid infrastructure for maintainable software.  And Software that is difficult to maintain is costly.
 
