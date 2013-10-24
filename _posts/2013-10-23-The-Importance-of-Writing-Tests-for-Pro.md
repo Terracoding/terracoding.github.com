@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Costs saved when your Team Writes Automated Tests"
+title: "Costs Saved when your Team Writes Automated Tests"
 category: Test Driven Development, Automated Tests
 author: Iz El-Bahnasy
 twitter: elbahnasy
