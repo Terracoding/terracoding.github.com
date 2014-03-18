@@ -1,0 +1,20 @@
+---
+slug: posts-by-tag
+---
+
+#banner
+  %h1
+    Posts tagged:
+    = link_to(tagname, tag_path(tagname))
+
+%section#blog
+  - articles.each_with_index do |post, i|
+    - if i > 0
+      %hr
+
+    .wrapper
+      = partial "shared/post", locals: { post: post }
+
+  - if articles.empty?
+    .wrapper
+      %p No posts found.
