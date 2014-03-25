@@ -2,6 +2,7 @@
 %html{ lang: "en-gb" }
   = partial "shared/head"
   %body{ id: current_page.data.slug }
-    = partial "shared/header"
+    = partial "shared/navbar"
     = yield
+    = partial "shared/footer"
     = partial "shared/javascripts"

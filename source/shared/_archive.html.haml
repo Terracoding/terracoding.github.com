@@ -1,6 +1,6 @@
 %section#archive
   %h1 Post Archive
-  .wrapper
+  .container
     - blog.articles.group_by { |a| a.date.year }.each do |year, year_posts|
       .year-block
         %h2= year
@@ -16,7 +16,7 @@
                       %dl
                         %dt Posted
                         %dd.pubdate
-                          %time{ title: post.date, datetime: post.date.iso8601, pubdate: "pubdate" }
+                          %time{ title: post.date, datetime: post.date.iso8601, pubdate: true }
                             = post.date.strftime("%d")
                         - unless post.tags.empty?
                           %dt Tagged

@@ -17,9 +17,8 @@
       %dt Tags
       %dd
         %ul.tags
-          - blog.tags.keys.sort.each do |tag|
-            %li{ class: "#{"tagged" if post.tags.include?(tag)}" }
-              = link_to(tag, tag_path(tag))
+          - post.tags.keys.sort.each do |tag|
+            %li= link_to(tag, tag_path(tag))
 
       - if post.next_article
         %dt.icon-after{ "data-icon" => "forward" } Next

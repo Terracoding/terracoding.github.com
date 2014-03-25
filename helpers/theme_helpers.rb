@@ -31,4 +31,9 @@ module ThemeHelpers
   def slideshow(slug)
     return image_collection(slug, :slideshow)
   end
+
+  def nav_link_to(title, url, active=nil)
+    active = current_page.url.index(url) == 0 if active.nil?
+    "<li class=\"#{"active" if active}\">" + link_to(title, url) + "</li>"
+  end
 end
