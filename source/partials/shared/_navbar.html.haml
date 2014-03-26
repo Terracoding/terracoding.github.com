@@ -1,0 +1,7 @@
+.navbar
+  .container
+    %h1= link_to "Terracoding", "/"
+    %p
+      Project or question?
+      = mail_to html_obfuscate(data.company.email, true), html_obfuscate(data.company.email)
+    = partial "partials/shared/navigation"

@@ -13,7 +13,7 @@ slug: posts-by-tag
       %hr
 
     .wrapper
-      = partial "shared/post", locals: { post: post }
+      = partial "partials/blog/post", locals: { post: post }
 
   - if articles.empty?
     .wrapper

@@ -7,13 +7,8 @@ slug: home
   .container
     #testimonials.row
       #testimonials-slideshow.col-sm-10
-        = partial "shared/testimonial", locals: { name: "Pratibha Rai", organisation: "The New Agency", quote: "The Terracoding guys are some of the most switched-on developers I've had the pleasure of working with. Not only are they really efficient and thorough, they're engaged and contribute valuable insights to product and business discussions. These guys are the full package and I'm really excited at the opportunity to work with them as we take our product to the next level." }
-
-        = partial "shared/testimonial", locals: { name: "Jim May", organisation: "Sportaroo", quote: "The Terracoding boys have talent! They have a knack for getting things executed quickly yet with discipline and an eye for quality. It's a good feeling to know your app is as well designed under the hood as it is on the surface." }
-
-        = partial "shared/testimonial", locals: { name: "Dave Tong", organisation: "Employment Hero", quote: "You'd be a fool not to consider the Terracoding guys for your next development project! They will always be the first guys I call. They get the job done without any hassle due to their key strengths of being great communicators as well as solid software engineers." }
-
-        = partial "shared/testimonial", locals: { name: "Bruno Mattarollo", organisation: "Waysact", quote: "The guys from Terracoding are amazing polyglot developers. They are genuine, talented and fun to work with." }
+        - data.testimonials.each do |filename, testimonial|
+          = partial "partials/index/testimonial", locals: { testimonial: testimonial }
 
       #testimonials-action.col-sm-2
         %p Looking to build a Web or mobile app?
@@ -37,3 +32,12 @@ slug: home
 
       .col-sm-6
         Image of iPhone
+
+%section#about
+  %h1.sr-only About Us
+  .container
+    .row
+      #team.col-sm-6
+        %h2 The Team
+        - data.team.each do |filename, member|
+          = partial "partials/index/team_member", locals: { username: filename, member: member }

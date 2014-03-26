@@ -1,9 +1,9 @@
 %figure
   %blockquote
     :markdown
-      #{quote}
+      #{testimonial.quote}
   %figcaption{ itemscope: true, itemtype: "http://www.schema.org/Person" }
-    %cite{ itemprop: "name" }>= name
+    %cite{ itemprop: "name" }>= testimonial.name
     ,
     %span{ itemprop: "worksFor", itemscope: true, itemtype: "http://schema.org/Organization" }
-      %span{ itemprop: "name" }= organisation
+      %span{ itemprop: "name" }= testimonial.organisation

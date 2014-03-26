@@ -1,6 +1,6 @@
 - wrap_layout :layout do
   %section#blog
     .container
-      = partial "shared/post", locals: { post: current_article }
+      = partial "partials/blog/post", locals: { post: current_article }
 
-  = partial "shared/archive"
+  = partial "partials/blog/archive"
