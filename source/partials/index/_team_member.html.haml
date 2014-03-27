@@ -1,10 +1,10 @@
 %li{ itemscope: true, itemtype: "http://www.schema.org/Person" }
-  %img{ itemprop: "image", src: "/images/team/#{username}.jpg", alt: member.name, class: "img-circle" }
-  %h1{ itemprop: "name" }= member.name
+  = image_tag "/images/team/#{username}.jpg", itemprop: "image", alt: member.name, class: "img-circle"
+  %h3{ itemprop: "name" }= member.name
   %p{ itemprop: "jobTitle"}= member.job_title
 
   %ul.person-links
-    %li= mail_to html_obfuscate(member.email, true), "Email", title: "Email", itemprop: "email"
+    %li= mail_to percent_obfuscate(member.email), "Email", title: "Email", itemprop: "email"
     %li= link_to "Blog", member.blog_url
     %li= link_to "Twitter", "https://twitter.com/#{member.twitter}"
     %li= link_to "LinkedIn", member.linkedin_url

@@ -1,4 +1,5 @@
 ---
+layout: page
 slug: home
 ---
 
@@ -7,7 +8,7 @@ slug: home
   .container
     #testimonials.row
       #testimonials-slideshow.col-sm-10
-        - data.testimonials.each do |filename, testimonial|
+        - data.testimonials.each do |i, testimonial|
           = partial "partials/index/testimonial", locals: { testimonial: testimonial }
 
       #testimonials-action.col-sm-2
@@ -30,14 +31,27 @@ slug: home
 
         = link_to "View case studies and more about our services", "/services/", class: "btn btn-default"
 
-      .col-sm-6
-        Image of iPhone
-
 %section#about
   %h1.sr-only About Us
   .container
     .row
       #team.col-sm-6
         %h2 The Team
-        - data.team.each do |filename, member|
-          = partial "partials/index/team_member", locals: { username: filename, member: member }
+        - ["robert", "dominic", "sam"].each do |name|
+          = partial "partials/index/team_member", locals: { username: name, member: data.team.send(name) }
+
+      #history.col-sm-6
+        %h2 About Terracoding
+        :markdown
+          Terracoding is based in Sheffield and Manchester, UK. We’ve been working with clients internationally since 2011, advising on development strategy, designing interfaces users enjoy and writing fast, dependable code.
+
+          We value testing and like to work in an #{define("Agile")} way, iterating on an idea with the client to produce the best solution.
+
+%section#partners
+  .container
+    %h1 Clients &amp; Partners
+    %ul#partner-logos
+      - data.partners.each do |name, url|
+        %li
+          = link_to url do
+            = image_tag "/images/partners/#{slugify(name)}.png", alt: name
