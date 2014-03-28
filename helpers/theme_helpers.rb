@@ -41,11 +41,23 @@ module ThemeHelpers
 
   def define(term)
     definition = data.glossary.send(term.downcase)
-    raise "Term '#{term}' not defined" unless definition
+    raise "Term '#{term}' not defined in glossary" unless definition
     '<span data-toggle="tooltip" title="'+definition+'">'+term+'</span>'
   end
 
   def slugify(str)
     str.strip.downcase.gsub(/(&|&amp;)/, ' and ').gsub(/[\s\/\\]/, '-').gsub(/[^\w-]/, '').gsub(/[-]{2,}/, '-').gsub(/^-|-$/, '')
+  end
+
+  def previous_project(project)
+    projects = data.work.keys
+    index = projects.index(project)
+    index == 0 ? projects.last : projects[index-1]
+  end
+
+  def next_project(project)
+    projects = data.work.keys
+    index = projects.index(project)
+    index == projects.size-1 ? projects.first : projects[index+1]
   end
 end

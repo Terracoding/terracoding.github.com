@@ -1,1 +1,6 @@
 agile: Agile is an iterative approach to building software that allows developers to adapt to changing requirements and produce a functioning prototype quickly.
+ruby on rails: Rails is a Ruby framework with a thriving developer community. It provides a solid foundation for us to build on and lets us reuse code written by fellow Rails developers to implement common features.
+api: An API is communication layer between two codebases, for example to let an iPhone app query a web server for data.
+html5: HTML5 supports lots of cool app-like features that let us build Web applications that feel almost like native apps on a mobile.
+wireframes: A wireframe is a basic layout of where elements such as buttons and images will be placed in an interface. It lets us experiment with different layout options easily to see what works.
+responsive: A responsive website adapts to the size of the device it is being viewed on, ensuring that it looks good and functions well for all visitors. This site is a good example! Try resizing the window or rotating your device.

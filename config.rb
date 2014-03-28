@@ -36,6 +36,14 @@ set :haml, { format: :html5, attr_wrapper: '"' }
 set :markdown_engine, :kramdown
 set :markdown, { smartypants: true }
 
+module Haml::Filters::Kramdown
+  include Haml::Filters::Base
+
+  def render(text)
+    Kramdown::Document.new(text).to_html
+  end
+end
+
 # Susy grids in Compass
 # First: gem install susy
 # require 'susy'
