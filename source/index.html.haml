@@ -23,11 +23,19 @@ slug: home
         :kramdown
           We work closely with businesses in Australia and the UK to improve customer experience, increase sales, and simplify and automate their work with great software.
 
-        %ul
-          %li.service-design   Design
-          %li.service-web      Web Apps
-          %li.service-mobile   Mobile Apps
-          %li.service-training Training
+        %ul.row
+          %li.service-design.col-sm-3
+            = icon("pencil", modify: "fluid")
+            Design
+          %li.service-web.col-sm-3
+            = icon("monitor", modify: "fluid")
+            Web Apps
+          %li.service-mobile.col-sm-3
+            = icon("tablet", modify: "fluid")
+            Mobile Apps
+          %li.service-training.col-sm-3
+            = icon("medal", modify: "fluid")
+            Training
 
         = link_to "View case studies and more about our services", "/services/", class: "btn btn-default"
 
