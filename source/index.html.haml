@@ -1,6 +1,6 @@
 ---
 layout: page
-slug: home
+slug: about-us
 ---
 
 %section#testimonials
@@ -24,20 +24,24 @@ slug: home
           We work closely with businesses in Australia and the UK to improve customer experience, increase sales, and simplify and automate their work with great software.
 
         %ul.row
-          %li.service-design.col-sm-3
+          %li.service-design.col-sm-3.col-xs-6
             = icon("pencil", modify: "fluid")
             Design
-          %li.service-web.col-sm-3
+          %li.service-web.col-sm-3.col-xs-6
             = icon("monitor", modify: "fluid")
             Web Apps
-          %li.service-mobile.col-sm-3
+          %li.service-mobile.col-sm-3.col-xs-6
             = icon("tablet", modify: "fluid")
             Mobile Apps
-          %li.service-training.col-sm-3
+          %li.service-training.col-sm-3.col-xs-6
             = icon("medal", modify: "fluid")
             Training
 
         = link_to "View case studies and more about our services", "/services/", class: "btn btn-default"
+
+      .col-sm-6
+        .row
+          = image_tag "/images/devices.png", width:"618", height:"328", class: "img-responsive"
 
 %section#about
   %h1.sr-only About Us
@@ -45,8 +49,9 @@ slug: home
     .row
       #team.col-sm-6
         %h2 The Team
-        - ["robert", "dominic", "sam"].each do |name|
-          = partial "partials/index/team_member", locals: { username: name, member: data.team.send(name) }
+        %ul.row
+          - ["robert", "dominic", "sam"].each do |name|
+            = partial "partials/index/team_member", locals: { username: name, member: data.team.send(name) }
 
       #history.col-sm-6
         %h2 About Terracoding

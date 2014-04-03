@@ -1,12 +1,11 @@
-%li{ itemscope: true, itemtype: "http://www.schema.org/Person" }
-  = image_tag "/images/team/#{username}.jpg", itemprop: "image", alt: member.name, class: "img-circle"
+%li{ itemscope: true, itemtype: "http://www.schema.org/Person", class: "col-sm-4" }
+  = image_tag "/images/team/#{username}.jpg", itemprop: "image", alt: member.name, class: "img-circle img-responsive"
   %h3{ itemprop: "name" }= member.name
   %p{ itemprop: "jobTitle"}= member.job_title
 
   %ul.person-links
-    %li= mail_to percent_obfuscate(member.email), "Email", title: "Email", itemprop: "email"
-    %li= link_to "Blog", member.blog_url
-    %li= link_to "Twitter", "https://twitter.com/#{member.twitter}"
-    %li= link_to "LinkedIn", member.linkedin_url
+    %li= link_to "Blog", member.blog_url, class: "fa fa-home"
+    %li= link_to "Twitter", "https://twitter.com/#{member.twitter}", class: "fa fa-twitter"
+    %li= link_to "LinkedIn", member.linkedin_url, class: "fa fa-linkedin"
     - if member.dribbble
-      %li= link_to "Dribbble", "http://dribbble.com/#{member.dribbble}"
+      %li= link_to "Dribbble", "http://dribbble.com/#{member.dribbble}", class: "fa fa-dribbble"

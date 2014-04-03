@@ -1,6 +1,8 @@
 %header{ class: "banner banner-#{slugify(title)}"}
   .container
-    %h1= title
-    %p= data.work.send(title)
+    .row
+      .col-xs-10.col-xs-push-1
+        %h1= title
+        %p= data.work.send(title)
 
-    = partial "partials/work/navigation", locals: { prev_title: previous_project(title), next_title: next_project(title) }
+      = partial "partials/work/navigation", locals: { prev_title: previous_project(title), next_title: next_project(title) }

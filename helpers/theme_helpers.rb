@@ -1,8 +1,6 @@
 module ThemeHelpers
   def entity_obfuscate(string)
-    encoded = []
-    string.each_char { |char| encoded << "&##{char[0].ord};" }
-    encoded.join
+    string.gsub(/./){ |char| "&##{char[0].ord};" }
   end
 
   def percent_obfuscate(string)
@@ -27,11 +25,11 @@ module ThemeHelpers
   end
 
   def gallery(slug)
-    return image_collection(slug, :gallery)
+    image_collection(slug, :gallery)
   end
 
   def slideshow(slug)
-    return image_collection(slug, :slideshow)
+    image_collection(slug, :slideshow)
   end
 
   def nav_link_to(title, url, active=nil)

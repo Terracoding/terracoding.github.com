@@ -11,3 +11,4 @@ gem "builder", "~> 3.0"
 gem "rake"
 
 gem 'bootstrap-sass', '~> 3.1.1', require: false
+gem 'font-awesome-sass', require: false

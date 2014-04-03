@@ -1,11 +1,11 @@
-/* Iconic theme rules. Don't delete! */
+@import "variables";
 
 @mixin iconic-color($color) {
   fill: $color;
   stroke: $color;
 }
 
-$color-primary: #336666;
+$color-primary: $darkGreen;
 $color-secondary: lighten($color-primary, 30%);
 
 /* Hide all icons that are waiting to be injected */

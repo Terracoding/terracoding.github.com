@@ -1,8 +1,166 @@
-/*= require_tree . */
-
 @import "bootstrap";
+@import "font-awesome";
+@import "iconic-theme";
+@import "variables";
+@import "mixins";
+
+/* Global
+================================================== */
+
+body {
+  background-color: $paleBg;
+  color: $darkGray;
+  font: 18px/1.2 $bodyFonts;
+}
 
 p span[data-toggle=tooltip] {
   cursor: help;
   border-bottom: 1px dotted rgba(0,0,0,0.4);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headingFonts;
+}
+
+blockquote {
+  p:first-of-type::before {
+    content: '“';
+  }
+
+  p:last-of-type::after {
+    content: '”';
+  }
+}
+
+/* Buttons
+-------------------------------------------------- */
+
+.btn {
+  font-size: 1em;
+  padding-top: 0.5em;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.btn.btn-default {
+  border-color: $darkGreen;
+  color: $darkGreen;
+  background: none;
+
+  &:hover, &:active, &:focus {
+    background-color: $darkGreen;
+    color: $paleBg;
+  }
+}
+
+/* Footers
+-------------------------------------------------- */
+
+#pre-footer {
+  text-align: center;
+  background-color: $paleGreen;
+}
+
+#footer {
+  background-color: $darkGreen;
+}
+
+
+/* About Us
+================================================== */
+
+body#about-us {
+  #services {
+    ul {
+      padding: 0;
+      list-style: none;
+      text-align: center;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      color: $darkGreen;
+    }
+  }
+
+  #about {
+    background-color: $paleGreen;
+
+    h2 {
+      text-align: center;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+      text-align: center;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    #team {
+      text-align: center;
+
+      h3 {
+        font-size: 1em;
+      }
+
+      p {
+        font-size: 0.9em;
+        color: $darkGreen;
+      }
+
+      img {
+        max-height: 200px;
+      }
+
+      .person-links a {
+        text-decoration: none;
+        display: block;
+        height: 1em;
+        width: 1em;
+        overflow: hidden;
+        color: $darkGray;
+        opacity: 0.3;
+
+        &:hover, &:focus, &:active {
+          opacity: 0.7;
+        }
+
+        &::before {
+          display: block;
+        }
+      }
+    }
+  }
+
+  #partners {
+    text-align: center;
+
+    ul {
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      list-style: none;
+      margin: 10px;
+    }
+
+    a {
+      @include desaturate;
+      opacity: 0.4;
+
+      &:hover, &:focus, &:active {
+        @include saturate;
+        opacity: 1;
+      }
+
+      img {
+        max-width: 200px;
+        max-height: 50px;
+        vertical-align: center;
+      }
+    }
+  }
 }
