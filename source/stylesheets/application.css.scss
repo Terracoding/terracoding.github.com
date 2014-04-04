@@ -8,7 +8,8 @@
 ================================================== */
 
 body {
-  background-color: $paleBg;
+  @include font-smoothing;
+  background-color: $white;
   color: $darkGray;
   font: 18px/1.2 $bodyFonts;
 }
@@ -43,13 +44,13 @@ blockquote {
 }
 
 .btn.btn-default {
-  border-color: $darkGreen;
-  color: $darkGreen;
+  border-color: $green;
+  color: $green;
   background: none;
 
   &:hover, &:active, &:focus {
-    background-color: $darkGreen;
-    color: $paleBg;
+    background-color: $green;
+    color: $white;
   }
 }
 
@@ -63,6 +64,67 @@ blockquote {
 
 #footer {
   background-color: $darkGreen;
+  padding: 1.5em 0 2em;
+
+  .copyright small, a {
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: $white;
+  }
+
+  .copyright {
+    opacity: 0.6;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    display: inline;
+  }
+
+  nav {
+    text-align: center;
+    margin: 0 -3em;
+
+    a {
+      padding: 0 0.5em;
+    }
+  }
+
+  .tc-elsewhere {
+    text-align: right;
+
+    a {
+      text-decoration: none;
+      height: 1.1em;
+      width: 1.1em;
+      font-size: 1.2em;
+      text-align: center;
+      overflow: hidden;
+      opacity: 0.5;
+
+      &:hover, &:focus, &:active {
+        opacity: 1;
+      }
+
+      &::before {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    .copyright, ul {
+      text-align: center;
+    }
+
+    nav {
+      margin: 0;
+    }
+  }
 }
 
 
@@ -152,7 +214,7 @@ body#about-us {
       opacity: 0.4;
 
       &:hover, &:focus, &:active {
-        @include saturate;
+        @include desaturate(0%);
         opacity: 1;
       }
 

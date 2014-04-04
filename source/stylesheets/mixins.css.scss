@@ -1,17 +1,18 @@
-@mixin desaturate {
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
-  -moz-filter: grayscale(100%);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
-  filter: gray;
+@mixin desaturate($amount: 100%) {
+  -webkit-filter: grayscale($amount);
+  -moz-filter: grayscale($amount);
+  -ms-filter: grayscale($amount);
+  -o-filter: grayscale($amount);
+  filter: grayscale($amount);
 }
 
-@mixin saturate {
-  filter: none;
-  -webkit-filter: grayscale(0%);
-  -moz-filter: grayscale(0%);
-  -ms-filter: grayscale(0%);
-  -o-filter: grayscale(0%);
-  -webkit-filter: grayscale(0);
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
 }

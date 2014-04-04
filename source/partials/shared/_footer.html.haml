@@ -1,18 +1,19 @@
 %footer#footer
   .container
     .row
-      .col-sm-3
-        %small
-          &copy; Terracoding
-          = "2011&mdash;#{Date.today.year}"
+      .col-sm-4
+        %p.copyright
+          %small
+            &copy; Terracoding
+            = "2011&ndash;#{Date.today.year}"
 
-      .col-sm-6
+      .col-sm-4
         = partial "partials/shared/navigation"
 
-      .col-sm-3
+      .tc-elsewhere.col-sm-4
         %h1.sr-only Elsewhere
         %ul
-          %li= link_to "Twitter", "https://twitter.com/terracoding/", title: "Follow us on Twitter"
-          %li= link_to "GitHub", "https://github.com/terracoding/", title: "Fork us on GitHub"
-          %li= link_to "Facebook", "http://facebook.com/terracoding", title: "Like us on Facebook"
-          %li= link_to "LinkedIn", "http://www.linkedin.com/company/terracoding/", title: "Connect with us on LinkedIn"
+          %li= link_to "Twitter", "https://twitter.com/terracoding/", title: "Follow us on Twitter", class: "fa fa-twitter"
+          %li= link_to "GitHub", "https://github.com/terracoding/", title: "Fork us on GitHub", class: "fa fa-github"
+          %li= link_to "Facebook", "http://facebook.com/terracoding", title: "Like us on Facebook", class: "fa fa-facebook-square"
+          %li= link_to "LinkedIn", "http://www.linkedin.com/company/terracoding/", title: "Connect with us on LinkedIn", class: "fa fa-linkedin"

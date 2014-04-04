@@ -5,8 +5,8 @@
   stroke: $color;
 }
 
-$color-primary: $darkGreen;
-$color-secondary: lighten($color-primary, 30%);
+$color-primary: $green;
+$color-secondary: lighten($color-primary, 20%);
 
 /* Hide all icons that are waiting to be injected */
 img.iconic {

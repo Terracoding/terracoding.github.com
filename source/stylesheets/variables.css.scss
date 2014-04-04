@@ -1,6 +1,7 @@
 $bodyFonts: "Myriad Pro", myriad, helvetica, arial, sans-serif;
 $headingFonts: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", helvetica, arial, sans-serif;
-$paleBg: #fffffb;
+$white: #fffffb;
 $darkGray: #333;
-$darkGreen: #366;
-$paleGreen: transparentize($darkGreen, 0.92);
+$green: #366;
+$darkGreen: #033;
+$paleGreen: transparentize($green, 0.92);
