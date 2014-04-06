@@ -3,17 +3,26 @@ layout: page
 slug: about-us
 ---
 
-%section#testimonials
+%section#testimonials.hidden-xs
   %h1.sr-only Testimonials
   .container
     #testimonials.row
-      #testimonials-slideshow.col-sm-10
-        - data.testimonials.each do |i, testimonial|
-          = partial "partials/index/testimonial", locals: { testimonial: testimonial }
+      .col-sm-10
+        #testimonials-carousel.carousel.slide{ data: { ride: "carousel", interval: 12000 }}
+          %ol.carousel-indicators
+            - data.testimonials.each do |i, t|
+              - i = i.to_i
+              %li{ class: "#{'active' if i == 0}", data: { target: "#testimonials-carousel", "slide-to" => i }}
+
+          .carousel-inner
+            - data.testimonials.each do |i, t|
+              - i = i.to_i
+              %div{ class: "item #{'active' if i == 0}" }
+                = partial "index/testimonial", locals: { testimonial: t }
 
       #testimonials-action.col-sm-2
         %p Looking to build a Web or mobile app?
-        = link_to "Get in touch", "/contact/", class: "btn btn-default"
+        = link_to "Get in touch", "/contact/", class: "btn btn-light"
 
 %section#services
   %h1.sr-only Our Services
@@ -51,7 +60,7 @@ slug: about-us
         %h2 The Team
         %ul.row
           - ["robert", "dominic", "sam"].each do |name|
-            = partial "partials/index/team_member", locals: { username: name, member: data.team.send(name) }
+            = partial "index/team_member", locals: { username: name, member: data.team.send(name) }
 
       #history.col-sm-6
         %h2 About Terracoding

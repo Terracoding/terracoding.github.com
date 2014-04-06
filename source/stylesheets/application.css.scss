@@ -1,26 +1,19 @@
+@import "variables";
+@import "mixins";
 @import "bootstrap";
 @import "font-awesome";
 @import "iconic-theme";
-@import "variables";
-@import "mixins";
 
 /* Global
 ================================================== */
 
 body {
   @include font-smoothing;
-  background-color: $white;
-  color: $darkGray;
-  font: 18px/1.2 $bodyFonts;
 }
 
-p span[data-toggle=tooltip] {
+abbr, p span[data-toggle=tooltip] {
   cursor: help;
-  border-bottom: 1px dotted rgba(0,0,0,0.4);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: $headingFonts;
+  border-bottom: $abbr-border-color dotted rgba(0,0,0,0.4);
 }
 
 blockquote {
@@ -33,24 +26,67 @@ blockquote {
   }
 }
 
+/* Navbar
+-------------------------------------------------- */
+
+#main-nav {
+  padding-right: 0;
+  margin-right: -15px;
+
+  @media (max-width: $screen-xs-max) {
+    .active {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    li:not(.active) a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: $white;
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+    .active a {
+      padding: 5px 3px;
+      margin: 15px 12px;
+      box-shadow: inset 0 -3px 0 rgba(255,255,255,0.4);
+    }
+  }
+}
+
 /* Buttons
 -------------------------------------------------- */
 
 .btn {
   font-size: 1em;
   padding-top: 0.5em;
-  border: 1px solid black;
-  border-radius: 3px;
-}
 
-.btn.btn-default {
-  border-color: $green;
-  color: $green;
-  background: none;
+  &.btn-default {
+    border-color: $btn-default-border;
 
-  &:hover, &:active, &:focus {
-    background-color: $green;
+    &:hover, &:focus {
+      background-color: $green;
+      color: $white;
+    }
+
+    &:active {
+      background-color: transparentize($green, 0.2);
+      color: $white;
+    }
+  }
+
+  &.btn-light {
+    border-color: $white;
     color: $white;
+
+    &:hover, &:focus {
+      background-color: $white;
+      color: $dark-green;
+    }
+
+    &:active {
+      background-color: transparentize($white, 0.2);
+      color: $dark-green;
+    }
   }
 }
 
@@ -59,11 +95,11 @@ blockquote {
 
 #pre-footer {
   text-align: center;
-  background-color: $paleGreen;
+  background-color: $pale-green;
 }
 
 #footer {
-  background-color: $darkGreen;
+  background-color: $dark-green;
   padding: 1.5em 0 2em;
 
   .copyright small, a {
@@ -85,9 +121,8 @@ blockquote {
     display: inline;
   }
 
-  nav {
+  .footer-nav {
     text-align: center;
-    margin: 0 -3em;
 
     a {
       padding: 0 0.5em;
@@ -132,6 +167,52 @@ blockquote {
 ================================================== */
 
 body#about-us {
+  #testimonials {
+    background-color: $dark-green;
+    color: $white;
+
+    #testimonials-carousel {
+      $carousel-height: 180px;
+
+      height: $carousel-height;
+      overflow: hidden;
+
+      .item {
+        background-color: $dark-green;
+        width: 100%;
+        height: $carousel-height;
+        overflow: hidden;
+      }
+
+      blockquote {
+        border: 0;
+        padding: 0;
+        margin: 0 0 0.5em;
+        font-family: $headings-font-family;
+      }
+
+      figcaption {
+        font-size: 0.8em;
+
+        &::before {
+          content: "— ";
+        }
+      }
+
+      .carousel-indicators li {
+        border: none;
+        background-color: rgba(255,255,255,0.2);
+
+        &.active {
+          margin: 1px;
+          width: 10px;
+          height: 10px;
+          background-color: rgba(255,255,255,0.7);
+        }
+      }
+    }
+  }
+
   #services {
     ul {
       padding: 0;
@@ -139,12 +220,12 @@ body#about-us {
       text-align: center;
       font-size: 0.8em;
       text-transform: uppercase;
-      color: $darkGreen;
+      color: $dark-green;
     }
   }
 
   #about {
-    background-color: $paleGreen;
+    background-color: $pale-green;
 
     h2 {
       text-align: center;
@@ -164,12 +245,12 @@ body#about-us {
       text-align: center;
 
       h3 {
-        font-size: 1em;
+        font-size: 0.9em;
       }
 
       p {
         font-size: 0.9em;
-        color: $darkGreen;
+        color: $dark-green;
       }
 
       img {
@@ -182,7 +263,7 @@ body#about-us {
         height: 1em;
         width: 1em;
         overflow: hidden;
-        color: $darkGray;
+        color: $gray-dark;
         opacity: 0.3;
 
         &:hover, &:focus, &:active {
@@ -210,18 +291,19 @@ body#about-us {
     }
 
     a {
-      @include desaturate;
-      opacity: 0.4;
-
-      &:hover, &:focus, &:active {
-        @include desaturate(0%);
-        opacity: 1;
-      }
-
       img {
+        @include desaturate;
+        opacity: 0.4;
         max-width: 200px;
         max-height: 50px;
         vertical-align: center;
+      }
+
+      &:hover, &:focus, &:active {
+        img {
+          @include desaturate(0%);
+          opacity: 1;
+        }
       }
     }
   }

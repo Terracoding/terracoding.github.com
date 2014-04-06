@@ -5,4 +5,4 @@
         %h1= title
         %p= data.work.send(title)
 
-      = partial "partials/work/navigation", locals: { prev_title: previous_project(title), next_title: next_project(title) }
+      = partial "work/navigation", locals: { prev_title: previous_project(title), next_title: next_project(title) }

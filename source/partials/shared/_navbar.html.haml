@@ -1,7 +1,15 @@
-.navbar
+%nav.navbar.navbar-inverse{ role: "navigation" }
   .container
-    %h1= link_to "Terracoding", "/"
-    %p
-      Project or question?
-      = mail_to percent_obfuscate(data.company.email), entity_obfuscate(data.company.email)
-    = partial "partials/shared/navigation"
+    .navbar-header
+      %button.navbar-toggle{ data: { toggle: "collapse", target: "#main-nav" } }
+        %span.sr-only Toggle navigation
+        - 3.times do
+          %span.icon-bar
+      = link_to "Terracoding", "/", class: "navbar-brand"
+      %p
+        Project or question?
+        = mail_to percent_obfuscate(data.company.email), entity_obfuscate(data.company.email)
+
+    #main-nav.collapse.navbar-collapse.navbar-right
+      %ul.nav.navbar-nav
+        = partial "shared/navigation_links"
