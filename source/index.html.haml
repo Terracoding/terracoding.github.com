@@ -6,8 +6,8 @@ slug: about-us
 %section#testimonials.hidden-xs
   %h1.sr-only Testimonials
   .container
-    #testimonials.row
-      .col-sm-10
+    .row
+      .col-sm-9
         #testimonials-carousel.carousel.slide{ data: { ride: "carousel", interval: 12000 }}
           %ol.carousel-indicators
             - data.testimonials.each do |i, t|
@@ -20,7 +20,7 @@ slug: about-us
               %div{ class: "item #{'active' if i == 0}" }
                 = partial "index/testimonial", locals: { testimonial: t }
 
-      #testimonials-action.col-sm-2
+      #testimonials-action.col-sm-3
         %p Looking to build a Web or mobile app?
         = link_to "Get in touch", "/contact/", class: "btn btn-light"
 
