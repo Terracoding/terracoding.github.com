@@ -40,26 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #main-nav {
   padding-right: 0;
-  margin-right: -15px;
-
-  @media (max-width: $screen-xs-max) {
-    .active {
-      background-color: rgba(0,0,0,0.2);
-    }
-
-    li:not(.active) a:hover {
-      background-color: rgba(255,255,255,0.1);
-      color: $white;
-    }
-  }
-
-  @media (min-width: $screen-sm-min) {
-    .active a {
-      padding: 5px 3px;
-      margin: 15px 12px;
-      box-shadow: inset 0 -3px 0 rgba(255,255,255,0.3);
-    }
-  }
+  margin-right: -$grid-gutter-width/2;
 }
 
 /* Buttons
@@ -87,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 
-  &.btn-light {
+  &.btn-inverse {
     border-color: $white;
     color: $white;
 
@@ -102,6 +83,61 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
+
+/* Tooltips
+-------------------------------------------------- */
+
+.tooltip-inner {
+  padding: 0.5em;
+}
+
+/* Banners
+-------------------------------------------------- */
+
+.banner {
+  $banner-height: 220px;
+
+  background: transparent no-repeat 50% 50%;
+  display: block;
+  height: $banner-height;
+  text-align: center;
+  color: $white;
+  background-size: cover;
+
+  .banner-title {
+    @include text-hide;
+    width: 90%;
+    margin: 0 auto;
+    height: $banner-height - 30;
+    background: transparent no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .banner-subtitle {
+    margin-top: -$banner-height/3.4;
+  }
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+    color: $white;
+    opacity: 0.85;
+  }
+}
+
+@mixin banner($project) {
+  .banner-#{$project} {
+    background-image: image-url('work/#{$project}/banner.jpg');
+
+    .banner-title {
+      background-image: image-url('work/#{$project}/logo.png');
+    }
+  }
+}
+
+@include banner(medtronic);
+@include banner(hello-sunday-morning);
+@include banner(employment-hero);
+@include banner(sprintly);
 
 /* Footers
 -------------------------------------------------- */
@@ -124,7 +160,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .copyright {
     opacity: 0.6;
-    margin-right: -2em;
   }
 
   ul {
@@ -164,16 +199,6 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
-
-  @media (max-width: $screen-xs-max) {
-    .copyright, ul {
-      text-align: center;
-    }
-
-    nav {
-      margin: 0;
-    }
-  }
 }
 
 
@@ -181,15 +206,21 @@ h1, h2, h3, h4, h5, h6 {
 ================================================== */
 
 body#about-us {
-  .nav-contact {
-    display: none;
+  .navbar-brand {
+    @include text-hide;
+    width: 186px;
+    height: 34px;
+    background: image-url("full-logo.png") no-repeat 0 0;
+    background-size: 100%;
+    margin: 14px 0 0;
+
+    &:hover {
+      opacity: 0.85;
+    }
   }
 
-  @media (min-width: $screen-sm-min) {
-    .navbar {
-      background: none;
-      border-color: transparent;
-    }
+  .nav-contact {
+    display: none;
   }
 
   #testimonials {
@@ -262,7 +293,7 @@ body#about-us {
         display: block;
         width: 115%;
         height: auto;
-        margin-left: -15px;
+        margin-left: -$grid-gutter-width/2;
         top: 110px;
         margin-top: -20%;
       }
@@ -372,5 +403,113 @@ body#about-us {
         }
       }
     }
+  }
+}
+
+
+/* Services
+================================================== */
+
+body#work {
+  header {
+    background-color: $dark-green;
+    color: $white;
+    padding-bottom: 1em;
+
+    p {
+      font-family: $headings-font-family;
+      font-size: $blockquote-font-size;
+    }
+
+    .btn {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+
+  #services {
+    .row {
+      margin-bottom: 1em;
+    }
+  }
+
+  #case-studies {
+    padding: 0;
+    margin-top: 1em;
+    position: relative;
+    background-color: $pale-green;
+
+    h1 {
+      position: absolute;
+      top: -2em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-left: 0;
+    }
+
+    li {
+      padding-left: 0;
+    }
+  }
+}
+
+
+/* Breakpoints
+================================================== */
+
+@media (min-width: $screen-sm-min) {
+  #main-nav .active a {
+    padding: 5px 3px;
+    margin: 15px 12px;
+    box-shadow: inset 0 -3px 0 rgba(255,255,255,0.3);
+  }
+
+  .nav-contact {
+    display: none;
+  }
+
+  #footer .copyright {
+    margin-right: -2em;
+  }
+
+  body#about-us .navbar {
+    background: none;
+    border-color: transparent;
+  }
+
+  body#work #case-studies {
+    ul {
+      margin-left: $grid-gutter-width/2;
+    }
+
+    .banner {
+      margin-left: -$grid-gutter-width/2;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  #main-nav {
+    .active {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    li:not(.active) a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: $white;
+    }
+  }
+
+  #footer {
+    .copyright, ul {
+      text-align: center;
+    }
+  }
+
+  body#about-us .navbar-brand {
+    margin-left: $grid-gutter-width/2;
   }
 }

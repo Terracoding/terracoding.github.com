@@ -5,6 +5,8 @@ $dark-green: darken($green, 15%);
 $pale-green: fade-out($green, 0.92);
 
 //Bootstrap
+$container-lg: 970px;
+
 $font-family-sans-serif: "Myriad Pro", myriad, helvetica, arial, sans-serif;
 $headings-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", helvetica, arial, sans-serif;
 $font-size-base: 18px;
@@ -34,3 +36,5 @@ $navbar-inverse-link-active-bg: rgba(0,0,0,0);
 $navbar-inverse-toggle-hover-bg: fade-out($navbar-inverse-link-color, 0.9);
 $navbar-inverse-toggle-icon-bar-bg: $navbar-inverse-link-color;
 $navbar-inverse-toggle-border-color: $navbar-inverse-bg;
+
+$tooltip-max-width: 300px;
