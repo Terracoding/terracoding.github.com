@@ -1,16 +1,16 @@
 %footer#footer
   .container
     .row
-      .col-sm-4
+      .col-sm-3
         %p.copyright
           %small
             &copy; Terracoding
             = "2011&ndash;#{Date.today.year}"
 
-      %ul.footer-nav.col-sm-4
+      %ul.footer-nav.col-sm-6
         = partial "shared/navigation_links"
 
-      .tc-elsewhere.col-sm-4
+      .tc-elsewhere.col-sm-3
         %h1.sr-only Elsewhere
         %ul
           %li= link_to "Twitter", "https://twitter.com/terracoding/", title: "Follow us on Twitter", class: "fa fa-twitter"

@@ -31,6 +31,6 @@ class Carousel
     $(window).on("debouncedresize", @resize)
 
 $ ->
-  $("[data-toggle=tooltip]").tooltip()
+  $("[data-toggle=tooltip]").tooltip({ container: 'body' })
   carousel = new Carousel("#testimonials-carousel", ".item")
   carousel.init()

@@ -46,11 +46,10 @@ slug: about-us
             = icon("medal", modify: "fluid")
             Training
 
-        = link_to "View case studies and more about our services", "/services/", class: "btn btn-default"
+        = link_to "Case studies and more about our services", "/services/", class: "btn btn-default"
 
-      .col-sm-6
-        .row
-          = image_tag "/images/devices.png", width:"618", height:"328", class: "img-responsive"
+      .service-image.col-sm-6.hidden-xs
+        = image_tag "/images/devices.png", width:"618", height:"328"
 
 %section#about
   %h1.sr-only About Us

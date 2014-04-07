@@ -11,9 +11,13 @@ body {
   @include font-smoothing;
 }
 
+section {
+  padding: 2em 0;
+}
+
 abbr, p span[data-toggle=tooltip] {
   cursor: help;
-  border-bottom: $abbr-border-color dotted rgba(0,0,0,0.4);
+  border-bottom: 1px dotted $abbr-border-color;
 }
 
 blockquote {
@@ -24,6 +28,11 @@ blockquote {
   p:last-of-type::after {
     content: '”';
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.8em;
+  font-size: $font-size-base * 1.4;
 }
 
 /* Navbar
@@ -60,6 +69,10 @@ blockquote {
   font-size: 1em;
   padding-top: 0.5em;
 
+  &:active {
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+  }
+
   &.btn-default {
     border-color: $btn-default-border;
 
@@ -69,7 +82,7 @@ blockquote {
     }
 
     &:active {
-      background-color: transparentize($green, 0.2);
+      background-color: darken($green, 10%);
       color: $white;
     }
   }
@@ -105,12 +118,13 @@ blockquote {
   .copyright small, a {
     display: inline-block;
     margin: 10px 0;
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: $white;
   }
 
   .copyright {
     opacity: 0.6;
+    margin-right: -2em;
   }
 
   ul {
@@ -167,7 +181,6 @@ blockquote {
 ================================================== */
 
 body#about-us {
-
   .nav-contact {
     display: none;
   }
@@ -183,6 +196,7 @@ body#about-us {
     background: $dark-green image-url("home-banner-bg.jpg") no-repeat 0 100%;
     background-size: cover;
     color: $white;
+    padding: 0;
     padding-top:  $navbar-height + 4px;
     margin-top: - $navbar-height - 4px;
 
@@ -239,13 +253,38 @@ body#about-us {
   }
 
   #services {
+    .service-image {
+      position: relative;
+      height: 300px;
+
+      img {
+        position: absolute;
+        display: block;
+        width: 115%;
+        height: auto;
+        margin-left: -15px;
+        top: 110px;
+        margin-top: -20%;
+      }
+    }
+
     ul {
+      margin-top: 2em;
+      margin-bottom: 2em;
       padding: 0;
       list-style: none;
       text-align: center;
       font-size: 0.8em;
       text-transform: uppercase;
       color: $dark-green;
+    }
+
+    .iconic {
+      margin-bottom: 0.2em;
+    }
+
+    .btn {
+      display: block;
     }
   }
 
@@ -271,6 +310,8 @@ body#about-us {
 
       h3 {
         font-size: 0.9em;
+        margin-top: 0.5em;
+        color: fade-out($dark-green, 0.2);
       }
 
       p {
