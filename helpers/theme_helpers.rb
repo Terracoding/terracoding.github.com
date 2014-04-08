@@ -59,15 +59,24 @@ module ThemeHelpers
     index == projects.size-1 ? projects.first : projects[index+1]
   end
 
-  def icon(name, options={})
+  def icon_tag_options(icon_set, options={})
     options[:class] ||= options["class"]
 
     modifiers = options[:modify].to_s.split(" ")
-    modifiers.map! { |modifier| "iconic-#{modifier}" }
+    modifiers.map! { |modifier| "#{icon_set}-#{modifier}" }
 
-    options[:class] = modifiers.unshift(options[:class], "iconic").compact.join(" ")
+    options[:class] = modifiers.unshift(options[:class], icon_set).compact.join(" ")
     options.delete_if { |key, val| ["class", :modify].member?(key) }
+  end
 
-    image_tag("images/iconic/#{name}.svg", options)
+  def iconic(name, options={})
+    options[:modify] ||= "sm"
+    options["data-src"] = "/images/iconic/#{name}.svg"
+    tag("img", icon_tag_options("iconic", options))
+  end
+
+  def fa(name, options={})
+    options[:modify] = [name, options[:modify]].compact.join(" ")
+    content_tag("i", "", icon_tag_options("fa", options))
   end
 end

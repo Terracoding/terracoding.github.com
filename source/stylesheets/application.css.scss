@@ -35,6 +35,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: $font-size-base * 1.4;
 }
 
+p a {
+  text-decoration: underline;
+}
+
+.img-rounded {
+  border-radius: $border-radius-base;
+}
+
 /* Navbar
 -------------------------------------------------- */
 

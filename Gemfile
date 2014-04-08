@@ -2,13 +2,15 @@
 # the following line to use "https"
 source 'http://rubygems.org'
 
-gem "middleman", "~> 3.3.1"
-gem "middleman-blog", "~> 3.5.2"
+gem "middleman", '~> 3.3.1'
+gem "middleman-blog", '~> 3.5.2'
 
 # For feed.xml.builder
-gem "builder", "~> 3.0"
+gem "builder", '~> 3.0'
 
-gem "rake"
+gem "rake", '~> 10.2.2'
 
 gem 'bootstrap-sass', '~> 3.1.1', require: false
-gem 'font-awesome-sass', require: false
+gem 'font-awesome-sass', '~> 4.0.3', require: false
+
+gem 'simple_form', '~> 3.0.1'
