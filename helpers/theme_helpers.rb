@@ -71,7 +71,7 @@ module ThemeHelpers
 
   def iconic(name, options={})
     options[:modify] ||= "sm"
-    options["data-src"] = "/images/iconic/#{name}.svg"
+    options["data-src"] = image_path("iconic/#{name}.svg")
     tag("img", icon_tag_options("iconic", options))
   end
 

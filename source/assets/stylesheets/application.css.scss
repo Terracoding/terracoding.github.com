@@ -11,6 +11,10 @@ body {
   @include font-smoothing;
 }
 
+.main-content {
+  min-height: 400px;
+}
+
 section {
   padding: 2em 0;
 }
@@ -41,6 +45,19 @@ p a {
 
 .img-rounded {
   border-radius: $border-radius-base;
+}
+
+form {
+  margin: 1em 0 2em;
+
+  label {
+    font-weight: normal;
+  }
+
+  .form-group .form-control {
+    box-shadow: none;
+    padding: 0.4em;
+  }
 }
 
 /* Navbar

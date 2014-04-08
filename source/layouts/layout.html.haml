@@ -3,6 +3,7 @@
   = partial "shared/head"
   %body{ id: current_page.data.slug }
     = partial "shared/navbar"
-    = yield
+    .main-content
+      = yield
     = partial "shared/footer"
     = partial "shared/javascripts"

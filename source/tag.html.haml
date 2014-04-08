@@ -14,7 +14,3 @@ slug: posts-by-tag
 
     .wrapper
       = partial "blog/post", locals: { post: post }
-
-  - if articles.empty?
-    .wrapper
-      %p No posts found.

@@ -5,12 +5,12 @@
 Time.zone = "UTC"
 
 activate :blog do |blog|
-  blog.prefix = "posts"
+  blog.prefix = "blog"
   blog.sources = ":title.html"
   blog.default_extension = ".md"
   blog.layout = "post"
   blog.permalink = ":title.html"
-  blog.taglink = "tagged/:tag.html"
+  blog.taglink = "tags/:tag.html"
 
   # blog.summary_separator = /(READMORE)/
   # blog.summary_length = 250
@@ -89,9 +89,9 @@ end
 #   end
 # end
 
-set :css_dir, 'stylesheets'
-set :js_dir, 'javascripts'
-set :images_dir, 'images'
+set :css_dir, 'assets/stylesheets'
+set :js_dir, 'assets/javascripts'
+set :images_dir, 'assets/images'
 set :partials_dir, 'partials'
 
 # Build-specific configuration

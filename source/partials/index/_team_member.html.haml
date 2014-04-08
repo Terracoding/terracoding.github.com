@@ -1,5 +1,5 @@
 %li{ itemscope: true, itemtype: "http://www.schema.org/Person", class: "col-sm-4" }
-  = image_tag "/images/team/#{username}.jpg", itemprop: "image", alt: member.name, class: "img-circle img-responsive"
+  = image_tag "team/#{username}.jpg", itemprop: "image", alt: member.name, class: "img-circle img-responsive"
   %h3{ itemprop: "name" }= member.name
   %p{ itemprop: "jobTitle"}= member.job_title
 
