@@ -17,3 +17,13 @@
     -moz-osx-font-smoothing: auto;
   }
 }
+
+@mixin banner($project) {
+  .banner-#{$project} {
+    background-image: image-url('work/#{$project}/banner.jpg');
+
+    .banner-title {
+      background-image: image-url('work/#{$project}/logo.png');
+    }
+  }
+}
