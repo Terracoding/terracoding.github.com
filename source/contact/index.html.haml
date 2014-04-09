@@ -13,7 +13,7 @@ slug: contact
     .row
       .col-sm-12
         = form_tag "//forms.brace.io/hello@terracoding.com", method: :post, class: "form-horizontal" do
-          = hidden_field_tag "_next", value: "http://www.terracoding.com/contact/thanks/"
+          = hidden_field_tag "_next", value: "http://www.terracoding.com/contact/thankyou/"
           .form-group
             = label_tag :name, class: "control-label col-sm-3"
             .col-sm-6
@@ -34,9 +34,9 @@ slug: contact
             = label_tag :message, caption: "How can we help you?", class: "control-label col-sm-3"
             .col-sm-6
               = text_area_tag :message, required: true, rows: "8", class: "form-control"
-          .form-group.hidden
-            = label_tag :first_name, caption: "Please don't type anything in here"
-            = text_field_tag :first_name, class: "form-control"
+          / .form-group#first-name
+          /   = label_tag :first_name, caption: "Please don't type anything in here"
+          /   = text_field_tag :first_name, class: "form-control", tabindex: -1
           .form-group
             .col-sm-offset-3.col-sm-6
               = submit_tag "Send", class: "btn btn-default pull-right"

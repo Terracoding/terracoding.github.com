@@ -1,8 +1,10 @@
 ---
-title: "NSObject for REST API calls"
+title: "NSObject for REST API Calls"
 date: 2012-09-07
 author: Dominic Wroblewski
-tags: [ios, tutorial]
+tags:
+- ios
+- tutorial
 ---
 
 In this tutorial I am going to teach you how to create your own `NSObject` that can make calls to your own web REST API and use it to retrieve the response received from the server. I am going to do this with the help of `ASIFormDataRequest` (`ASIHTTPRequest`). This will mean your iOS app will be able to make calls to your web server and download information to your app. The following tutorial is useful for if you want to perform tasks such as logging into an online account or registering a new user from within your application.

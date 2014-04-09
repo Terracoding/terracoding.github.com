@@ -1,18 +1,19 @@
-%article.post{ id: post.slug }
-  %h1
-    - if current_article
-      = post.title
-    - else
-      = link_to post.title, post.url
-  - #squiggle fixes whitespace in code blocks (similar to =)
-  ~ post.body
+%article.post.row{ id: post.slug }
+  .col-sm-9.col-sm-push-3
+    %h1
+      - if current_article
+        = post.title
+      - else
+        = link_to post.title, post.url
+    - #squiggle fixes whitespace in code blocks (similar to =)
+    ~ post.body
 
-  %footer
+  %footer.col-sm-3.col-sm-pull-9
     %dl
       %dt Posted
       %dd.pubdate{ "data-icon" => "calendar" }
         %time{ title: post.date, datetime: post.date.iso8601, pubdate: "pubdate" }
-          = post.date.strftime("%e %B, %Y")
+          = post.date.strftime("#{post.date.day.ordinalize} %B, %Y")
 
       %dt Tags
       %dd
@@ -21,15 +22,13 @@
             %li= link_to tag, tag_path(tag)
 
       - if post.next_article
-        %dt.icon-after{ "data-icon" => "forward" } Next
+        %dt
+          Next
+          = fa("chevron-right")
         %dd= link_to post.next_article.title, post.next_article.url, rel: "next"
 
       - if post.previous_article
-        %dt{ "data-icon" => "back" } Previous
+        %dt
+          = fa("chevron-left")
+          Previous
         %dd= link_to post.previous_article.title, post.previous_article.url, rel: "prev"
-
-    .comments
-      %h1{ "data-icon" => "comment" } Comments?
-      %p
-        Tweet
-        = link_to "@#{data.company.twitter}", "http://twitter.com/#{data.company.twitter}"

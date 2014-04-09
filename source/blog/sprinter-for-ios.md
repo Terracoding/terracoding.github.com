@@ -2,7 +2,9 @@
 title: "Sprinter for iOS"
 date: 2012-10-28
 author: Dominic Wroblewski
-tags: [sprintly, ios, iphone, ipad, development, apps]
+tags:
+- ios
+- sprintly
 ---
 
 Recently I have been working closely with the Sprint.ly team to work on the development of our new app for iOS, named "Sprinter".
@@ -15,4 +17,4 @@ We have decided to first release the iPhone version of the app as we would love 
 
 In the mean time, you can check out the [product page](http://terracoding.com/sprintly/index.html) that contains a few pre-release screenshots.
 
-If you have any further questions regarding the app, or would like to share your thoughts on the release, feel free to email us at [sales@terracoding.com](mailto:sales@terracoding.com).
+If you have any further questions regarding the app, or would like to share your thoughts on the release, feel free to [email us](/contact/).

@@ -1,8 +1,11 @@
 ---
-title: "Building Software for Humans - Interview with Ash Donaldson"
+title: "Interview with Ash Donaldson"
 date: 2012-10-29
 author: Iz El-Bahnasy
-tags: ["human factors", "UX", "design", "lean", "interviews"]
+tags:
+- interview
+- ux
+- lean
 ---
 
 ![Human Factors in Software, Ash Donaldson](http://farm5.staticflickr.com/4151/5119935194_b55ff0391d.jpg "Ash Donaldson")
@@ -13,7 +16,7 @@ I first met Ash during my time at CommunityEngine, a Sydney Northern Beaches sta
 
 I wanted to find out a little more about the importance of UX / Behavioural Design when building software.  Here are 10 questions and answers from our chat:
 
-### 1. Tells us a little about yourself, your professional passion and how you got into it!
+##1. Tells us a little about yourself, your professional passion and how you got into it!
 **Ash:** Years and years ago I was in aviation.  The way aviation training worked is that you'd go to a commercial pilot school, and they will talk about how many pilots they've got in the airlines and how its a wonderful life...... and you're so starstruck and bedazzled by it!  Every young boy wants to be a pilot....... “And its going to cost you X amount of dollars“!
 
 So you scrimp and save and you pay the whole thing upfront, and about the time you clear your private license, you realise that there are a lot of old pilots hanging around; there's just no jobs in the airlines. 5000 jobs in the airlines, 100,000 pilots around, you do the math!
@@ -22,7 +25,7 @@ And the best way to get around that is to become a flight instructor and tell pe
 
 I became a flight instructor, and I really enjoyed doing that actually; I love teaching people.  When you are teaching you have to dig deeper to be able to answer questions; this is how I become aware of Human Factors.  For example, understanding that during times of high cognitive load, extreme levels of attention is required.  Therefore, the cockpit door is locked during takeoff and landing.  Or understanding that despite what your instrument panel may be telling you, your brain will make you think you are upright!
 
-### 2. What is Human Factors Engineering?
+##2. What is Human Factors Engineering?
 
 **Ash:** Our brain is a wonderful ecosystem that strives to stay in equilibrium. This influences our behaviour. When relaxed, we have a greater propensity for creativity, but miss details. When stressed, our attention zooms in to notice the smallest detail, but we find it difficult to think outside the square.
 
@@ -34,7 +37,7 @@ I always espouse the behaviour formula of Kurt Lewin, the Father of Social Psych
 
 This is the fun behind human factors, you need to design a system based on people's current behaviours whilst understanding their motivations, because you know that as soon as you introduce this tool, their behaviour is going to change.  So you need to understand what causes the behaviours in the first place, in order to shape the tool in the right direction.
 
-###3. Walk us through a typical user research exercise you would undertake for a new project.
+##3. Walk us through a typical user research exercise you would undertake for a new project.
 
 **Ash:** The typical workflow for a user research exercise would be:
 
@@ -52,7 +55,7 @@ So you can say "they're not doing x because of y", and then you have to go back 
 
 A lot of people think that research is a big undertaking, but the amount of guerrilla research I have done going to cafés and saying I'll buy you a coffee if I can sit down with you for 5 mins.... It's well worth it.
 
-###4. What is ISO 25062:2006? Any other standards worth mentioning?
+##4. What is ISO 25062:2006? Any other standards worth mentioning?
 
 **Ash:** This is the Common Industry Format for Usability Testing.  It is applied at the highest stage of fidelity - where a product is at maturity and you are going through iterations to continually make it better. Many software companies end up 'breaking' their software because they keep adding features, but never test to make sure that these iterations are actually making things better.
 
@@ -61,7 +64,7 @@ This is a scientifically replicable experiment that anyone can re-perform.
 There is also a framework for research that has been in place since the 1940s which is an international standard, that no one seems to know about, which is [ISO 9241-210:2010](http://www.iso.org/iso/catalogue_detail.htm?csnumber=52075),
 Ergonomics of Human-System Interaction -- Part 210: Human-centred design for interactive systems.
 
-###5. What's the difference between the ISO 25062:2006 format and, say, testing a prototype with users, for a startup product?
+##5. What's the difference between the ISO 25062:2006 format and, say, testing a prototype with users, for a startup product?
 
 **Ash:** People get confused about usability testing, they tend to think that it is all done in a lab, in a fake environment performing a series of made up tests.  This is called Summative Usability Testing. Which is a far cry from formative testing, which is what I described earlier - where you sit down with someone in a cafe. 
 
@@ -75,7 +78,7 @@ The standard tells you what sorts of things you should be recording, and what me
 
 Whereas formative testing is 99% of usability testing, and people get it confused. They think of usability testing as one type.  Formative usability testing is best done in context. So you go to peoples' work place and you do a cognitive walkthrough, to start with, then you do some paper prototyping, then you do some light mock ups. You go through those iterations but it is best to do it in context so that you can see how the environment impacts upon their behaviour in completing a task.
 
-###6. Here at Terracoding, we work with greenfield projects and startups.  In terms of product development, what advice would you give to startup folks at the start of a product development cycle?
+##6. Here at Terracoding, we work with greenfield projects and startups.  In terms of product development, what advice would you give to startup folks at the start of a product development cycle?
 
 **Ash:** Take your idea and objectively put it in front of people. Put a few drawings of the flow on paper and have a few screens for people to see. 
 
@@ -84,14 +87,14 @@ I liken it to a ship going across the ocean. A few degrees off course at the beg
 Whereas, if you have defined who it is you are building this for in the first place, one of the first things you do is find out where they are. They are going to be on certain forums or groups, in certain areas in a café.... Find out where they are and go and hang out in those types of places. For the price of a coffee, or nothing at all, it is amazing how grateful people are when you ask them about a piece of software they think is being developed for them!
 
 
-###7. What resources would you recommend for those embarking on building a new user centric software?
+##7. What resources would you recommend for those embarking on building a new user centric software?
 
 **Ash:** [Steve Krug](http://www.sensible.com/) wrote 2 really digestible books. One is 'Don't Make Me Think' which covers the basics of making usable software. The second is "Rocket Surgery Made Easy", which mis-spells the myths about usability testing. These books give you the really practical stuff. 
 
 One more book, [Jodie Moule](http://www.symplicit.com.au/) [- "Killer UX"](http://www.sitepoint.com/books/ux1/), a book on UX mainly for developers, it goes through the process with developers in mind, covering the different techniques and the detail.
 
 
-###8. So are these resources useful for those startups, particularly if they can't hire a UX designer yet?
+##8. So are these resources useful for those startups, particularly if they can't hire a UX designer yet?
 
 **Ash:** There shouldn't be anything such as a "UX designer", as UX belongs to everyone!  And that's why human factors is one of those weird things!  Human factors engineers are actually facilitators.  When you are actually doing the study you learn about these different disciplines and it is only so that you can communicate them and have an appreciation of where they come from. 
 
@@ -102,7 +105,7 @@ So the role of the UX designer is to see the bigger picture and have that vision
 It's crazy.... people think of roles as specific people!  But in a startup, you have one person doing the front-end, back-end and marketing.  Someone else does the business plan, architecture and the packaging!  So you've got six roles there already, perfect!
 
 
-###9. When starting out, why is it important to take a "step back" and research, before coding or even wireframing?
+##9. When starting out, why is it important to take a "step back" and research, before coding or even wireframing?
 
 **Ash:** If you actually spend some time doing the research then you can design something that is actually useful to someone.  For example, I am designing something for accountants, here are several different types of accountants and X is a common behaviour across all of them.... here is what their motivations are... So I am going to have the core of the software just coming off those motivations. 
 
@@ -120,7 +123,7 @@ Testing with users goes through fidelity levels. The first level is to draw a sk
 
 When its ugly there is the tendency to blame the software for why it doesn't work.  However, when it's pretty people blame themselves for why it doesn't work, so it doesn’t have a massive effect on the end product.
 
-###10. In an ideal organisation setup, how would you see: Marketing, Engineering and UX all fitting together?
+##10. In an ideal organisation setup, how would you see: Marketing, Engineering and UX all fitting together?
   
 **Ash:** In the ideal situation all the teams can get together!!  One of the failings of some companies, and it's a bit of a fad at the moment, is the work space allowing for flexible working (open space with no desk allocation).  But what is more important is having a [war room](http://ux.stackexchange.com/questions/16212/how-to-set-up-a-war-room). That makes it easy to keep up to date concepts, flows and designs on the walls, where anyone can quickly be brought up to speed on the project and where it's up to.  As things change, with blue tac, team members create new versions and capture those changes to show why the changes were made.
 

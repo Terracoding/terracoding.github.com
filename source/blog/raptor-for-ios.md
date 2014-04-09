@@ -2,7 +2,9 @@
 title: "Raptor for iOS"
 date: 2013-01-18
 author: Dominic Wroblewski
-tags: [apps, ios, iphone, app.net]
+tags:
+- ios
+- app.net
 ---
 
 It's been quite a while, but we are now announcing the upcoming release of Raptor for iOS.

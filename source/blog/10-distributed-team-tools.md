@@ -1,8 +1,9 @@
 ---
-title: "10 Tools we use to make Distributed Team Working Awesome"
+title: "10 Tools We Use as a Distributed Team"
 date: 2013-08-28
 author: Iz El-Bahnasy
-tags: ["distributed team", "collaboration", "remote working"]
+tags:
+- remote working
 ---
 
 ![Sharpest tool in the shed, by Lachlan Donald](http://farm3.staticflickr.com/2851/9408028555_396725f058.jpg "tools")
@@ -17,14 +18,14 @@ Sharpest tool in the shed, by Lachlan Donald
 
 There is no doubt that without tech, distributed working would be difficult, making the above advantages unobtainable.  Here are 10 technologies we rely on in our day to day workflow as a distributed team (in no particular order).  
 
-**1. [Trello](http://www.trello.com)**  
+##1. [Trello](http://www.trello.com)
 
 ![Trello](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvAbQ20erMIe-BxuTSzW5zziGQECvqXv_euCjyCoVadco5D3j7zw "Trello")  
 
-We love Trello, and we use it for all sort of cases.  From a simple task lists, Business Model Canvases, it's represented in Trello boards.  
+We love Trello, and we use it for all sort of cases.  From a simple task lists, Business Model Canvases, it's represented in Trello boards.
 
 
-***2. [Sprintly](http://www.sprint.ly).***  
+##2. [Sprintly](http://www.sprint.ly)
 
 ![Sprintly](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_tcBaLC6Exm8K8J803H-XCdnmXciIU880Bur6oZ0TdUwm1Ad9 "Sprintly")  
 
@@ -37,7 +38,7 @@ Because we love Sprintly, we developed an iPhone / iPad app for it. This makes i
 We have also built a couple of workflow tool for Sprintly, which are available [here](http://terracoding.com/sprintly/).  
 
 
-***3. [Sqwiggle](http://www.sqwiggle.com)***  
+##3. [Sqwiggle](http://www.sqwiggle.com)
 
 ![Sqwiggle](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRediEZHDijK9FDBpzQfoX_GpQYl2gCZFKI5rqY_kJrBlqWWJfx "Sprintly")  
 
@@ -47,13 +48,12 @@ Sqwiggle is video / chat collaboration app.  Unlike other video apps we know of,
 
 With one click on a team mate's snapshot you are instantly connected.  Conversations generally tend to be short on Sqwiggle (a quick query and back to work).  It feels great being able to have instant access to team mates.  
 
-
-***4. Facebook Groups***  
+##4. Facebook Groups
 
 We tried out a number of enterprise social networking solutions.  Facebook's private groups is a great fit for the small team that we are.  We already use Facebook socially, and the interface is clean, and responsive.  
 
 
-***5. [Bundlll](http://www.bundlll.com)***  
+##5. [Bundlll](http://www.bundlll.com)
 
 One problems we found with being a distributed team was essentially a side effect of the technology that facilitates distributed working in the first place!!
 
@@ -67,15 +67,14 @@ This is what the inspiration behind Bundlll came from.  We wanted a centrally or
 
 Bundlll is currently in closed beta, [but we would love to have you on the beta list](http://www.bundlll.com) ;)  
 
-
-***6. [Dropbox](http://www.dropbox.com)***  
+##6. [Dropbox](http://www.dropbox.com)
 
 ![Dropbox](http://blogs.evergreen.edu/seedsandcircuits/files/2013/05/Dropbox-Art.jpg "Dropbox")
 
 Dropbox stores most of our files in our shared folder.  Everyone is in sync; a no brainer.  
 
 
-***7. [HipChat](https://www.hipchat.com)***  
+##7. [HipChat](https://www.hipchat.com)
 
 ![HipChat](http://cdn.appstorm.net/windows.appstorm.net/files/2012/05/HipChat.png "Dropbox")  
 
@@ -86,21 +85,21 @@ In other words, whenever we have a new software build, we receive a message on H
 We use HipChat for general communications and we are big fans of the [HipChat emoji!](http://hipchat-emoticons.nyh.name/)  
 
 
-***8. [Github](http://www.github.com)***  
+##8. [Github](http://www.github.com)
 
-![Github](https://si0.twimg.com/profile_images/651575553/twittergithub2.png "Github")  
+![Github](http://upload.wikimedia.org/wikipedia/en/4/40/Octocat,_a_Mascot_of_Github.jpg "Github")  
 
 Github is vital for our distributed work.  Our Github repositories host most of our code.  We use [Vincent Driessen's branching model](http://nvie.com/posts/a-successful-git-branching-model/) as a guide for collaborating on a codebase.  
 
 
-***9. Google Docs***  
+##9. Google Docs
 
 ![Google Docs](http://0.jsucdn.com/instructionaltech/files/2012/02/M-GoogleDocs.jpg?75f79a "Google Docs")
 
 One of the things we like about Google docs is being be on the same page as your team mate, quite literally! Realtime collaboration on a document is great!  
 
 
-***10. [Evernote](http://www.evernote.com)***  
+##10. [Evernote](http://www.evernote.com)
 
 ![Evernote](https://lh3.ggpht.com/si0cgkp2rkVX5JhhBYrtZ4cy2I1hZcrx8aiz-v8MjvPykfhT7-YAM2B8MNi0OCF9AQ=w300 "Evernote")  
 

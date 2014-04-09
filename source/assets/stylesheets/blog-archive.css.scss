@@ -1,0 +1,150 @@
+@import "bootstrap/variables";
+
+#archive {
+  background-color: $pale-green;
+  padding-bottom: 3em;
+
+  .container * {
+    font: 1em $font-family-sans-serif;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  article h1 a {
+    font-weight: normal;
+    text-shadow: none;
+  }
+
+  footer {
+    dt {
+      display: none;
+    }
+
+    .tags ul {
+      padding: 0;
+      list-style: none;
+      height: 1.2em;
+      overflow: hidden;
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+    .month-block,
+    .day-block {
+      border-left: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .year-block {
+      margin-top: 0.5em;
+    }
+
+    .year-block > h2,
+    .month-block > h3 {
+      position: absolute;
+    }
+
+    .year-block {
+      > h2 {
+        width: 7%;
+      }
+    }
+
+    .month-block {
+      margin-left: 8%;
+
+      > h3 {
+        width: 17%;
+        margin-left: 1em;
+      }
+
+      + .month-block {
+        padding-top: 0.5em;
+      }
+    }
+
+    .day-block {
+      margin-left: 19%;
+
+      + .day-block {
+        padding-top: 0.5em;
+      }
+    }
+
+    article {
+      position: relative;
+      padding-left: 3em;
+
+      h1 {
+        position: relative;
+        z-index: 2;
+        display: inline-block;
+        background-color: $pale-green;
+        box-shadow: 1em 0 0.5em 0.3em $pale-green;
+        padding-right: 1em;
+      }
+
+      footer {
+        dt {
+          display: none;
+        }
+
+        dd {
+          display: inline-block;
+        }
+
+        .pubdate {
+          position: absolute;
+          left: 1em;
+          top: 0;
+          word-spacing: 3em;
+          width: 3em;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        .tags {
+          float: right;
+          margin-top: -1.2em;
+
+          li {
+            margin-left: 0.3em;
+            float: left;
+          }
+        }
+      }
+
+      + article {
+        padding-top: 0.5em;
+
+        .pubdate {
+          top: 0.5em;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    footer {
+      display: none;
+    }
+
+    .year-block,
+    .month-block {
+      border-left: 0.2em solid rgba(0,0,0,0.2);
+      padding-left: 0.5em;
+      margin-top: 1em;
+
+      &:first-of-type {
+        margin-top: 0.5em;
+      }
+    }
+
+    .month-block {
+      border-color: rgba(0,0,0,0.1);
+    }
+
+    .day-block:first-of-type {
+      margin-top: 0.3em;
+    }
+  }
+}

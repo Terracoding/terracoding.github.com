@@ -1,16 +1,15 @@
----
-slug: posts-by-tag
----
-
-#banner
-  %h1
-    Posts tagged:
-    = link_to(tagname, tag_path(tagname))
+%header
+  .container
+    %h1
+      Posts tagged
+      = "&lsquo;" + link_to(tagname, tag_path(tagname)) + "&rsquo;"
 
 %section#blog
   - articles.each_with_index do |post, i|
     - if i > 0
       %hr
 
-    .wrapper
+    .container
       = partial "blog/post", locals: { post: post }
+
+= partial "blog/archive"

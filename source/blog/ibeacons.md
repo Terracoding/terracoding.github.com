@@ -1,8 +1,10 @@
 ---
-title: "Hack day: iBeacons"
+title: "Hack Day: iBeacons"
 date: 2013-12-10
 author: Dominic Wroblewski
-tags: ["ibeacon", "beacon", "ble", "bluetooth", "smart", "ios", "android"]
+tags:
+- ios
+- android
 ---
 
 Shops and malls are going to get pretty interesting with a relatively new type of technology that could help shoppers navigate around large stores, as well as improve the discovery of available offers in a store.
@@ -13,8 +15,6 @@ The standard has been available on iOS devices since the release of the iPhone 4
 
 So with all of this in mind, I bought some beacons from [Estimote](http://estimote.com/) to hack away and see what I could come up with:
 
-<iframe src="//player.vimeo.com/video/81510092" width="500" height="281" allowfullscreen="allowfullscreen" frameborder="0">&nbsp;</iframe>
-
-<img width="200" src="/posts/ibeacons/beacon-app.png" />
+<iframe src="//player.vimeo.com/video/81510092" width="500" height="281" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 

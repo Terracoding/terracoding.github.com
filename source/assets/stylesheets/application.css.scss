@@ -3,6 +3,7 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "iconic-theme";
+@import "blog-archive";
 
 /* Global
 ================================================== */
@@ -11,8 +12,8 @@ body {
   @include font-smoothing;
 }
 
-.main-content {
-  min-height: 400px;
+#main-content {
+  min-height: 85vh;
 }
 
 section {
@@ -39,8 +40,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: $font-size-base * 1.4;
 }
 
-p a {
-  text-decoration: underline;
+p {
+  margin-bottom: 1em;
+  a {
+    text-decoration: underline;
+  }
 }
 
 .img-rounded {
@@ -52,11 +56,19 @@ form {
 
   label {
     font-weight: normal;
+    color: $green;
   }
 
-  .form-group .form-control {
-    box-shadow: none;
-    padding: 0.4em;
+  .form-group {
+    .form-control {
+      padding: 0.4em;
+      box-shadow: none;
+    }
+  }
+
+  #first-name {
+    position: absolute;
+    top: -9999px;
   }
 }
 
@@ -499,6 +511,74 @@ body#sprintly {
   }
 }
 
+/* Blog
+================================================== */
+
+body#blog {
+  header {
+    text-align: center;
+    margin-top: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+  }
+
+  .post {
+    h1 { font-size: $font-size-h1 - 15; }
+    h2 { font-size: $font-size-h2 - 12; }
+    h3 { font-size: $font-size-h3 - 8; }
+
+    img {
+      @include img-responsive;
+    }
+
+    footer {
+      text-align: right;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: -1em;
+
+      dt {
+        font-weight: normal;
+        margin: 2em 0 0.5em;
+        text-transform: uppercase;
+        font-size: 0.8em;
+
+        &:first-of-type {
+          display: none;
+        }
+      }
+
+      .pubdate {
+        line-height: 2.5;
+        margin-bottom: -0.7em;
+      }
+
+      .tags {
+        padding: 0;
+        list-style: none;
+        margin: 0 0 1em;
+
+        li {
+          margin-bottom: 0.1em;
+        }
+      }
+    }
+  }
+
+  footer .tags a {
+    display: inline-block;
+    padding: 0.3em 0.5em 0.2em;
+    background-color: rgba(0,0,0,0.08);
+    font-size: 0.65em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: $border-radius-small;
+
+    &:hover,
+    &:focus {
+      background-color: rgba(0,0,0,0.15)
+    }
+  }
+}
 
 /* Breakpoints
 ================================================== */
@@ -534,16 +614,21 @@ body#sprintly {
       margin-left: -$grid-gutter-width/2;
     }
   }
+
+  body#blog .post .pubdate {
+    margin-left: -1em;
+  }
 }
 
 @media (max-width: $screen-xs-max) {
   #main-nav {
     .active {
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.3);
+      font-weight: bold;
     }
 
     li:not(.active) a:hover {
-      background-color: rgba(255,255,255,0.1);
+      background-color: rgba(255,255,255,0.2);
       color: $white;
     }
   }
@@ -561,5 +646,14 @@ body#sprintly {
   .banner .banner-next {
     position: absolute;
     right: $grid-gutter-width/2;
+  }
+
+  body#blog {
+    .post footer {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      text-align: left;
+      padding-top: 1em;
+      margin-top: 2em;
+    }
   }
 }

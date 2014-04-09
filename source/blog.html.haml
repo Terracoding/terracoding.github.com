@@ -1,9 +1,5 @@
 ---
-slug: blog
+layout: blog
 ---
 
-%section#blog
-  .container
-    = partial "blog/post", locals: { post: blog.articles.first }
-
-  = partial "blog/archive"
+= partial "blog/post", locals: { post: blog.articles.first }

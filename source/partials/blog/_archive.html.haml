@@ -1,5 +1,5 @@
 %section#archive
-  %h1 Post Archive
+  %h1.sr-only Post Archive
   .container
     - blog.articles.group_by { |a| a.date.year }.each do |year, year_posts|
       .year-block

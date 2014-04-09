@@ -1,15 +1,11 @@
 ---
-title: "Costs Saved when your Team Writes Automated Tests"
+title: "Costs Saved When You Write Automated Tests"
 date: 2013-10-23
 category: Test Driven Development, Automated Tests
 author: Iz El-Bahnasy
-tags: ["Test Driven Development", "TDD", "Automated Tests"]
+tags:
+- testing
 ---
-![Construction Plan by cbmd, source: FLikr](http://farm4.staticflickr.com/3074/3017474074_a000736d58_z.jpg "testing, planning")
-
-Construction Plan by cbmd, source: Flikr
-
-**The Example goes like this:**
 
 Just as the developer thinks it will be a smooth morning, they are bombarded with error reports or bug tickets on entrance to the office; the 5 year old software is broken again!
 
@@ -25,9 +21,9 @@ After some time debugging, the developer concludes that the bug was caused by a 
 
 "We can, but it will be difficult to: 'draw up construction plans for a house, when we don't even know what's between the walls and what's under the floor'! "
 
-The keyword in focus here is ***construction plans***.
+The keyword in focus here is _construction plans_.
 
-**Automated Testing as a Hidden Cost Saving**
+##Automated Testing as a Hidden Cost Saving
 
 When it comes to collaboration on a software project, It is important for the technical team to have visibility into why feature decisions are made and how new features play out in the market.
 
@@ -41,9 +37,9 @@ But because savings in developer costs during the actual building of a feature o
 
 Therefore, the lack of a good test suite often disguises itself as a hidden cost.  A cost that doesn't bite till later.  The role of a developer is to emphasis to a product owner the importance of testing, mainly for the wellbeing of the product.
 
-**The Analogy**
+##The Analogy
 
-At Terracoding we cannot emphasise the importance of automated tests enough.  We illustrate it's importance using this analogy:
+At Terracoding we cannot emphasise the importance of automated tests enough. We illustrate its importance using this analogy:
 
 A software product that lacks adequate automated tests is like building a skyscraper without construction plans.
 
@@ -61,10 +57,10 @@ What automated testing offers is a way to automatically make sure that a product
 
 If the luxury of automation in maintenance was available in construction, a lot of money would be saved.  In fact, there are efforts in construction to use 3D modeling technologies to make use of automation, leading to cost savings.
 
-**Different Techniques for Testing**
+##Different Techniques for Testing
 
-Some of the naming conventions used by developers to describe techniques for testing and designing software include [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_development), [Test First Development] (http://www.extremeprogramming.org/rules/testfirst.html) and [Behaviour Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development).  There are differences between these techniques, and choices are made subjectively.
+Some of the naming conventions used by developers to describe techniques for testing and designing software include [Test Driven Development](http://en.wikipedia.org/wiki/Test-driven_development), [Test First Development](http://www.extremeprogramming.org/rules/testfirst.html) and [Behaviour Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development).  There are differences between these techniques, and choices are made subjectively.
 
 However, no matter what methodology your developer chooses, the take away here is the importance of a good test suite as a primary expectation when commissioning developers.
 
-Have you witnessed the monetary savings a good test suite has given your project or organisation?  We would love your comments :)
+Have you witnessed the monetary savings a good test suite has given your project or organisation? We would love your comments :)
