@@ -6,7 +6,7 @@ task :post, :title do |t, args|
   title = args[:title]
   slug = slugify(title)
 
-  post_dir = "source/posts/"
+  post_dir = "source/blog/"
 
   post = '---
 title: "'+title+'"

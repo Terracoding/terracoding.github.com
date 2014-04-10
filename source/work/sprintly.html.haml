@@ -5,46 +5,71 @@ slug: sprintly
 
 = partial "work/header", locals: { title: "Sprintly" }
 
-%section
+%section.intro
   .container
-    .row
-      .col-sm-6
-        %h2.sr-only About The Project
-        :kramdown
-          [Medtronic](http://www.medtronic.com/) is one of the world's leading medical device companies, providing devices and therapies to treat more than 30 chronic diseases, including heart failure, Parkinson's disease, downsyndrome and spinal disorders.
-
-          We partnered with [obii.mobi](http://obii.mobi/) to produce an iPad app for the Fortune 500 company, digitising their surgical implements catalogue and simplifying tool choice for a wide range of procedures.
-      .col-sm-6
-        = image_tag "work/medtronic/device-screenshot.png", alt: "Screenshot", class: "img-responsive"
+    :kramdown
+      At Terracoding we use [Sprintly](http://sprint.ly/) to keep on top of our tasks every day. We built these tools to make our lives even easier. Enjoy!
 
 %section
   .container
     .row
-      .col-sm-6.col-sm-push-6
-        %h2
-          = iconic("tablet")
-          User Interface
-        :kramdown
-          Provided mockups by obii.mobi, we turned Medtronic's dream of a intuitive, dynamic tool catalogue into a reality.
+      .col-sm-8
+        .row
+          .col-xs-3.col-sm-3.col-md-2.icon
+            = image_tag "work/sprintly/sprinter.png", class: "img-responsive", alt: "Sprinter icon"
 
-          By crafting custom interface elements and animations to suit the content, we were able to present the entirity of Medtronic's instrument range through easily browsable menus.
+          .col-xs-9.col-sm-9.col-md-10
+            %h1
+              Sprinter for iPhone
+            :kramdown
+              Manage your Sprintly products on the go with Sprinter for iPhone and iPad.
 
-          Now surgeons can quickly select tools and see attachments drop in with details and measurements.
-      .col-sm-6.col-sm-pull-6
-        = image_tag "work/medtronic/screenshot-2.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"
+      .col-sm-4
+        = link_to "https://itunes.apple.com/us/app/sprinter-for-iphone/id568151529", class: "btn-download" do
+          = image_tag "work/sprintly/app-store.png", height: 55, width: 165, class: "img-rounded", alt: "Available on the App Store"
+
+    .row
+      .col-sm-12
+        %iframe{src: "http://player.vimeo.com/video/70181603?portrait=0&byline=0&title=0", width: 1049, height: 720, frameborder: 0, allowFullScreen: true}
 
 %section
   .container
     .row
-      .col-sm-6
-        %h2
-          = iconic("spreadsheet")
-          Data Handling
-        :kramdown
-          With a huge selection of tools and attachment combinations for hundreds of procedures, working closely with Medtronic was vital to ensure data for the app was complete and accurate.
+      .col-sm-8
+        .row
+          .col-xs-3.col-sm-3.col-md-2.icon
+            = image_tag "work/sprintly/sprintly-for-alfred.png", class: "img-responsive", alt: "Sprintly for Alfred icon"
 
-          We gave Medtronic the freedom to provide us with data in the format that made sense to them, before carefully importing it into the application on our end.
+          .col-xs-9.col-sm-9.col-md-10
+            %h1
+              Sprintly for Alfred
+            :kramdown
+              Add, list, start and finish Sprintly items easily with our workflow for [Alfred](http://www.alfredapp.com/).
 
-          The result was a comprehensive app with data Medtronic trusted to be correct.
-      .col-sm-6
-        = image_tag "work/medtronic/screenshot-3.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"
+      .col-sm-4
+        = link_to "Download Workflow", "https://github.com/samrayner/Sprintly-for-Alfred/releases/download/v1.0.5/Sprintly.alfredworkflow", class: "btn btn-default btn-download"
+
+    .row
+      .col-sm-12
+        %iframe{src: "http://player.vimeo.com/video/70181604?portrait=0&byline=0&title=0", width: 1280, height: 800, frameborder: 0, allowFullScreen: true}
+
+%section
+  .container
+    .row
+      .col-sm-8
+        .row
+          .col-xs-3.col-sm-3.col-md-2.icon
+            = image_tag "work/sprintly/sly.png", class: "img-responsive", alt: "Sly icon"
+
+          .col-xs-9.col-sm-9.col-md-10
+            %h1
+              Sly
+            :kramdown
+              Control your products without leaving Terminal with our Sprintly CLI.
+
+      .col-sm-4
+        = link_to "Download Sly", "https://github.com/Haar/Sprintly-Terminal/archive/master.zip", class: "btn btn-default btn-download"
+
+    .row
+      .col-sm-12
+        %iframe{src: "http://player.vimeo.com/video/70181605?portrait=0&byline=0&title=0", width: 960, height: 540, frameborder: 0, allowFullScreen: true}

@@ -11,9 +11,11 @@ slug: hello-sunday-morning
       .col-sm-6
         %h2.sr-only About The Project
         :kramdown
-          [Medtronic](http://www.medtronic.com/) is one of the world's leading medical device companies, providing devices and therapies to treat more than 30 chronic diseases, including heart failure, Parkinson's disease, downsyndrome and spinal disorders.
+          [Hello Sunday Morning](http://www.hellosundaymorning.org/) is a community working towards a better drinking culture. Since 2010 over 20,000 people have signed up to go 3 months or more without alcohol and blog about their experience.
 
-          We partnered with [obii.mobi](http://obii.mobi/) to produce an iPad app for the Fortune 500 company, digitising their surgical implements catalogue and simplifying tool choice for a wide range of procedures.
+          Users share thoughts, photos and goals, and support each other in changing their relationship with alcohol. They can follow friends and earn badges for contributing.
+
+          HSM approached us to take over their existing Ruby code-base, bring it up to scratch and drive the next stage of development.
       .col-sm-6
         = image_tag "work/hello-sunday-morning/device-screenshot.png", alt: "Screenshot", class: "img-responsive"
 
@@ -22,14 +24,12 @@ slug: hello-sunday-morning
     .row
       .col-sm-6.col-sm-push-6
         %h2
-          = iconic("tablet")
-          User Interface
+          = iconic("wrench")
+          Platform Engineering
         :kramdown
-          Provided mockups by obii.mobi, we turned Medtronic's dream of a intuitive, dynamic tool catalogue into a reality.
+          We started with  stability, improving #{define("test coverage")} and performance for the thousands of people already relying on the service. With the site experiencing prolonged periods of high traffic, we were able to improve uptime and make a lot of the data processing done behind the scenes more efficient.
 
-          By crafting custom interface elements and animations to suit the content, we were able to present the entirity of Medtronic's instrument range through easily browsable menus.
-
-          Now surgeons can quickly select tools and see attachments drop in with details and measurements.
+          Next, it was on to implementing user-requested features like private messaging and premium subscriptions. We wrote a system to handle payment transactions, allowing HSMers to pay a small amount monthly and unlock extra features.
       .col-sm-6.col-sm-pull-6
         = image_tag "work/hello-sunday-morning/screenshot-2.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"
 
@@ -38,13 +38,13 @@ slug: hello-sunday-morning
     .row
       .col-sm-6
         %h2
-          = iconic("spreadsheet")
-          Data Handling
+          = iconic("people")
+          Social Strategy
         :kramdown
-          With a huge selection of tools and attachment combinations for hundreds of procedures, working closely with Medtronic was vital to ensure data for the app was complete and accurate.
+          Working on a platform with such a thriving community is a challenge and a privilege. We're always looking to the future with the HSM team, advising them on how best to satisfy users and the technical feasibility of requested features.
 
-          We gave Medtronic the freedom to provide us with data in the format that made sense to them, before carefully importing it into the application on our end.
+          We utilise [Mixpanel](https://mixpanel.com/) to give HSM a valuable insight into user activity. Data collected throughout the site helps guide changes to the interface and flags up popular user-generated content for the HSM staff to feature.
 
-          The result was a comprehensive app with data Medtronic trusted to be correct.
+          With lots of ideas for the website and plans for Terracoding to bring HSM to the iPhone, we're excited to continue helping the community to grow and make a difference.
       .col-sm-6
         = image_tag "work/hello-sunday-morning/screenshot-3.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"

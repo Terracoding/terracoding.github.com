@@ -47,10 +47,6 @@ p {
   }
 }
 
-.img-rounded {
-  border-radius: $border-radius-base;
-}
-
 form {
   margin: 1em 0 2em;
 
@@ -504,10 +500,37 @@ body#work {
 
 body#medtronic,
 body#hello-sunday-morning,
-body#employment-hero,
-body#sprintly {
+body#employment-hero {
   section:nth-of-type(even) {
     background-color: $pale-green;
+  }
+}
+
+body#sprintly {
+  section:nth-of-type(odd) {
+    background-color: $pale-green;
+  }
+
+  h1 {
+    margin-bottom: 0.5em;
+  }
+
+  .intro {
+    font-family: $headings-font-family;
+    font-size: $blockquote-font-size;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .icon {
+    margin-right: -$grid-gutter-width/2;
+  }
+
+  .btn-download {
+    display: inline-block;
+    margin-bottom: 1em;
   }
 }
 
@@ -617,6 +640,10 @@ body#blog {
 
   body#blog .post .pubdate {
     margin-left: -1em;
+  }
+
+  body#sprintly .btn-download {
+    float: right;
   }
 }
 
