@@ -123,6 +123,11 @@ form {
       color: $dark-green;
     }
   }
+
+  &.btn-full-width {
+    display: block;
+    white-space: normal;
+  }
 }
 
 /* Tooltips
@@ -147,10 +152,14 @@ form {
   background-size: cover;
   @include font-smoothing(off);
 
+  > .container {
+    position: relative;
+  }
+
   .banner-title {
     @include text-hide;
-    width: 438px;
-    max-width: 90%;
+    max-width: 438px;
+    width: 90%;
     margin: 0 auto;
     height: $banner-height - 30;
     background: transparent no-repeat 50% 50%;
@@ -165,21 +174,27 @@ form {
   .banner-previous {
     @include text-hide;
     display: block;
-    height: 50px;
-    background: image-url("chevron-bubble.png") no-repeat 100% 50%;
+    height: $banner-height;
+    width: 80%;
+    min-width: 40px;
+    background: image-url("chevron-bubble.png") no-repeat 50% 50%;
     opacity: 0.4;
     background-size: contain;
     padding: 0;
-    margin: 80px 0 0;
-    min-width: 40px;
+    position: absolute;
 
     &:hover, &:focus {
       opacity: 1;
     }
   }
 
+  .banner-previous {
+    left: $grid-gutter-width/2;
+  }
+
   .banner-next {
     @include rotate(180deg);
+    right: $grid-gutter-width/2;
   }
 }
 
@@ -353,10 +368,6 @@ body#about-us {
     .iconic {
       margin-bottom: 0.2em;
     }
-
-    .btn {
-      display: block;
-    }
   }
 
   #about {
@@ -459,11 +470,6 @@ body#work {
     p {
       font-family: $headings-font-family;
       font-size: $blockquote-font-size;
-    }
-
-    .btn {
-      width: 100%;
-      white-space: normal;
     }
   }
 
@@ -623,9 +629,16 @@ body#blog {
     margin-right: -2em;
   }
 
-  body#about-us .navbar {
-    background: none;
-    border-color: transparent;
+  body#about-us {
+    .navbar {
+      background: none;
+      border-color: transparent;
+    }
+
+    #history {
+      padding-left: $grid-gutter-width;
+      padding-right: 0;
+    }
   }
 
   body#work #case-studies {
@@ -671,8 +684,20 @@ body#blog {
   }
 
   .banner .banner-next {
-    position: absolute;
-    right: $grid-gutter-width/2;
+    right: -$grid-gutter-width/4;
+  }
+
+  body#about-us {
+    #services {
+      li {
+        line-height: 2;
+        margin-bottom: 1em;
+      }
+    }
+
+    #team li {
+      margin-bottom: 1em;
+    }
   }
 
   body#blog {
