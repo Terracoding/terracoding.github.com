@@ -7,14 +7,14 @@
       <path d="M1.5 127.7l25.1-5.4c.8-.2 1-.8.4-1.4l-19.9-19.8c-.6-.6-1.2-.4-1.4.4l-5.4 25.1c-.2.7.4 1.3 1.2 1.1z" class="iconic-resize-both-arrowhead iconic-resize-both-arrowhead-bottom-left iconic-property-fill"/>
     </g>
   </g>
-  <g data-width="128" data-height="28" class="iconic-lg iconic-container" display="none" transform="translate(0 50)">
+  <g data-width="128" data-height="28" class="iconic-lg iconic-container" display="inline" transform="translate(0 50)">
     <g class="iconic-resize-width" display="none">
       <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-resize-width-line iconic-property-stroke" d="M114 14h-100" fill="none"/>
       <path d="M126.7 13.2l-21.4-12.4c-.7-.4-1.3-.1-1.3.7v25c0 .8.6 1.2 1.3.7l21.4-12.5c.7-.4.7-1 0-1.5z" class="iconic-resize-width-arrowhead iconic-resize-width-arrowhead-right iconic-property-fill"/>
       <path d="M1.3 14.8l21.4 12.5c.7.4 1.3.1 1.3-.7v-25c0-.8-.6-1.2-1.3-.7l-21.4 12.3c-.7.5-.7 1.1 0 1.6z" class="iconic-resize-width-arrowhead iconic-resize-width-arrowhead-left iconic-property-fill"/>
     </g>
   </g>
-  <g data-width="28" data-height="128" class="iconic-lg iconic-container" display="none" transform="translate(50)">
+  <g data-width="28" data-height="128" class="iconic-lg iconic-container" display="inline" transform="translate(50)">
     <g class="iconic-resize-height" display="none">
       <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-resize-height-line iconic-property-stroke" d="M14 14v100" fill="none"/>
       <path d="M13.2 1.3l-12.4 21.4c-.5.7-.1 1.3.7 1.3h25c.8 0 1.2-.6.7-1.3l-12.4-21.4c-.5-.7-1.1-.7-1.6 0z" class="iconic-resize-height-arrowhead iconic-resize-height-arrowhead-top iconic-property-fill"/>
