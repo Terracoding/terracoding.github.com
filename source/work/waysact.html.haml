@@ -1,0 +1,48 @@
+---
+layout: page
+slug: waysact
+---
+
+= partial "work/header", locals: { title: "Waysact" }
+
+%section
+  .container
+    .row
+      .col-sm-6
+        %h2.sr-only About The Project
+        :kramdown
+          [Waysact](http://waysact.com) is the leading face to face fundraising platform built by professional fundraisers. Major charities and their partners use Waysact to reduce donation loss through error and long processing times, improve retention with multimedia communication, and strategise better using real time statistics.
+
+          Terracoding joined Waysact's internal team to lead development of their #{define("Ruby on Rails")} app. Together, we have provided fundraisers around the world with a seamless iPad experience backed by valuable data analysis tools for campaign managers.
+      .col-sm-6
+        = image_tag "work/waysact/device-screenshot.png", alt: "Screenshot", class: "img-responsive"
+
+%section
+  .container
+    .row
+      .col-sm-6.col-sm-push-6
+        %h2
+          = iconic("bar-chart")
+          Data Processing
+        :kramdown
+          Waysact cater to a huge variety of charities, from [ActionAid](http://www.actionaid.org/) to [Greenpeace](http://www.greenpeace.org/), each with their own software for handling donors and payments. Previously, the team would manually program an exporter for each new charity so the data fundraisers collected using Waysact could be imported into the charity's own internal system.
+
+          Terracoding tackled the problem head-on, developing an intuitive tool to automate the export process. Now Waysact can scale up easily, taking on more charities than ever; support for any data format can be added in minutes.
+      .col-sm-6.col-sm-pull-6
+        = image_tag "work/waysact/screenshot-2.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"
+
+%section
+  .container
+    .row
+      .col-sm-6
+        %h2
+          = iconic("person")
+          Consultation
+        :kramdown
+          Though Waysact have built a highly successful Web app for the iPad, the team lacked experience developing native applications for iOS.
+
+          We've been working closely with them to start moving some of the fundraiser experience from the browser to a dedicated app. With the move comes improved performance and even more useful data through iPad features such as location services.
+
+          We look forward to helping more fundraisers around the world collect donations for a whole host of worthwhile causes.
+      .col-sm-6
+        = image_tag "work/waysact/screenshot-3.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"
