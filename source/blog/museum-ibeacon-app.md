@@ -14,7 +14,7 @@ iBeacon and BLE technology is often being discussed in the media giving people n
 
 When walking around a museum, children can quickly loose interest, or feel that there is not enough content that is interactive for them. Another issue arises when there are a number of touch displays throughout the museum, and during peak times, those displays have lots of people surrounding them, meaning that unless you wait in a queue, you will miss some great content. Children’s minds need to be stimulated, and need something to keep them busy to prevent them from getting too bored. We want to help museums and other similar institutes by providing them with a platform for increased engagement by children, and adults alike.
 
-<a href="/assets/images/museum-app.jpg"><img src="/assets/images/museum-app.jpg" /></a>
+<a href="/blog/museum-ibeacon-app/museum-app.jpg"><img src="/blog/museum-ibeacon-app/museum-app.jpg" alt="iBeacon App Mockup" /></a>
 
 It is well known that there are three main types of learning styles:
 
