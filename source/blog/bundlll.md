@@ -12,7 +12,7 @@ Over the past year or two working as a distributed team, we have come across man
 
 With the recent booming market for online web applications, there has been a never-ending amount of great tools to help us with our work. But the more tools we would start using, the harder it becomes to stay up to date. We started off by trying to cut down on the number of applications we use, but as soon as we would get another client, they would have a preference over some of the tools they want us to use, or we would end up inviting them to a number of tools they probably have never heard of in their life. Documents get duplicated (pages saved as PDFs, documents copied from one Dropbox folder to another), and different files are sent across via email attachments. This is where Bundlll comes in.
 
-<a href="/assets/images/bundlll-screenshot.png"><img width="400" src="/blog/bundlll/bundlll-screenshot.png" /></a>
+<a href="/blog/bundlll/bundlll-screenshot.png"><img width="400" src="/blog/bundlll/bundlll-screenshot.png" /></a>
 
 [Visit Bundlll here](http://bundlll.com)
 

@@ -8,4 +8,4 @@ tags:
 
 Today I want to present a few slides to a group of people about the Lean Startup methodology. Here is something that I came up with:
 
-[Click here to view the presentation](https://speakerdeck.com/domness/lean-startups)
+[View the presentation](https://speakerdeck.com/domness/lean-startups)
