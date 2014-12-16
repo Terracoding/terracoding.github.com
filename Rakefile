@@ -12,6 +12,8 @@ task :post, :title do |t, args|
 title: "'+title+'"
 date: '+Time.now.strftime("%F %R")+'
 tags:
+image_url:
+summary_text:
 ---
 
 '

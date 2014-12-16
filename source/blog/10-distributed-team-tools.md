@@ -4,6 +4,7 @@ date: 2013-08-28
 author: Iz El-Bahnasy
 tags:
 - remote working
+summary_text: 'Here are 10 technologies we rely on in our day to day workflow as a distributed team (in no particular order).'
 ---
 
 ![Sharpest tool in the shed, by Lachlan Donald](http://farm3.staticflickr.com/2851/9408028555_396725f058.jpg "tools")
