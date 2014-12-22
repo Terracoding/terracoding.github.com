@@ -9,7 +9,7 @@ module ThemeHelpers
 
   def image_collection(dir, type)
     html = '<div class="'+type.to_s+'">'
-    source_path = "/images/galleries"
+    source_path = "/assets/images/galleries"
     pattern = "#{Dir.pwd}/source#{source_path}/#{dir}/*.{jpg,jpeg,png,gif}"
 
     Dir.glob(pattern) do |path|
