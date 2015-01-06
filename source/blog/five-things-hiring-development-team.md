@@ -6,6 +6,7 @@ tags:
 - startups
 - hiring
 - teams
+summary_text: 'A development team is one of the most important parts of building any new software product or startup. Getting the right team is crucial.'
 ---
 
 A development team is one of the most important parts of building any new software product or startup. Getting the right team is crucial, as developers are the people that turn ideas into something customers will be interacting with and using on a daily basis.
@@ -18,7 +19,7 @@ Here are a number of tips for selecting a development team for your product:
 
 The end goal of shipping your product and making money is a great one, but to reach that goal you will have to decide what services you require. Most importantly, what can the development team provide to help your business run most effectively.
 
-Analytics can help understand how customers are using your products. Find out if the team you want to hire can provide you with analytics, and record how your customers are using the site.
+Analytics can help you understand how customers are using your products. Find out if the team you want to hire can provide you with analytics, and record how your customers are using the site.
 
 Do you require your team to have its own product manager? Does your intended team have a user interface (UI) or user experience (UX) designer to provide wireframes, and build and test prototypes?
 
@@ -30,7 +31,7 @@ Have a look through their showcase of previous projects. Ask them what they did 
 
 #### 3. What is your budget? How much are the team charging?
 
-Hiring a cheap development team is all well and good until you realise that the product they have built is buggy and not to spec. Skimping on budget may look good on your bank balance, but soon you will realise it often costs more to look for another development team to put the product back on track.
+Hiring a cheap development team is all well and good until you realise that the product they have built isn't quite what you wanted, and doesn't work that well either. Skimping on budget may look good on your bank balance, but soon you will realise it often costs more to look for another development team to put the product back on track.
 
 Maybe your team haven't planned enough to cover communicating with you and ensuring that the ideas are fully fleshed out before being implemented. Leading to my next point...
 
@@ -38,7 +39,7 @@ Maybe your team haven't planned enough to cover communicating with you and ensur
 
 Effective communication and keeping you in the loop is essential for the success of online startups. Thankfully we live in an age where you can voice or video call people from around the globe with ease.
 
-Make sure you and your development team can contact each other easily, and ensure you ask how often they would like to engage with you. When people stop communicating, your product can soon go downhill.
+Make sure you and your development team can contact each other easily, and ensure there is a clear understanding of how much communication is expected of one another from the get go. When people stop communicating, your product can soon go downhill.
 
 Turning your idea into a list of features and wireframes can take quite a bit of time and discussion before everyone is ready to get on with their work.
 
@@ -66,6 +67,6 @@ Here are just a few ways in which you can communicate with your team:
 
 It is amazing how much you can gauge about someone through an informal conversation with them.
 
-Getting to know your development team before you hire them can be essential in understanding their background, what type of people they are and what interests they have.
+Getting to know your development team before you hire them can be essential in understanding their background, what type of people they are, and what interests they have.
 
 Having a good relationship with the team often boosts their efforts to make sure your business is built with love and care.

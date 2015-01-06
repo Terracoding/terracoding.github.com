@@ -1,8 +1,2 @@
 = wrap_layout :blog do
-  - if current_article
-    %meta{ property: "og:type", content: "Article" }
-    %meta{ property: "og:title", content: current_article.title }
-    %meta{ property: "og:description", content: "#{current_article.data.summary_text ? current_article.data.summary_text : ''}" }
-    %meta{ property: "og:image", content: "#{current_article.data.image_url ? current_article.data.image_url : '/apple-touch-icon.png' }" }
-    %meta{ property: "og:site_name", content: "Terracoding Blog" }
   = partial "blog/post", locals: { post: current_article }
