@@ -30,7 +30,9 @@ As a system grows and more features are added to it, it becomes an unrealistic b
 
 ### Automated testing
 
-Wouldn’t it be awesome if we could just tell a web browser to visit each of our pages for us, and check that everything works as expected? Turns out we can make the web browser do everything for us, and set expectations as to what a page should contain afterwards.
+Wouldn’t it be awesome if our web browser could somehow visit each of our pages for us, and check that everything works for us? Turns out we can... sort of. We can tell the web browser to visit pages, we just need to tell it exactly what to do on them, and set our expectations for what pages should contain.
+
+This way we perform the test manually when we're writing it, but then the computer can repeat this test for us over and over, much faster than we can did it in the first place.
 
 The caveat usually associated with automated testing is a predictable overall increase in developer time for implementing features, after all - they need to write the feature and the appropriate tests to go with it. However, this time cost is usually paid back quite quickly, as bugs are detected as they occur, rather than after several days or weeks of development having gone by. As a result, bugs are typically fixed before they even make it out the door, resulting in a better product and development cycle for your product.
 
