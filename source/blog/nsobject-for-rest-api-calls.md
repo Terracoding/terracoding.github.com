@@ -1,7 +1,7 @@
 ---
 title: "NSObject for REST API Calls"
 date: 2012-09-07
-author: Dominic Wroblewski
+author: dominic
 tags:
 - ios
 - tutorial

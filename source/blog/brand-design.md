@@ -1,7 +1,7 @@
 ---
 title: "How We Design Branding"
 date: 2014-12-11
-author: Sam Rayner
+author: sam
 tags:
 - design
 - branding
@@ -15,6 +15,6 @@ As a client, you're included in every step of the process, from sketches to fina
 
 Below is a selection of branding Terracoding has done for clients. If you'd like to give your company a fresh new look or have an app that needs an icon, [get in touch](/contact/)!
 
-<a href="/blog/brand-design/brand-design.png"><img src="/blog/brand-design/brand-design.png" alt="Client branding by Terracoding" /></a>
+[![Client branding by Terracoding](/blog/brand-design/brand-design.png)](/blog/brand-design/brand-design.png)
 
 [ddc]: http://draplin.com/

@@ -1,7 +1,7 @@
 ---
 title: "Museum iBeacon Application"
 date: 2014-06-04
-author: Dominic Wroblewski
+author: dominic
 tags:
 - ios
 - android

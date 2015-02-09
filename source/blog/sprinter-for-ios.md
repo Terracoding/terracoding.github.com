@@ -1,7 +1,7 @@
 ---
 title: "Sprinter for iOS"
 date: 2012-10-28
-author: Dominic Wroblewski
+author: dominic
 tags:
 - ios
 - sprintly

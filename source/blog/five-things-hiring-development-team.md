@@ -1,7 +1,7 @@
 ---
 title: "Five Things to Consider When Hiring a Development Team"
 date: 2015-01-06
-author: Dominic Wroblewski
+author: dominic
 tags:
 - startups
 - hiring

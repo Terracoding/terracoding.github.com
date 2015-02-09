@@ -1,7 +1,7 @@
 ---
 title: "Testing in iOS"
 date: 2012-09-08
-author: Dominic Wroblewski
+author: dominic
 tags:
 - ios
 - tutorial
@@ -40,7 +40,7 @@ Testing certain UI elements can also be done using OCUnit. This requires you to 
         myController    = app_delegate.myController;
         myView          = myController.view;
     }
-    
+
     - (void)testUI
     {
         [myController press:[myView viewWithTag:1]];

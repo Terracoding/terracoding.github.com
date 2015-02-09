@@ -1,7 +1,7 @@
 ---
 title: "Raptor for iOS"
 date: 2013-01-18
-author: Dominic Wroblewski
+author: dominic
 tags:
 - ios
 - app.net

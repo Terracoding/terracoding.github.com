@@ -1,7 +1,7 @@
 ---
 title: "Hack Day: iBeacons"
 date: 2013-12-10
-author: Dominic Wroblewski
+author: dominic
 tags:
 - ios
 - android

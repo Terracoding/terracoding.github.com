@@ -1,7 +1,7 @@
 ---
 title: "Automated Testing - What is it, and why should you care?"
 date: 2015-01-23 17:30
-author: Robert White
+author: robert
 tags:
 - teams
 - testing
