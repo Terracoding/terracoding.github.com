@@ -15,6 +15,14 @@
         %time{ title: post.date, datetime: post.date.iso8601, pubdate: "pubdate" }
           = post.date.strftime("#{post.date.day.ordinalize} %B, %Y")
 
+      - full_name = data.team.send(post.data.author)["name"]
+      %dt
+        By
+        = full_name.split(" ").first
+      %dd.author
+        - full_name = data.team.send(post.data.author)["name"]
+        = image_tag("team/#{post.data.author}.jpg", width: 30, height: 30, class: "img-circle", alt: full_name, title: full_name)
+
       %dt Tags
       %dd
         %ul.tags

@@ -47,7 +47,11 @@ p {
   }
 }
 
-iframe {
+pre code {
+  font-size: 0.9em;
+}
+
+pre, iframe {
   margin-bottom: 1em;
 }
 
@@ -566,6 +570,14 @@ body#blog {
       @include img-responsive;
     }
 
+    ul, ol {
+      margin-bottom: 1em;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+    }
+
     footer {
       text-align: right;
       color: rgba(0,0,0,0.4);
@@ -579,6 +591,14 @@ body#blog {
 
         &:first-of-type {
           display: none;
+        }
+      }
+
+      .author {
+        color: rgba(0,0,0,0.5);
+
+        img {
+          display: inline;
         }
       }
 
