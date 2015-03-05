@@ -58,7 +58,7 @@ slug: about-us
       #team.col-sm-6
         %h2 The Team
         %ul.row
-          - ["robert", "dominic", "sam"].each do |name|
+          - ["dominic", "robert", "sam"].each do |name|
             = partial "index/team_member", locals: { username: name, member: data.team.send(name) }
 
       #history.col-sm-6
