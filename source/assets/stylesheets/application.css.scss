@@ -401,8 +401,10 @@ body#about-us {
 
       h3 {
         font-size: 0.9em;
-        margin-top: 0.5em;
         color: fade-out($dark-green, 0.2);
+        max-width: 5em;
+        display: block;
+        margin: 0.5em auto 1em;
       }
 
       p {
