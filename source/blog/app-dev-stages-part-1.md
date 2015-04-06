@@ -16,14 +16,14 @@ Each project is unique and requires flexibility within this loose framework. In 
 ##Stage 1 - The Problem/Idea
 Before we can start thinking about a software solution, it’s important to really get our heads around what it is we’re solving. In a lot of cases, companies come to us with a pretty clear idea of what they want building. We like to get together and discuss the motivation behind the project in detail before we get started for a number of reasons:
 
-- We need to understand your business to appreciate how the problem affects you and what kind of software would be appropriate
+- We need to understand your business to appreciate how the problem affects you and what kind of software would be appropriate.
 - What one person perceives to be the problem might not always turn out to be the thing that needs addressing directly. You know your business better than anyone, but sometimes it takes an outsider to tease out the root cause or a higher-level issue that can be overlooked in the day-to-day running of a company.
-- Sometimes the vision for an app is just not feasible (especially within budget and time constraints). Equally, there might be a technical solution you hadn't considered possible. As technical experts we can help analyse the problem in the context of what apps, and the platforms they run on, are capable of.
+- Sometimes the vision for an app is just not feasible (especially within budget and time constraints). Equally, there might be a solution you hadn't considered possible. As technical experts we can help analyse the problem in the context of what apps, and the platforms they run on, are capable of.
 
 ##Stage 2 - Feature Design
 Once we have nailed down the problem or need that our application is going to address, we can start designing a solution. Is it going to run natively on a mobile or in a web browser? What operating systems should be supported? Exactly what will users be able to do with the software?
 
-In almost every case, we suggest reducing the scope of an application right down to the bare essentials and focusing on getting those few features right for a first release. This is called a Minimum Viable Product (MVP) and allows us to get something useful into the hands of users as soon as possible. That way, people can benefit from our solution and we get valuable feedback to guide further development, informing decisions and saving money in the long run.
+In almost every case, we suggest reducing the scope of an application right down to the bare essentials and focusing on getting those few features right for a first release. This is called a Minimum Viable Product (MVP) and allows us to get something useful into people's hands as soon as possible. That way, users can benefit from our solution and we get valuable feedback to guide further development, informing decisions and saving money in the long run.
 
 
 ##Stage 3 - Interaction Design
