@@ -288,8 +288,8 @@ a.banner {
 
 body#about-us {
   #testimonials {
-    background: $dark-green image-url("home-banner-bg.jpg") no-repeat 0 100%;
-    background-size: cover;
+    background: $dark-green image-url("triangles.png") repeat 50% 0;
+    background-size: 830px auto;
     color: $white;
     padding: 0;
     padding-top:  $navbar-height + 4px;
@@ -393,6 +393,10 @@ body#about-us {
     text-align: center;
     background-color: $pale-green;
     padding: 1.2em 0;
+
+    a {
+      text-decoration: underline;
+    }
 
     h1, h2 {
       font-size: 1em;
