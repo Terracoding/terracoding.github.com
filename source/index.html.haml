@@ -36,7 +36,7 @@ slug: about-us
   %h1.sr-only Our Services
   .container
     .row
-      .col-sm-6
+      #intro.col-sm-6
         :kramdown
           We work closely with businesses in the UK and Australia to improve customer experience, increase sales, and simplify and automate their work with great software.
 
@@ -55,9 +55,12 @@ slug: about-us
             Training
 
         = link_to "Case studies and more about our services", "/work/", class: "btn btn-default btn-full-width"
-
-      .service-image.col-sm-6.hidden-xs
-        = image_tag "devices.png", width:"618", height:"328"
+      #recent.col-sm-6
+        = link_to "/work/hello-sunday-morning" do
+          %h1 Recent work
+          %h2 Hello Sunday Morning
+          .recent-image
+            = image_tag "work/hello-sunday-morning/iphones.png", alt: "HSM on iPhone", class: "img-responsive"
 
 %section#about
   %h1.sr-only About Us

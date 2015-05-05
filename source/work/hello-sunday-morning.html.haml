@@ -3,6 +3,8 @@ layout: page
 slug: hello-sunday-morning
 ---
 
+- app_url = "https://itunes.apple.com/app/hsm/id961582035"
+
 = partial "work/header", locals: { title: "Hello Sunday Morning" }
 
 %section
@@ -15,7 +17,7 @@ slug: hello-sunday-morning
 
           Users share thoughts, photos and goals, and support each other in changing their relationship with alcohol. They can follow friends and earn rewards for contributing.
 
-          HSM approached us to take over their existing Ruby code-base, bring it up to scratch and drive the next stage of development.
+          HSM approached us to manage the website and build an [iPhone app](#{app_url}) to help people track their drinking and take on drink-free challenges.
       .col-sm-6
         = image_tag "work/hello-sunday-morning/device-screenshot.png", alt: "Screenshot", class: "img-responsive"
 
@@ -24,27 +26,30 @@ slug: hello-sunday-morning
     .row
       .col-sm-6.col-sm-push-6
         %h2
-          = iconic("wrench")
-          Platform Engineering
-        :kramdown
-          We started with  stability, improving #{define("test coverage")} and performance for the thousands of people already relying on the service. With the site experiencing prolonged periods of high traffic, we were able to improve uptime and make a lot of the data processing done behind the scenes more efficient.
+          = iconic("iphone")
+          iPhone App
 
-          Next, it was on to implementing user-requested features like private messaging and premium subscriptions. We wrote a system to handle payment transactions, allowing HSMers to pay a small amount monthly and unlock extra features.
-      .col-sm-6.col-sm-pull-6
-        = image_tag "work/hello-sunday-morning/screenshot-2.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"
+        :kramdown
+          HSM wanted to help people track their drinking habits on the go. Together, we designed and built an app that suggests fun challenges to reduce alcohol consumption along with data visualisations on how your health is improving as a result.
+
+          Users can leave comments and tips on their favourite challenges, share what they are doing on their profile and check in each week with how things have been going.
+
+        %p
+          = link_to app_url, class: "btn-download" do
+            = image_tag "app-store.png", height: 55, width: 165, class: "img-rounded", alt: "Available on the App Store"
+      .col-sm-6.col-sm-pull-6.text-center
+        = image_tag "work/hello-sunday-morning/iphones.png", alt: "HSM on iPhone", width: 290
 
 %section
   .container
     .row
       .col-sm-6
         %h2
-          = iconic("people")
-          Social Strategy
+          = iconic("wrench")
+          Web Platform Engineering
         :kramdown
-          Working on a platform with such a thriving community is a challenge and a privilege. We're always looking to the future with the HSM team, advising them on how best to satisfy users and the technical feasibility of requested features.
+          After inheriting the website from a previous team, we started with stability, improving #{define("test coverage")} and performance for the thousands of people already relying on the service. With the site experiencing prolonged periods of high traffic, we were able to improve uptime and make a lot of the data processing done behind the scenes more efficient.
 
-          We utilise [Mixpanel](https://mixpanel.com/) to give HSM a valuable insight into user activity. Data collected throughout the site helps guide changes to the interface and flags up popular user-generated content for the HSM staff to feature.
-
-          With lots of ideas for the website and plans for Terracoding to bring HSM to the iPhone, we're excited to continue helping the community to grow and make a difference.
+          Next, it was on to implementing user-requested features like private messaging and premium subscriptions. We wrote a system to handle payment transactions, allowing HSMers to pay a small amount monthly and unlock extra features.
       .col-sm-6
         = image_tag "work/hello-sunday-morning/screenshot-3.jpg", alt: "Screenshot", class: "img-responsive img-thumbnail"

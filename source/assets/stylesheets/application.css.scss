@@ -358,21 +358,6 @@ body#about-us {
   }
 
   #services {
-    .service-image {
-      position: relative;
-      height: 300px;
-
-      img {
-        position: absolute;
-        display: block;
-        width: 115%;
-        height: auto;
-        margin-left: -$grid-gutter-width/2;
-        top: 110px;
-        margin-top: -20%;
-      }
-    }
-
     ul {
       margin-top: 2em;
       margin-bottom: 2em;
@@ -412,7 +397,36 @@ body#about-us {
     }
   }
 
+  #recent {
+    min-height: 250px;
+
+    a {
+      display: block;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 0.7em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: $gray-light;
+    }
+
+    .recent-image {
+      margin-right: $grid-gutter-width/2;
+      position: absolute;
+      z-index: 1;
+    }
+  }
+
   #about {
+    position: relative;
+    z-index: 2;
     background-color: $pale-green;
 
     h2 {
@@ -719,9 +733,8 @@ body#blog {
       margin-right: 0.2ex;
     }
 
-    #history {
+    #recent, #history {
       padding-left: $grid-gutter-width;
-      padding-right: 0;
     }
   }
 
@@ -781,6 +794,10 @@ body#blog {
 
     #team li {
       margin-bottom: 1em;
+    }
+
+    #recent {
+      margin-top: 40px;
     }
   }
 
