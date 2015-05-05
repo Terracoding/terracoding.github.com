@@ -21,8 +21,16 @@ slug: about-us
                 = partial "index/testimonial", locals: { testimonial: t }
 
       #testimonials-action.col-sm-3
-        %p Looking to build a Web or mobile app?
-        = link_to "Get in touch", "/contact/", class: "btn btn-inverse"
+        %p Interested in a Web or mobile app?
+        %p
+          %span.tel 0114 212 7030
+          = link_to "Email us", "/contact/", class: "btn btn-inverse"
+
+%section#blog
+  .container
+    %h1 Latest from the blog
+    - post = blog.articles.first
+    %h2= link_to post.title, post.url
 
 %section#services
   %h1.sr-only Our Services
@@ -30,7 +38,7 @@ slug: about-us
     .row
       .col-sm-6
         :kramdown
-          We work closely with businesses in Australia and the UK to improve customer experience, increase sales, and simplify and automate their work with great software.
+          We work closely with businesses in the UK and Australia to improve customer experience, increase sales, and simplify and automate their work with great software.
 
         %ul.row
           %li.col-sm-3.col-xs-6
