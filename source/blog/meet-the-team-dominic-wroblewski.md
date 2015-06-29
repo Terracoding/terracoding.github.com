@@ -5,41 +5,44 @@ author: robert
 tags:
 - terracoding
 - team
-- members
 ---
 
-Dominic is Technical Director here at Terracoding. Born in Redditch, a small town just south of Birmingham, he made Sheffield his home when he decided to study Computer Science at the University of Sheffield. A strong advocate of almost all things tech-related, he discovered his passion for programming whilst at Secondary school, developing some of the first Apps for iOS shortly after Apple released the App Store. When he's not running the Sheffield Swift meetup, he's busy setting world records on Guild Wars 2, or Scuba Diving seas both hot and cold.
+Dominic is Technical Director here at Terracoding. Born in Redditch, a small town just south of Birmingham, he made Sheffield his home when he decided to study Computer Science at the [University of Sheffield][uos]. A strong advocate of almost all things tech-related, he discovered his passion for programming whilst at secondary school, developing some of the first apps for iOS shortly after Apple unveiled the App Store. When he's not running the [Sheffield Swift][ss] meetup, he's busy setting world records on [Guild Wars 2][gw2], or scuba diving in seas both hot and cold.
 
-<img src="/blog/meet-the-team-dominic-wroblewski/dominic-diving.png" alt="Dominic Wroblewski" style="margin-left: auto; margin-right: auto">
+<img src="/blog/meet-the-team-dominic-wroblewski/dominic.jpg" alt="Dominic Wroblewski" class="img-responsive">
 
-#### 1. What is your favourite form of exercise?
-_Skateboarding._
+#### What is your favourite form of exercise?
+> Skateboarding.
+>
+> It's such a great sport for exercise as it's fun and it's something I can always improve at, for example learning a new trick is a great feeling of accomplishment.
 
-_It's such a great sport for exercise as it's fun and it's something I can always improve at, for example learning a new trick is a great feeling of accomplishment._
+#### If you had any advice for 12 year old you, what would it be?
+> Try not to hate Maths, you're going to need it an awful lot later.
 
-#### 2. If you had any advice for 12 year old you, what would it be?
-_Try not to hate Maths, you're going to need it an awful lot later._
+#### What is your favourite thing to eat?
+> Full English Breakfast OR... A jacket potato (with a Full English Breakfast)
 
-#### 3. What is your favourite thing to eat?
-_Full English Breakfast OR... A jacket potato (with a Full English Breakfast)_
+#### Favourite place in the world (and why)?
+> Blue mountains in Australia. It's beautiful, the sounds, the birds, the life - you just don't get that kind of experience in many places.
 
-#### 4. Favourite place in the world (and why)?
-_Blue mountains in Australia. It's beautiful, the sounds, the birds, the life - you just don't get that kind of experience in many places._
+#### What were you most proud of when you were younger?
+> Making silly animated claymations.
 
-#### 5. What were you most proud of when you were younger?
-_Making silly animated claymations._
+#### What is your favourite part of the day?
+> Early morning, just before the world wakes up - that period of time where nothing's going on, it's just peaceful.
 
-#### 6. What is your favourite part of the day?
-_Early morning, just before the world wakes up - that period of time where nothing's going on, it's just peaceful._
+#### If you could meet any one person, living or dead, who would it be?
+> Captain Cook, just to know what it was like to explore an unknown world.
 
-#### 7. If you could meet any one person, living or dead, who would it be?
-_Captain Cook, just to know what it was like to explore an unknown world._
+#### What is the hardest thing you've ever done?
+> Trying to understand my Maths teacher at University.
 
-#### 8. What is the hardest thing you've ever done?
-_Trying to understand my Maths teacher at University._
+#### Which actor would play you in a movie about your life?
+> Tom Hardy
 
-#### 9. Which actor would play you in a movie about your life?
-_Tom Hardy_
+#### Are you a cat person or a dog person?
+> Dogs, I think cats are really cool, but kind of scary at the same time.
 
-#### 10. Are you a cat person or a dog person?
-_Dogs, I think cats are really cool, but kind of scary at the same time._
+[uos]: http://www.sheffield.ac.uk/
+[ss]: https://twitter.com/sheffieldswift/
+[gw2]: https://www.guildwars2.com/

@@ -646,6 +646,17 @@ body#blog {
       margin-bottom: 0.5em;
     }
 
+    &[id^=meet-the-team] blockquote {
+      padding: 0;
+      border: none;
+      font-size: $font-size-base;
+      font-style: italic;
+
+      p::before, p::after {
+        content: none;
+      }
+    }
+
     footer {
       text-align: right;
       color: rgba(0,0,0,0.4);
