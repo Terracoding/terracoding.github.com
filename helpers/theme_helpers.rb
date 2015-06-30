@@ -50,13 +50,13 @@ module ThemeHelpers
   def previous_project(project)
     projects = data.work.keys
     index = projects.index(project)
-    index == 0 ? projects.last : projects[index-1]
+    index == 0 ? projects.last : projects[index.to_i-1]
   end
 
   def next_project(project)
     projects = data.work.keys
     index = projects.index(project)
-    index == projects.size-1 ? projects.first : projects[index+1]
+    index == projects.size-1 ? projects.first : projects[index.to_i+1]
   end
 
   def icon_tag_options(icon_set, options={})
