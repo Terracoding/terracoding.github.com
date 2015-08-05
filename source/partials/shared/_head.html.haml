@@ -15,8 +15,8 @@
     %meta{ name: "description", content: data.site.description }
     %meta{ property: "og:description", content: data.site.description }
   %title
-    = "#{current_page.data.title} -" if current_page.data.title
     = data.site.title
+    = "- #{current_page.data.title}" if current_page.data.title
 
   %link{ href: "/feed.xml", rel: "alternate", title: data.site.title, type: "application/atom+xml" }
 
