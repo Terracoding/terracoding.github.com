@@ -1,0 +1,7 @@
+%ul.list-reset.row.gutters-none
+  - data.work.each do |title, description|
+    - slug = slugify(title)
+    %li.col-sm-6
+      = link_to "#{slug}/", class: "banner banner-#{slug}" do
+        %h2.banner-title= title
+        %p.banner-subtitle= description

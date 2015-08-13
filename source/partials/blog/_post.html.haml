@@ -32,11 +32,11 @@
       - if post.next_article
         %dt
           Next
-          = fa("chevron-right")
+          = fa_icon("chevron-right")
         %dd= link_to post.next_article.title, post.next_article.url, rel: "next"
 
       - if post.previous_article
         %dt
-          = fa("chevron-left")
+          = fa_icon("chevron-left")
           Previous
         %dd= link_to post.previous_article.title, post.previous_article.url, rel: "prev"

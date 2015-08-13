@@ -1,0 +1,53 @@
+@import "variables";
+@import "bootstrap/variables";
+@import "mixins";
+
+.row {
+  &.gutters-sm {
+    @include gutter-padding($grid-gutter-width*0.25, $grid-gutter-width*0.25);
+  }
+
+  &.gutters-xs {
+    @include gutter-padding($grid-gutter-width*0.4, $grid-gutter-width*0.1);
+  }
+
+  &.gutters-none {
+    @include gutter-padding($grid-gutter-width*0.5, $grid-gutter-width*0);
+  }
+}
+
+.text-left-xs {
+  @media (max-width: $screen-xs-max) {
+    text-align: left !important;
+  }
+}
+
+.text-left-sm {
+  @media (max-width: $screen-sm-max) {
+    text-align: left !important;
+  }
+}
+
+.text-left-md {
+  @media (max-width: $screen-md-max) {
+    text-align: left !important;
+  }
+}
+
+.pad-above-xs {
+  @media (max-width: $screen-xs-max) {
+    margin-top: 10px !important;
+  }
+}
+
+ul, ol {
+  &.list-reset {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+}
+
+.faded {
+  opacity: 0.5;
+}

@@ -27,3 +27,12 @@
     }
   }
 }
+
+@mixin gutter-padding($row-padding, $col-padding) {
+  padding: 0 $row-padding;
+
+  > [class^=col-] {
+    padding-left: $col-padding;
+    padding-right: $col-padding;
+  }
+}

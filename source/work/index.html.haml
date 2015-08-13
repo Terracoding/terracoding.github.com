@@ -19,26 +19,26 @@ title: Our Services
     .row
       .col-sm-6
         %h2
-          = iconic("monitor")
+          = fa_icon("laptop")
           Web Applications
         :kramdown
           Whether you need an internal  stock-control system or international crowd-funding platform, we’ve honed the process of creating websites. Our #{define("Agile")} approach lets us adapt to your priorities and ship a stable, efficient application on time. We specialise in test-driven, #{define("Ruby on Rails")} development and can manage hosting and maintenance for you.
       .col-sm-6
         %h2
-          = iconic("tablet")
+          = fa_icon("tablet")
           Mobile Applications
         :kramdown
           We've been building for iOS since 2007 and love helping businesses embrace the mobile revolution. We'll work with you to craft your idea into an app you can be proud of. Need a Web component too? We'll build an #{define("API")} so your app and website talk to each other. And, if you want to go cross-platform, our #{define("HTML5")} mobile apps feel at home on any device.
     .row
       .col-sm-6
         %h2
-          = iconic("brush")
+          = fa_icon("picture-o")
           Design
         :kramdown
           Design isn't just making things look pretty. We'll help you transform your idea into a functioning product through #{define("wireframes")}, interface mockups and live demos. We know what makes a good user experience but you lead the way, guiding us towards your vision with regular iterations. #{define("Responsive")} site or native mobile app, it will look and feel great.
       .col-sm-6
         %h2
-          = iconic("medal")
+          = fa_icon("comment-o")
           Training
         :kramdown
           A good hand-over is vital but often overlooked. Our projects often transition to an internal team on completion. We write clear, extendable code and enjoy educating fellow developers so the software we build for you flourishes for years to come. We also offer consultancy to help your business embrace new technology and best practices.
@@ -46,10 +46,4 @@ title: Our Services
 %section#case-studies
   .container
     %h1 Case Studies
-    %ul.row
-      - data.work.each do |title, description|
-        - slug = slugify(title)
-        %li.col-sm-6
-          = link_to "#{slug}/", class: "banner banner-#{slug}" do
-            %h2.banner-title= title
-            %p.banner-subtitle= description
+    = partial "shared/case_studies"

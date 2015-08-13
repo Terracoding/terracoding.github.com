@@ -59,24 +59,17 @@ module ThemeHelpers
     index == projects.size-1 ? projects.first : projects[index.to_i+1]
   end
 
-  def icon_tag_options(icon_set, options={})
-    options[:class] ||= options["class"]
-
-    modifiers = options[:modify].to_s.split(" ")
-    modifiers.map! { |modifier| "#{icon_set}-#{modifier}" }
-
-    options[:class] = modifiers.unshift(options[:class], icon_set).compact.join(" ")
-    options.delete_if { |key, val| ["class", :modify].member?(key) }
-  end
-
-  def iconic(name, options={})
-    options[:modify] ||= "sm"
-    options["data-src"] = image_path("iconic/#{name}.svg")
-    tag("img", icon_tag_options("iconic", options))
-  end
-
-  def fa(name, options={})
-    options[:modify] = [name, options[:modify]].compact.join(" ")
-    content_tag("i", "", icon_tag_options("fa", options))
+  #helper to match font-awesome-rails gem
+  def fa_icon(names = "flag", options = {})
+    classes = ["fa"]
+    classes.concat names.split(/\s+/).map { |n| "fa-#{n}" }
+    classes.concat Array(options.delete(:class))
+    text = options.delete(:text)
+    right_icon = options.delete(:right)
+    icon = content_tag(:i, nil, options.merge(:class => classes.join(" ")))
+    return icon if text.blank?
+    elements = [icon, text]
+    elements.reverse! if reverse_order
+    array.map { |i| ERB::Util.html_escape(i) }.join(" ").html_safe
   end
 end

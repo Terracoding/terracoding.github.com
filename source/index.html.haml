@@ -1,7 +1,7 @@
 ---
 layout: page
 slug: about-us
-title: Web and mobile app development in Sheffield, UK
+title: Digital agency in Sheffield, UK building web and mobile apps
 ---
 
 %section#testimonials.hidden-xs
@@ -36,32 +36,25 @@ title: Web and mobile app development in Sheffield, UK
 %section#services
   %h1.sr-only Our Services
   .container
-    .row
+    .row.gutters-none
       #intro.col-sm-6
         :kramdown
-          We work closely with businesses in the UK and Australia to improve customer experience, increase sales, and simplify and automate their work with great software.
+          Terracoding is a digital agency based in Sheffield. We work closely with businesses in the UK and Australia to improve customer experience, increase sales, and streamline work with great software.
 
-        %ul.row
-          %li.col-sm-3.col-xs-6
-            = iconic("image", modify: "fluid", "data-orientation" => "landscape")
-            Design
-          %li.col-sm-3.col-xs-6
-            = iconic("monitor", modify: "fluid")
-            Web Apps
-          %li.col-sm-3.col-xs-6
-            = iconic("tablet", modify: "fluid")
-            Mobile Apps
-          %li.col-sm-3.col-xs-6
-            = iconic("medal", modify: "fluid")
-            Training
+        .row.gutters-xs
+          .col-md-6.col-sm-7
+            = link_to "More on our services", "/work/", class: "btn btn-default btn-full-width"
+          .col-md-6.col-sm-5.pad-above-xs
+            = link_to "Get in touch", "/contact/", class: "btn btn-default btn-full-width"
 
-        = link_to "Case studies and more about our services", "/work/", class: "btn btn-default btn-full-width"
-      #recent.col-sm-6
-        = link_to "/work/hello-sunday-morning" do
-          %h1 Recent work
-          %h2 Hello Sunday Morning
-          .recent-image
-            = image_tag "work/hello-sunday-morning/iphones.png", alt: "HSM on iPhone", class: "img-responsive"
+      .col-sm-6.hidden-xs
+        .services-image
+          = image_tag "devices.png", width:"618", height:"328", class: "img-responsive"
+
+%section#case-studies
+  .container
+    %h1 Recent Work
+    = partial "shared/case_studies"
 
 %section#about
   %h1.sr-only About Us
@@ -76,7 +69,7 @@ title: Web and mobile app development in Sheffield, UK
       #history.col-sm-6
         %h2 About Terracoding
         :kramdown
-          Terracoding is based in Sheffield, UK. We’ve been working with clients internationally since 2011, advising on development strategy, designing interfaces users enjoy and writing fast, dependable code.
+          Terracoding has been working with clients internationally since 2011, advising on development strategy, designing interfaces users enjoy and writing fast, dependable code.
 
           We value testing and like to work in an #{define("Agile")} way, iterating on an idea with the client to produce the best solution.
 
