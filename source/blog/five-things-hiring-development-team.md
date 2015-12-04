@@ -6,7 +6,7 @@ tags:
 - startups
 - hiring
 - teams
-summary_text: 'A development team is one of the most important parts of building any new software product or startup. Getting the right team is crucial.'
+summary: 'A development team is one of the most important parts of building any new software product or startup. Getting the right team is crucial.'
 ---
 
 A development team is one of the most important parts of building any new software product or startup. Getting the right team is crucial, as developers are the people that turn ideas into something customers will be interacting with and using on a daily basis.

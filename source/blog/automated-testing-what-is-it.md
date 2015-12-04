@@ -5,7 +5,7 @@ author: robert
 tags:
 - teams
 - testing
-summary_text: 'When working with a software development team, what are automated tests, and are your team using them?'
+summary: 'When working with a software development team, what are automated tests, and are your team using them?'
 ---
 
 You’ve just started working with a software development company on a large project and you want to make sure everything goes smoothly and reliably. Unpredictable changes can cause no end of problems, from increased costs through to missed deadlines.

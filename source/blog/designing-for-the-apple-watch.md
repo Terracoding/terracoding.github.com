@@ -8,7 +8,7 @@ tags:
 - watch
 - watchkit
 - apple
-summary_text: 'The Apple Watch is such a small and personal device, development of apps need to be approached in a completely different way to mobile. Here are a few thoughts and tips.'
+summary: 'The Apple Watch is such a small and personal device, development of apps need to be approached in a completely different way to mobile. Here are a few thoughts and tips.'
 ---
 
 Since the release of the Apple Watch, we have already had discussions with clients about how they were interested in releasing a watch app. As the Apple Watch is such a small and personal device, development of apps need to be approached in a completely different way to mobile.
