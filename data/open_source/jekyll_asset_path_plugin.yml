@@ -1,0 +1,5 @@
+title: Jekyll Asset Path
+description: A liquid tag to output a relative URL for assets based on the Jekyll post or page
+maintainers: sam
+image: https://raw.githubusercontent.com/samrayner/jekyll-asset-path-plugin/master/icon.png
+repo_url: https://github.com/samrayner/jekyll-asset-path-plugin

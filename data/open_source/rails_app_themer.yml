@@ -1,0 +1,7 @@
+title: Rails App Themer
+description: Set colours, fonts and images for a website from an admin panel
+maintainers: sam
+image: /blog/rails-app-themer/icon.png
+repo_url: https://github.com/samrayner/rails-app-themer
+demo_url: http://app-themer.herokuapp.com/theme/edit
+post_url: http://www.terracoding.com/blog/rails-app-themer/

@@ -1,0 +1,6 @@
+title: DWTagList
+description: Create a list of tags from an NSArray to be show in a view with customisable fonts, colors etc
+maintainers: dominic
+image: /blog/dwtaglist-for-ios/icon.png
+repo_url: https://github.com/domness/DWTagList
+post_url: http://www.terracoding.com/blog/dwtaglist-for-ios/

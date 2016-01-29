@@ -1,0 +1,7 @@
+title: Spectacles
+description: A bookmarklet to position specs alongside implementation files in GitHub pull requests for easier review
+maintainers: sam
+image: http://www.samrayner.com/posts/github-spectacles/octoclark.png
+repo_url: https://github.com/samrayner/spectacles
+post_url: http://www.samrayner.com/posts/github-spectacles/
+demo_url:

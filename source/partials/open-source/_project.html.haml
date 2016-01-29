@@ -1,0 +1,31 @@
+.row.gutters-sm
+  .col-xs-9.col-xs-push-3.col-md-8.col-md-push-4
+    %h2= link_to project.title, project.repo_url
+
+    %h3.sr-only Maintainers
+    %ul.list-inline.repo-maintainers
+      - Array(project.maintainers).each do |maintainer|
+        %li
+          - full_name = data.team.send(maintainer)["name"]
+          = image_tag("team/#{maintainer}.jpg", width: 20, height: 20, class: "img-circle", alt: full_name, title: full_name)
+          = full_name.split(" ").first
+
+    %p.repo-description= project.description
+    = link_to project.repo_url, class: 'btn btn-default btn-sm' do
+      - if project.repo_url =~ /github.com/
+        = fa_icon 'github-alt'
+        GitHub
+      - else
+        = fa_icon 'code'
+        Source
+    - if project.post_url
+      = link_to project.post_url, class: 'btn btn-default btn-sm' do
+        = fa_icon 'info-circle'
+        Blog post
+    - if project.demo_url
+      = link_to project.demo_url, class: 'btn btn-default btn-sm' do
+        = fa_icon 'mouse-pointer'
+        Demo
+  .col-xs-3.col-xs-pull-9.col-md-4.col-md-pull-8
+    = link_to project.repo_url do
+      = image_tag project.image, alt: project.title, class: 'repo-image'

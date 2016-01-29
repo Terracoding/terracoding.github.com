@@ -1,0 +1,22 @@
+---
+slug: open-source
+title: Open Source
+---
+
+%section
+  .container
+    %h1 Open Source Projects
+    .row
+      .col-sm-6
+        :kramdown
+          Programming often throws similar challenges at us from project to project. When we think something might be useful for the developer community, or just our future selves, we try to tidy it up, document it and release it under an open-source license.
+      .col-sm-6
+        :kramdown
+          Building modular, flexible components like this saves us (and hopefully others) re-inventing the wheel with each project. Below are a few things we've released. Please feel free to reuse, fork, submit pull requests and [Tweet any questions at us][tw].
+
+          [tw]: http://twitter.com/terracoding
+
+    .repos
+      %ul.list-unstyled.row
+        - data.open_source.each do |filename, info|
+          %li.repo.col-sm-6= partial "open-source/project", locals: { project: info }

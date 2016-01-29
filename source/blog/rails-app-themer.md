@@ -6,6 +6,8 @@ author: sam
 summary: How we built a simple UI for users to customise the theme of a Rails app
 ---
 
+[<img src="/blog/rails-app-themer/icon.png" width="150" alt="Themer UI" class="pull-right">][gh]
+
 We started work on an exciting new project this week that requires a single Rails app to power multiple similar websites. The websites are all going to have the same features and basic structure but the client wanted to be able to customise colours, fonts and images for each site themselves.
 
 To get our heads around the feature, we built a [prototype app][gh] that provides a theme editing interface. You can [try out the demo][app]!
