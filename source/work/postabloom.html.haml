@@ -1,0 +1,67 @@
+---
+layout: page
+slug: postabloom
+title: Postabloom
+---
+
+- app_url = "https://itunes.apple.com/gb/app/postabloom-uk-flower-delivery/id1061557257"
+
+= partial "work/header", locals: { title: "Postabloom" }
+
+%section
+  .container
+    .row
+      .col-sm-6
+        %h2.sr-only About The Project
+        :kramdown
+          The creators of [Postsnap][ps], a popular iPhone app for sending personalised cards, approached us with a similar idea for flowers.
+
+          They wanted to start completely fresh, utilising our expertise in modern #{define('iOS')} development to create a beautiful app for customising and buying bouquets.
+
+          We jumped at the chance! [Postabloom][pb] is now available on the UK App Store for download.
+
+          [ps]: https://www.postsnap.com/
+          [pb]: http://www.postabloom.co.uk/
+
+        %p
+          = link_to app_url, class: "btn-download" do
+            = image_tag "app-store.png", height: 55, width: 165, class: "img-rounded", alt: "Available on the App Store"
+      .col-sm-6
+        = image_tag "work/postabloom/preview.jpg", alt: "Postabloom in use", class: "img-responsive img-thumbnail"
+
+%section
+  .container
+    .row
+      .col-sm-6.col-sm-push-6
+        %h2
+          = fa_icon("truck")
+          Stock Control and Delivery
+
+        :kramdown
+          While the customer app is clean and simple, there is a lot more to Postabloom behind-the-scenes. We worked closely with the team to build a robust, fully-fledged product management system that lets them keep up with orders even on Valentines day.
+
+          Our web-driven back-end receives orders from the app, automatically generating barcodes and PDF templates for Postabloom's various fulfilment companies.
+
+          On the factory floor, printing a postage label is as simple as scanning a barcode.
+
+      .col-sm-6.col-sm-pull-6
+        = image_tag "work/postabloom/order-print.png", alt: "Printing an order label", class: "img-responsive"
+
+%section
+  .container
+    .row
+      .col-sm-6
+        %h2
+          = fa_icon("tablet")
+          The Latest Mobile Technology
+        :kramdown
+          With an in-house developer and an app already in the Store, Postsnap knew what goes in to building a good iPhone app. The team didn't just want to expand on what they had though, they wanted Postabloom to be a best-in-class app for shopping on #{define('iOS')}.
+
+          To make sure the app lasted for years to come, we built it in [Swift][], Apple's new language designed for faster, more stable apps. The interface is also scalable to cover the increasing variety of devices Apple offers.
+
+          We look forward to bringing Postabloom to the iPad soon!
+
+
+          [Swift]: https://developer.apple.com/swift/
+      .col-sm-6.text-center
+        = image_tag "work/postabloom/iphones.png", alt: "Postabloom on iPhone", width: 290

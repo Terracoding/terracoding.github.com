@@ -18,5 +18,5 @@ title: Open Source
 
     .repos
       %ul.list-unstyled.row
-        - data.open_source.each do |filename, info|
+        - data.open_source.sort_by{ |_, info| info.title }.each do |filename, info|
           %li.repo.col-sm-6= partial "open-source/project", locals: { project: info }

@@ -5,3 +5,4 @@ html5: HTML5 supports lots of cool app-like features that let us build Web appli
 wireframes: A wireframe is a basic layout of where elements such as buttons and images will be placed in an interface. It lets us experiment with different layout options easily to see what works.
 responsive: A responsive website adapts to the size of the device it is being viewed on, ensuring that it looks good and functions well for all visitors. This site is a good example! Try resizing the window or rotating your device.
 test coverage: Automated testing is vital to ensure reliable software. Tests give us piece of mind that a new feature is not breaking functionality elsewhere and vastly reduce unexpected bugs.
+ios: iOS is the name for Apple's operating system that powers both the iPhone and iPad.

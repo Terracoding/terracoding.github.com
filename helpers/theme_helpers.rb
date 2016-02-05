@@ -39,7 +39,7 @@ module ThemeHelpers
 
   def define(term)
     definition = data.glossary.send(term.downcase)
-    raise "Term '#{term}' not defined in glossary" unless definition
+    raise "Term '#{term.downcase}' not defined in glossary" unless definition
     '<span data-toggle="tooltip" title="'+definition+'">'+term+'</span>'
   end
 
