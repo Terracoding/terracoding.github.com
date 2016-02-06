@@ -218,13 +218,15 @@ form {
     @include text-hide;
     display: block;
     height: $banner-height;
-    width: 80%;
+    width: 10%;
+    max-width: 50px;
     min-width: 40px;
     background: image-url("chevron-bubble.png") no-repeat 50% 50%;
     opacity: 0.4;
     background-size: contain;
     padding: 0;
     position: absolute;
+    top: 0;
 
     &:hover, &:focus {
       opacity: 1;
@@ -541,6 +543,7 @@ body#work {
   }
 }
 
+body#postabloom,
 body#medtronic,
 body#hello-sunday-morning,
 body#employment-hero {
@@ -817,10 +820,6 @@ body#blog {
 
   .navbar > .container .navbar-brand {
     margin-left: $grid-gutter-width/2;
-  }
-
-  .banner .banner-next {
-    right: -$grid-gutter-width/4;
   }
 
   body#about-us {
