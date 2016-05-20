@@ -36,7 +36,7 @@ page "/rss/index.xml", :layout => false
 
 set :haml, { format: :html5, attr_wrapper: '"' }
 set :markdown_engine, :kramdown
-set :markdown, { smartypants: true }
+set :markdown, { smartypants: true, fenced_code_blocks: true }
 
 module Haml::Filters::Kramdown
   include Haml::Filters::Base
@@ -128,3 +128,4 @@ end
 
 activate :directory_indexes
 activate :alias
+activate :syntax

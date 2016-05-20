@@ -12,54 +12,60 @@ When Dry July approached us, they emphasised that the majority of their traffic 
 
 Almost every image on the Dry July platform, including for the [customisable website theme][theme], are uploaded through [Carrierwave][cw]. That meant we could auto-generate multiple versions of an image on upload. In our uploader, we configured @2x and @3x versions for each version size:
 
-    # image_uploader.rb
-    version :small_3x do
-      process resize_to_limit: [900, 900]
-    end
+~~~ ruby
+# image_uploader.rb
+version :small_3x do
+  process resize_to_limit: [900, 900]
+end
 
-    version :small_2x, from_version: :small_3x do
-      process resize_to_limit: [600, 600]
-    end
+version :small_2x, from_version: :small_3x do
+  process resize_to_limit: [600, 600]
+end
 
-    version :small, from_version: :small_2x do
-      process resize_to_limit: [300, 300]
-    end
+version :small, from_version: :small_2x do
+  process resize_to_limit: [300, 300]
+end
 
-    version :thumb_3x, from_version: :small do
-      process resize_to_limit: [150, 150]
-    end
+version :thumb_3x, from_version: :small do
+  process resize_to_limit: [150, 150]
+end
 
-    version :thumb_2x, from_version: :thumb_3x do
-      process resize_to_limit: [100, 100]
-    end
+version :thumb_2x, from_version: :thumb_3x do
+  process resize_to_limit: [100, 100]
+end
 
-    version :thumb, from_version: :thumb_2x do
-      process resize_to_limit: [50, 50]  
-    end
+version :thumb, from_version: :thumb_2x do
+  process resize_to_limit: [50, 50]
+end
+~~~
 
 [srcset][], the HTML5 `img` attribute for serving multiple resolutions is thankfully [widely supported][caniuse] these days. By adding this method to our `application_helper.rb` we could provide retina-capable image tags with ease:
 
-    # application_helper.rb
-    def retina_image_tag(uploader, version, options={})
-      options.symbolize_keys!
-      options[:srcset] ||=  (2..3).map do |multiplier|
-                              name = "#{version}_#{multiplier}x"
-                              if uploader.version_exists?(name) &&
-                                source = uploader.url(name).presence
-                                "#{source} #{multiplier}x"
-                              else
-                                nil
-                              end
-                            end.compact.join(', ')
+~~~ ruby
+# application_helper.rb
+def retina_image_tag(uploader, version, options={})
+  options.symbolize_keys!
+  options[:srcset] ||=  (2..3).map do |multiplier|
+                          name = "#{version}_#{multiplier}x"
+                          if uploader.version_exists?(name) &&
+                            source = uploader.url(name).presence
+                            "#{source} #{multiplier}x"
+                          else
+                            nil
+                          end
+                        end.compact.join(', ')
 
-      image_tag(uploader.url(version), options)
-    end
+  image_tag(uploader.url(version), options)
+end
 
-    # view.html.haml
-    = retina_image_tag user.avatar, :thumb
+# view.html.haml
+= retina_image_tag user.avatar, :thumb
+~~~
+produces
 
-    # produces
-    <img src="/users/avatars/thumb_me.jpg" srcset="/users/avatars/thumb_2x_me.jpg 2x, /users/avatars/thumb_3x_me.jpg 3x" />
+~~~ html
+<img src="/users/avatars/thumb_me.jpg" srcset="/users/avatars/thumb_2x_me.jpg 2x, /users/avatars/thumb_3x_me.jpg 3x" />
+~~~
 
 Feel free to use the code above in your next project. And check out [Dry July][dj] to see it in action!
 
