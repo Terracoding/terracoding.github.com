@@ -34,19 +34,19 @@ This is all well and good, but when you come to [eager-load][el] associations on
 In the view that includes our feed partial we have the following:
 
 ~~~html
-  - cache(cache_key_for_user_feed_items(resource, params[:page])) do
-    = render 'feed_items'
+- cache(cache_key_for_user_feed_items(resource, params[:page])) do
+  = render 'feed_items'
 ~~~
 
 ~~~ruby
-  module FragmentCacheHelper
-    def cache_key_for_user_feed_items(resource, page = 1)
-      count = resource.feed_items.count
-      max_updated_at = resource.feed_items.maximum(:updated_at).try(:utc)
-        .try(:to_s, :number)
-      "user/#{resource.id}/feed_items_#{count}_#{max_updated_at}_#{page}"
-    end
+module FragmentCacheHelper
+  def cache_key_for_user_feed_items(resource, page = 1)
+    count = resource.feed_items.count
+    max_updated_at = resource.feed_items.maximum(:updated_at).try(:utc)
+      .try(:to_s, :number)
+    "user/#{resource.id}/feed_items_#{count}_#{max_updated_at}_#{page}"
   end
+end
 ~~~
 
 The `FragmentCacheHelper` generates a key for us to use. If the key differs when the next page is loaded, it will pull the records as usual and skip the cache. This works per page, so each page with [will_paginate][wp] will also pull from the database if needs be.
