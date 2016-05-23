@@ -211,7 +211,6 @@ form {
 
   .banner-subtitle {
     margin-top: - $banner-height/2 + 45;
-    text-shadow: 0 0 15px rgba(0,0,0,1);
   }
 
   .banner-next,
@@ -254,6 +253,7 @@ a.banner {
   }
 }
 
+@include banner(dry-july);
 @include banner(postabloom);
 @include banner(medtronic);
 @include banner(hello-sunday-morning);
@@ -544,6 +544,7 @@ body#work {
   }
 }
 
+body#dry-july,
 body#postabloom,
 body#medtronic,
 body#hello-sunday-morning,

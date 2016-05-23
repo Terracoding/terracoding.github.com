@@ -1,0 +1,67 @@
+---
+layout: page
+slug: dry-july
+title: Dry July
+---
+
+= partial "work/header", locals: { title: "Dry July" }
+
+%section
+  .container
+    .row
+      .col-sm-6
+        %h2.sr-only About The Project
+
+        :kramdown
+          [Dry July][dj] is a fundraiser where people give up alcohol for a month to raise money for adults living with cancer. Each year thousands of people sign up and get sponsored by friends and family to stop drinking. We were excited to get involved.
+
+          Up until 2016, Dry July had been running on a hodgepodge of outdated software and overpriced services. We were asked to rebuild the platform from scratch - everything from initial architecture plans to front-end design, payment processing, usage reports and mailing list management.
+
+          The result is a fully-fledged, customisable fundraising platform that we're very proud of. We can't wait to take the project further and support such a good cause.
+
+          [dj]: https://dryjuly.com
+
+      .col-sm-6
+        = image_tag "work/dry-july/characters.png", alt: "Dry July characters", class: "img-responsive"
+
+%section
+  .container
+    .row
+      .col-sm-6.col-sm-push-6
+        %h2
+          = fa_icon("globe")
+          Internationally Scalable
+
+        :kramdown
+          A core requirement of the new platform was to easily launch campaigns all over the world on a server local to the country.
+
+          At launch we already have campaigns running in [Australia][au] and [New Zealand][nz], with plans to expand to the UK, USA and Canada soon.
+
+          This flexibility meant supporting multiple payment gateways, currencies and timezones. We've even allowed full customisation of each campaign website theme through an admin panel.
+
+          [au]: https://dryjuly.com
+          [nz]: https://dryjuly.co.nz
+
+      .col-sm-6.col-sm-pull-6
+        = image_tag "work/dry-july/laptops.png", alt: "Dry July in various countries", class: "img-responsive"
+
+%section
+  .container
+    .row
+      .col-sm-6
+        %h2
+          = fa_icon("bullhorn")
+          Socially Conscious
+
+        :kramdown
+          People raise more for charity when they have the support of their friends and family behind them. To increase participation and keep fundraisers motivated we implemented:
+
+          * Teams for participants to join forces
+          * Leaderboards to see who has raised the most
+          * Cross posting of status updates to Facebook and Twitter
+          * Achievement badges for fundraising milestones
+          * Blogs about how the money raised is used
+          * And much more...
+
+      .col-sm-6
+        = image_tag "work/dry-july/patient.jpg", alt: "A person who has benefitted from Dry July", class: "img-responsive img-thumbnail"
