@@ -27,9 +27,9 @@ class Photo < ActiveRecord::Base
 end
 ~~~
 
-This is all well and good, but when you start having different associations you want to `includes` or `join` on the collection, it starts to become problematic. This is where [Rails Fragement Caching][rfc] comes into play.
+This is all well and good, but when you come to [eager-load][el] associations on the collection to improve performance, this technique becomes problematic. This is where [Rails Fragment Caching][fragcache] comes into play.
 
-Fragment caching is a really useful tool in Rails to cache partials and collections, so they are pulled straight from memory without needing to access the database (besides checking if new records exist, or existing records have been updated).
+[Fragment caching][fragcache] is a really useful tool in Rails to cache partials and collections so they are pulled straight from memory without needing to access the database (besides checking if new records exist or existing records have been updated).
 
 In the view that includes our feed partial we have the following:
 
@@ -41,17 +41,18 @@ In the view that includes our feed partial we have the following:
 ~~~ruby
   module FragmentCacheHelper
     def cache_key_for_user_feed_items(resource, page = 1)
-      count = resource.feed_items.for_display.count
-      max_updated_at = resource.feed_items.for_display.maximum(:updated_at).try(:utc)
+      count = resource.feed_items.count
+      max_updated_at = resource.feed_items.maximum(:updated_at).try(:utc)
         .try(:to_s, :number)
       "user/#{resource.id}/feed_items_#{count}_#{max_updated_at}_#{page}"
     end
   end
 ~~~
 
-The `FragmentCacheHelper` generates a key for us to use, if the key differs when the next page is loaded, it'll pull the records as usual and skip the cache. This works per page, so each page with [will_paginate][wp] will also pull from the database if needs be.
+The `FragmentCacheHelper` generates a key for us to use. If the key differs when the next page is loaded, it will pull the records as usual and skip the cache. This works per page, so each page with [will_paginate][wp] will also pull from the database if needs be.
 
-This cuts down the database calls by only ever needing to check the count of the records for the user, and checks the latest `updated_at` value.
+This cuts down the database calls by only ever needing to check the count of the records for the user and the latest `updated_at` value.
 
-[rfc]: http://guides.rubyonrails.org/caching_with_rails.html
+[el]: http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations
 [wp]: https://github.com/mislav/will_paginate
+[fragcache]: http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching
