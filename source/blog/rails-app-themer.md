@@ -1,7 +1,7 @@
 ---
 title: Dynamic Rails App Theming
 date: 2015-12-04 14:36
-tags: web, development, open source
+tags: web, development, open source, ruby on rails
 author: sam
 summary: How we built a simple UI for users to customise the theme of a Rails app
 ---

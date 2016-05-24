@@ -1,7 +1,7 @@
 ---
 title: Rails Polymorphic Feed Caching
 date: 2016-05-21 16:11
-tags: web, development, open source
+tags: web, development, ruby on rails
 author: dominic
 summary: How to improve polymorphic feeds in a Rails application with fragment caching
 ---

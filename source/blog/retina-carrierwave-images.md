@@ -1,7 +1,7 @@
 ---
 title: Easy Retina Images with Carrierwave
 date: 2016-05-19 12:03
-tags: web, development, open source
+tags: web, development, ruby on rails
 author: sam
 summary: How to automate creation and serving of high-resolution images in a Rails app
 ---
