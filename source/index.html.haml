@@ -49,7 +49,7 @@ title: Digital agency in Sheffield, UK building web and mobile apps
 
       .col-sm-6.hidden-xs
         .services-image
-          = image_tag "devices.png", width:"618", height:"328", class: "img-responsive"
+          = retina_image_tag "devices.png", width:"618", height:"328", class: "img-responsive"
 
 %section#case-studies
   .container
@@ -82,4 +82,4 @@ title: Digital agency in Sheffield, UK building web and mobile apps
       - data.partners.each do |name, url|
         %li
           = link_to url, target: "_blank" do
-            = image_tag "partners/#{slugify(name)}.png", alt: name
+            = retina_image_tag "partners/#{slugify(name)}.png", alt: name

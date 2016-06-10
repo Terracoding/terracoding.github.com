@@ -1,37 +1,4 @@
 module ThemeHelpers
-  def entity_obfuscate(string)
-    string.gsub(/./){ |char| "&##{char[0].ord};" }
-  end
-
-  def percent_obfuscate(string)
-    "%" + string.unpack("H2" * string.bytesize).join("%").upcase
-  end
-
-  def image_collection(dir, type)
-    html = '<div class="'+type.to_s+'">'
-    source_path = "/assets/images/galleries"
-    pattern = "#{Dir.pwd}/source#{source_path}/#{dir}/*.{jpg,jpeg,png,gif}"
-
-    Dir.glob(pattern) do |path|
-      filename = File.basename(path)
-      file_path = "#{source_path}/#{dir}/#{filename}"
-
-      html += '<a href="'+file_path+'" target="_blank">' if type == :gallery
-      html += '<img src="'+file_path+'" alt="" />'
-      html += '</a>' if type == :gallery
-    end
-
-    html += '</div>'
-  end
-
-  def gallery(slug)
-    image_collection(slug, :gallery)
-  end
-
-  def slideshow(slug)
-    image_collection(slug, :slideshow)
-  end
-
   def nav_link_to(title, url, active=nil)
     active = current_page.url.index(url) == 0 if active.nil?
     "<li class=\"#{"active" if active}\">" + link_to(title, url) + "</li>"
@@ -71,5 +38,14 @@ module ThemeHelpers
     elements = [icon, text]
     elements.reverse! if reverse_order
     array.map { |i| ERB::Util.html_escape(i) }.join(" ").html_safe
+  end
+
+  def retina_image_tag(url, options={})
+    return image_tag(url, options) if url =~ /(https?:)?\/\//
+    options[:srcset] ||= "#{image_path(url)} 2x"
+    extension = File.extname(url)
+    #don't alter URL in development as image won't exist in /source/
+    url.sub!(extension, "@1x#{extension}") if build?
+    image_tag(url, options)
   end
 end

@@ -27,6 +27,12 @@ activate :blog do |blog|
   blog.tag_template = "tag.html"
 end
 
+require 'extensions/image_resizer'
+activate :image_resizer do |ir|
+  ir.input_folders = ['assets/images']
+  ir.filename_suffix = '@1x'
+end
+
 page "/feed.xml", :layout => false
 page "/rss/index.xml", :layout => false
 

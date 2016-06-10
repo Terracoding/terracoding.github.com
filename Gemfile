@@ -15,3 +15,5 @@ gem 'rake', '~> 10.4.2'
 
 gem 'bootstrap-sass', '~> 3.3.6', require: false
 gem 'font-awesome-sass', '~> 4.4.0'
+
+gem 'mini_magick', require: false

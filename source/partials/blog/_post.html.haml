@@ -21,7 +21,7 @@
         = full_name.split(" ").first
       %dd.author
         - full_name = data.team.send(post.data.author)["name"]
-        = image_tag("team/#{post.data.author}.jpg", width: 30, height: 30, class: "img-circle", alt: full_name, title: full_name)
+        = retina_image_tag("team/#{post.data.author}.jpg", width: 30, height: 30, class: "img-circle", alt: full_name, title: full_name)
 
       %dt Tags
       %dd

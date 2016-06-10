@@ -7,7 +7,7 @@
       - Array(project.maintainers).each do |maintainer|
         %li
           - full_name = data.team.send(maintainer)["name"]
-          = image_tag("team/#{maintainer}.jpg", width: 20, height: 20, class: "img-circle", alt: full_name, title: full_name)
+          = retina_image_tag("team/#{maintainer}.jpg", width: 20, height: 20, class: "img-circle", alt: full_name, title: full_name)
           = full_name.split(" ").first
 
     %p.repo-description= project.description
