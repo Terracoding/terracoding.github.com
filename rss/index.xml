@@ -1,0 +1,1573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+
+    <title>Terracoding</title>
+    <link>http://www.terracoding.com</link>
+    <description>Terracoding is a digital agency based in Sheffield, UK. We build high-quality web and mobile apps for awesome clients.</description>
+    <language>en</language>
+    <copyright>Copyright 2016, Terracoding</copyright>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <pubDate>Mon, 23 May 2016 15:15:00 +0100</pubDate>
+    <lastBuildDate>Tue, 24 May 2016 08:32:54 +0100</lastBuildDate>
+
+      <item>
+
+        <title>Natural Resource: Avoiding ActiveAdmin</title>
+        <link>http://www.terracoding.com/blog/natural-resource/</link>
+        <pubDate>Mon, 23 May 2016 15:15:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/natural-resource/</guid>
+
+        <description><![CDATA[ <h2 id="background">Background</h2>
+
+<p><a href="https://github.com/haar/natural_resource">Natural Resource</a> was born from frustrations experienced on legacy projects that used gems like <a href="http://activeadmin.info/">ActiveAdmin</a> to provide an admin interface for an app. For the very basics ActiveAdmin is great; it provides you a set of functionality out of the box that you don’t have to implement yourself.</p>
+
+<p>Unfortunately, we are all aware that requirements change and functionality grows. ActiveAdmin forces you to extend it using its own concepts outside of standard Rails practices, sometimes going so far as to mix routing, controller and view details in the same file.</p>
+
+<h2 id="rolling-your-own-admin-functionality">Rolling your own admin functionality?</h2>
+
+<p>After a frustrating few hours grappling with AA’s quirks, it’s easy to understand why someone would resort to rolling their own admin interface. Advanced admin features shouldn’t be any harder to implement than the rest of your app.</p>
+
+<p>Secondly, it’s often hard to integrate large, opinionated admin gems because they try to blend authentication and/or authorisation logic with their own concepts. Whilst Natural Resource is also opinionated, it exists and performs in a very simple way and is easily overridden.</p>
+
+<h2 id="enough-talk---show-me-the-code">Enough talk - show me the code!</h2>
+
+<p>The following is a typical NR-based controller:</p>
+
+<pre class="highlight ruby"><code><span class="c1"># Controller for generating and displaying Reports for orders received</span>
+<span class="k">class</span> <span class="nc">Admin</span><span class="o">::</span><span class="no">OrdersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="kp">include</span> <span class="no">AdminController</span>
+  <span class="kp">include</span> <span class="no">ReportDownloading</span>
+
+  <span class="n">resource</span> <span class="ss">:order</span>
+
+  <span class="k">def</span> <span class="nf">resource_scope</span>
+    <span class="no">Order</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="ss">:txns</span><span class="p">,</span> <span class="ss">line_items: </span><span class="p">[</span><span class="ss">:product</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">report_class</span>
+    <span class="no">OrderReport</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If we take the above to have authenticated our admin-user (via your own <code>AdminController</code> concern) then our view could look like this:</p>
+
+<pre class="highlight haml"><code><span class="nt">%h1</span> Order Report
+
+<span class="p">=</span> <span class="n">search_form_for</span> <span class="p">[</span><span class="n">current_context</span><span class="p">,</span> <span class="n">query</span><span class="p">]</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">input</span> <span class="ss">:user_email_cont</span><span class="p">,</span> <span class="ss">label: </span><span class="s1">'Recipient Email'</span>
+  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">input</span> <span class="ss">:amount_cents_gt</span><span class="p">,</span> <span class="ss">label: </span><span class="s1">'Amount greater than'</span>
+  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">button</span> <span class="ss">:submit</span><span class="p">,</span> <span class="s2">"Apply filters"</span>
+  <span class="p">=</span> <span class="n">link_to</span> <span class="s1">'Download report'</span><span class="p">,</span> <span class="p">[</span><span class="ss">:download</span><span class="p">,</span> <span class="n">current_context</span><span class="p">,</span> <span class="ss">:orders</span><span class="p">,</span>
+    <span class="ss">q: </span><span class="n">params</span><span class="p">[</span><span class="ss">:q</span><span class="p">])</span>
+
+<span class="nt">%table</span>
+  <span class="nt">%tr</span>
+    <span class="nt">%th</span> Order Reference
+    <span class="nt">%th</span> Payment Method
+    <span class="nt">%th</span> Recipient Name
+    <span class="nt">%th</span> Amount
+    <span class="nt">%th</span> Created At
+  <span class="p">-</span> <span class="n">resources</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">resource</span><span class="o">|</span>
+    <span class="nt">%tr</span>
+      <span class="nt">%td</span><span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">reference</span>
+      <span class="nt">%td</span><span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">source_type</span><span class="p">.</span><span class="nf">titleize</span>
+      <span class="nt">%td</span><span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">user</span><span class="p">.</span><span class="nf">name</span>
+      <span class="nt">%td</span><span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">amount</span><span class="p">.</span><span class="nf">format</span>
+      <span class="nt">%td</span><span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">created_at</span>
+
+<span class="p">=</span> <span class="n">will_paginate</span> <span class="n">resources</span>
+</code></pre>
+
+<p>The above controller offers several helper methods:</p>
+
+<ul>
+  <li><code>current_context</code> is a method defined to specify the area of the site you are in. It is used for consistently defining routes.</li>
+  <li><code>query</code> is the <a href="https://github.com/activerecord-hackery/ransack">Ransack</a> search object used for defining simple querying using the Ransack syntax.</li>
+  <li><code>resource_scope</code> is the initial scope of the objects scoped via its respective policy, i.e. <code>policy_scope(resource_scope)</code></li>
+  <li><code>resources</code> is the lazy-loaded, <a href="https://github.com/mislav/will_paginate">paginated</a> result of applying the Ransack query across the <code>resource_scope</code> method.</li>
+</ul>
+
+<h2 id="in-summary">In Summary</h2>
+
+<p>The main motivation behind Natural Resource is to be pragmatic. There are further extensions that can be made to it to allow auto-generating initial views if a sensible standard set can be decided upon without introducing too much overhead/complexity.</p>
+
+<p>It provides a rich set of foundational functionality and tries its best to take a sensible modular, easily overridden approach to standardised components.</p>
+
+<p>There is an <a href="https://github.com/haar/nr_example">NR example</a> repo that contains a more detailed example, but nothing beats <a href="https://github.com/haar/natural_resource">reading the source</a>. The majority of functionality is only ~100 lines long. I will add to the NR example repository as we use NR at Terracoding, converting the git history to a series of steps you can follow in <a href="https://github.com/Haar/natural_resource/blob/master/README.md">the README</a>.</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Rails Polymorphic Feed Caching</title>
+        <link>http://www.terracoding.com/blog/rails-feed-caching/</link>
+        <pubDate>Sat, 21 May 2016 17:11:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/rails-feed-caching/</guid>
+
+        <description><![CDATA[ <p>When building a social platform, we’re often required to build a feed of some sort, usually containing multiple types of content such as posts, photos, etc.</p>
+
+<p>With this in mind, it’s usually best to have a <code>FeedItem</code> model with a polymorphic association for the different types of feed items. Let’s say:</p>
+
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">FeedItem</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:source</span><span class="p">,</span> <span class="ss">polymorphic: </span><span class="kp">true</span>
+  <span class="n">has_many</span> <span class="ss">:comments</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:user</span>
+  <span class="n">has_one</span> <span class="ss">:feed_item</span><span class="p">,</span> <span class="ss">as: :source</span><span class="p">,</span> <span class="ss">dependent: :destroy</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Photo</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:user</span>
+  <span class="n">has_one</span> <span class="ss">:feed_item</span><span class="p">,</span> <span class="ss">as: :source</span><span class="p">,</span> <span class="ss">dependent: :destroy</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is all well and good, but when you come to <a href="http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations">eager-load</a> associations on the collection to improve performance, this technique becomes problematic. This is where <a href="http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching">Rails Fragment Caching</a> comes into play.</p>
+
+<p><a href="http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching">Fragment caching</a> is a really useful tool in Rails to cache partials and collections so they are pulled straight from memory without needing to access the database (besides checking if new records exist or existing records have been updated).</p>
+
+<p>In the view that includes our feed partial we have the following:</p>
+
+<pre class="highlight html"><code>- cache(cache_key_for_user_feed_items(resource, params[:page])) do
+  = render 'feed_items'
+</code></pre>
+
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">FragmentCacheHelper</span>
+  <span class="k">def</span> <span class="nf">cache_key_for_user_feed_items</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">feed_items</span><span class="p">.</span><span class="nf">count</span>
+    <span class="n">max_updated_at</span> <span class="o">=</span> <span class="n">resource</span><span class="p">.</span><span class="nf">feed_items</span><span class="p">.</span><span class="nf">maximum</span><span class="p">(</span><span class="ss">:updated_at</span><span class="p">).</span><span class="nf">try</span><span class="p">(</span><span class="ss">:utc</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:to_s</span><span class="p">,</span> <span class="ss">:number</span><span class="p">)</span>
+    <span class="s2">"user/</span><span class="si">#{</span><span class="n">resource</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">/feed_items_</span><span class="si">#{</span><span class="n">count</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">max_updated_at</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">page</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The <code>FragmentCacheHelper</code> generates a key for us to use. If the key differs when the next page is loaded, it will pull the records as usual and skip the cache. This works per page, so each page with <a href="https://github.com/mislav/will_paginate">will_paginate</a> will also pull from the database if needs be.</p>
+
+<p>This cuts down the database calls by only ever needing to check the count of the records for the user and the latest <code>updated_at</code> value.</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Easy Retina Images with Carrierwave</title>
+        <link>http://www.terracoding.com/blog/retina-carrierwave-images/</link>
+        <pubDate>Thu, 19 May 2016 13:03:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/retina-carrierwave-images/</guid>
+
+        <description><![CDATA[ <p>We recently launched <a href="https://dryjuly.com">Dry July</a>, a platform where people can raise funds for adults in Australia living with cancer.</p>
+
+<p>When Dry July approached us, they emphasised that the majority of their traffic comes from smartphones and tablets. With the proliferation of “retina” mobile devices and Macs over the last few years, we wanted to selectively serve high-resolution images to keep things looking crisp for all users.</p>
+
+<p>Almost every image on the Dry July platform, including for the <a href="/blog/rails-app-themer/">customisable website theme</a>, are uploaded through <a href="https://github.com/carrierwaveuploader/carrierwave">Carrierwave</a>. That meant we could auto-generate multiple versions of an image on upload. In our uploader, we configured @2x and @3x versions for each version size:</p>
+
+<pre class="highlight ruby"><code><span class="c1"># image_uploader.rb</span>
+<span class="n">version</span> <span class="ss">:small_3x</span> <span class="k">do</span>
+  <span class="n">process</span> <span class="ss">resize_to_limit: </span><span class="p">[</span><span class="mi">900</span><span class="p">,</span> <span class="mi">900</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">version</span> <span class="ss">:small_2x</span><span class="p">,</span> <span class="ss">from_version: :small_3x</span> <span class="k">do</span>
+  <span class="n">process</span> <span class="ss">resize_to_limit: </span><span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">version</span> <span class="ss">:small</span><span class="p">,</span> <span class="ss">from_version: :small_2x</span> <span class="k">do</span>
+  <span class="n">process</span> <span class="ss">resize_to_limit: </span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">version</span> <span class="ss">:thumb_3x</span><span class="p">,</span> <span class="ss">from_version: :small</span> <span class="k">do</span>
+  <span class="n">process</span> <span class="ss">resize_to_limit: </span><span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">version</span> <span class="ss">:thumb_2x</span><span class="p">,</span> <span class="ss">from_version: :thumb_3x</span> <span class="k">do</span>
+  <span class="n">process</span> <span class="ss">resize_to_limit: </span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">version</span> <span class="ss">:thumb</span><span class="p">,</span> <span class="ss">from_version: :thumb_2x</span> <span class="k">do</span>
+  <span class="n">process</span> <span class="ss">resize_to_limit: </span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a href="https://webkit.org/demos/srcset/">srcset</a>, the HTML5 <code>img</code> attribute for serving multiple resolutions is thankfully <a href="http://caniuse.com/#feat=srcset">widely supported</a> these days. By adding this method to our <code>application_helper.rb</code> we could provide retina-capable image tags with ease:</p>
+
+<pre class="highlight ruby"><code><span class="c1"># application_helper.rb</span>
+<span class="k">def</span> <span class="nf">retina_image_tag</span><span class="p">(</span><span class="n">uploader</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+  <span class="n">options</span><span class="p">.</span><span class="nf">symbolize_keys!</span>
+  <span class="n">options</span><span class="p">[</span><span class="ss">:srcset</span><span class="p">]</span> <span class="o">||=</span>  <span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="nf">.</span><span class="mi">3</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">multiplier</span><span class="o">|</span>
+                          <span class="nb">name</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">version</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">multiplier</span><span class="si">}</span><span class="s2">x"</span>
+                          <span class="k">if</span> <span class="n">uploader</span><span class="p">.</span><span class="nf">version_exists?</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                            <span class="n">source</span> <span class="o">=</span> <span class="n">uploader</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="nb">name</span><span class="p">).</span><span class="nf">presence</span>
+                            <span class="s2">"</span><span class="si">#{</span><span class="n">source</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">multiplier</span><span class="si">}</span><span class="s2">x"</span>
+                          <span class="k">else</span>
+                            <span class="kp">nil</span>
+                          <span class="k">end</span>
+                        <span class="k">end</span><span class="p">.</span><span class="nf">compact</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span>
+
+  <span class="n">image_tag</span><span class="p">(</span><span class="n">uploader</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="n">version</span><span class="p">),</span> <span class="n">options</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># view.html.haml</span>
+<span class="o">=</span> <span class="n">retina_image_tag</span> <span class="n">user</span><span class="p">.</span><span class="nf">avatar</span><span class="p">,</span> <span class="ss">:thumb</span>
+</code></pre>
+<p>produces</p>
+
+<pre class="highlight html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/users/avatars/thumb_me.jpg"</span> <span class="na">srcset=</span><span class="s">"/users/avatars/thumb_2x_me.jpg 2x, /users/avatars/thumb_3x_me.jpg 3x"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<p>Feel free to use the code above in your next project. And check out <a href="https://dryjuly.com">Dry July</a> to see it in action!</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Dynamic Rails App Theming</title>
+        <link>http://www.terracoding.com/blog/rails-app-themer/</link>
+        <pubDate>Fri, 04 Dec 2015 14:36:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/rails-app-themer/</guid>
+
+        <description><![CDATA[ <p><a href="https://github.com/samrayner/rails-app-themer"><img src="/blog/rails-app-themer/icon.png" width="150" alt="Themer UI" class="pull-right" /></a></p>
+
+<p>We started work on an exciting new project this week that requires a single Rails app to power multiple similar websites. The websites are all going to have the same features and basic structure but the client wanted to be able to customise colours, fonts and images for each site themselves.</p>
+
+<p>To get our heads around the feature, we built a <a href="https://github.com/samrayner/rails-app-themer">prototype app</a> that provides a theme editing interface. You can <a href="http://app-themer.herokuapp.com/theme/edit">try out the demo</a>!</p>
+
+<p><a href="http://app-themer.herokuapp.com/theme/edit"><img src="/blog/rails-app-themer/themer.jpg" alt="Themer UI" class="img-responsive img-thumbnail" /></a></p>
+
+<h2 id="technical-details">Technical Details</h2>
+
+<p>You include theme style rules in special comment blocks using <code>color()</code>, <code>font()</code>, and <code>image_url()</code> helpers:</p>
+
+<pre class="highlight plaintext"><code>body {
+  /* defaults */
+  background: white;
+  color: black;
+  font-family: sans-serif;
+
+  /* THEME --------
+  background-image: image_url(bg);
+  color: color(text);
+  font-family: font(body);
+  -------- THEME */
+}
+</code></pre>
+
+<p>Running <code>rake theme:update</code> will then generate a theme template from those comments at <code>app/views/themes/show.css.erb</code>.</p>
+
+<p>Theme attributes can be easily added to the <code>Theme</code> model. The controller <code>:show</code> action is cached and the generated stylesheet is available at <code>/theme.css</code> to be included in the <code>head</code> of any page.</p>
+
+<p>The theme editor presents a live preview by injecting styles into an <code>iframe</code> as the theme values are changed. This includes images, using the <a href="https://developer.mozilla.org/en/docs/Web/API/FileReader">FileReader API</a> to read them locally in Base64 before they are uploaded to the server.</p>
+
+<p>To make sure override rules with missing values degrade gracefully, the app utilises browsers’ behaviour of ignoring any invalid rules whilst continuing to render the rest of the styles. This means any default styling can simply be included in the app’s main stylesheet (or anywhere you like).</p>
+
+<h2 id="open-source">Open Source</h2>
+
+<p>All of the source code is <a href="https://github.com/samrayner/rails-app-themer">available on GitHub</a>. Please fork and reuse the code as much as you like! Feel free to open an Issue on GitHub or you can reach us on Twitter <a href="http://twitter.com/terracoding">@terracoding</a>.</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Meet the Team: Rob White</title>
+        <link>http://www.terracoding.com/blog/meet-the-team-robert-white/</link>
+        <pubDate>Fri, 07 Aug 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/meet-the-team-robert-white/</guid>
+
+        <description><![CDATA[ <p>Robert is one of the directors of Terracoding. He’s a pragmatic and sensible guy with a sense of humor that is easily found. He helped create the company at the same time as working towards his First Class Masters in Computer Science at University. Here are a few questions he answered so you too can get to know what goes on in this inspirational man’s mind.</p>
+
+<p><img src="/blog/meet-the-team-robert-white/robert-white.png" alt="Robert White" class="img-responsive" /></p>
+
+<h4 id="what-is-your-favourite-film">What is your favourite film?</h4>
+
+<blockquote>
+  <p><a href="http://www.imdb.com/title/tt0119116/">The Fifth Element</a></p>
+</blockquote>
+
+<h4 id="when-you-were-young-what-did-you-want-to-be">When you were young, what did you want to be?</h4>
+
+<blockquote>
+  <p>I never had an idea what I wanted to be when I was young, even going to Uni I wasn’t sure if I was choosing the right course.</p>
+</blockquote>
+
+<h4 id="if-you-had-any-advice-for-12-year-old-you-what-would-it-be">If you had any advice for 12 year old you, what would it be?</h4>
+
+<blockquote>
+  <p>Get stuck in and learn hard work when you’re young, don’t cruise by and be your own hardest critic.</p>
+</blockquote>
+
+<h4 id="what-inspired-you-to-get-into-software-development">What inspired you to get into Software Development?</h4>
+
+<blockquote>
+  <p>I used to play a lot of video games when I was younger, and my Dad was always quite techie (everything from building PCs to building websites); it seemed a natural progression.</p>
+</blockquote>
+
+<h4 id="have-you-ever-had-a-hero-in-your-life-someone-you-look-up-to-and-aspire-to-be">Have you ever had a “hero” in your life, someone you look up to and aspire to be?</h4>
+
+<blockquote>
+  <p>It’s strange to say - but I’d consider one of my friends from secondary school to be huge inspiration. He arrived in the country knowing just shy of no English, and within what felt like a matter of days (more likely weeks) he was semi-fluent and laughing along with the rest of us. It must have been an incredibly daunting experience, and one he handled with immense grace.</p>
+</blockquote>
+
+<h4 id="if-you-had-a-time-machine-what-year-would-you-go-to-and-why">If you had a time machine, what year would you go to and why?</h4>
+
+<blockquote>
+  <p>I don’t think I could pick just one year; I’d want to go forward 10, 20, 50, 100+ years into the future to see how everything changes and all the new things that are created.</p>
+</blockquote>
+
+<h4 id="if-you-could-be-part-of-any-businessproduct-which-would-you-pick">If you could be part of any business/product, which would you pick?</h4>
+
+<blockquote>
+  <p>Definitely either <a href="https://www.google.co.uk/intl/en/glass/start/">Google Glass</a> or the <a href="http://www.apple.com/uk/watch/">Apple Watch</a>; they’re both in the very early stages of what I think are going to become very exciting products. Imagine having real-time tracking of your health, fitness, and being alerted within moments of something being detected/diagnosed. We’re a long way off understanding the human body, and there’s no such thing as too much data!</p>
+</blockquote>
+
+<h4 id="whats-the-most-rewarding-thing-youve-done-so-far">What’s the most rewarding thing you’ve done so far?</h4>
+
+<blockquote>
+  <p>I think it’s a tie between either learning Mandarin at University, or working on numerous projects for a good cause. Learning a language so completely different from anything else I’d known was a huge challenge, and to do well brought a great sense of accomplishment and pride.</p>
+</blockquote>
+
+<h4 id="do-you-have-any-suggestions-for-someone-wanting-to-get-into-software-development">Do you have any suggestions for someone wanting to get into software development?</h4>
+
+<blockquote>
+  <p>Dive in and build something, it doesn’t even have to work great the first time. Get stuck in, release something and enjoy the thrill of your creation being out there for the world to see.</p>
+</blockquote>
+
+<h4 id="fast-forward-50-years-how-much-do-you-think-technology-would-have-changed">Fast forward, 50 years, how much do you think technology would have changed?</h4>
+
+<blockquote>
+  <p>I think wearable technology/Internet of Things will have a big impact on our day to day activities, with the world becoming even more interconnected. Whether this is a good thing or not (e.g. potential privacy implications, nanny state etc) only time will tell.</p>
+</blockquote>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Meet the Team: Sam Rayner</title>
+        <link>http://www.terracoding.com/blog/meet-the-team-sam-rayner/</link>
+        <pubDate>Fri, 26 Jun 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/meet-the-team-sam-rayner/</guid>
+
+        <description><![CDATA[ <p>Sam is the Creative Director for Terracoding. When he isn’t working, he’s usually playing <a href="https://en.wikipedia.org/wiki/Ultimate_(sport)">Ultimate Frisbee</a> for Great Britain or as captain of <a href="http://www.sheffieldultimate.co.uk/">Sheffield Steal</a>. In the summer he likes to help out with <a href="http://www.makomborero.info/">Makomborero</a>, a charity dedicated to providing education for underprivileged children in Zimbabwe.</p>
+
+<p><img src="/blog/meet-the-team-sam-rayner/sam.jpg" alt="Sam Rayner" class="img-responsive" /></p>
+
+<h4 id="what-is-your-favourite-film">What is your favourite film?</h4>
+
+<blockquote>
+  <p>Casino Royale (looking forward to Spectre!)</p>
+</blockquote>
+
+<h4 id="when-you-were-young-what-did-you-want-to-be">When you were young, what did you want to be?</h4>
+
+<blockquote>
+  <p>I’m not sure I had decided when I was very young. Perhaps a tennis player? My dad bought me a book on building websites when I was eleven and I had always been into computers so I knew I wanted to work with them from a fairly young age.</p>
+</blockquote>
+
+<h4 id="what-is-your-favourite-season-of-the-year-and-why">What is your favourite season of the year (and why)?</h4>
+
+<blockquote>
+  <p>Summer, mainly because it has the best weather for Ultimate. Sunshine definitely improves my mood too.</p>
+</blockquote>
+
+<h4 id="what-inspired-you-to-get-into-software-development">What inspired you to get into Software Development?</h4>
+
+<blockquote>
+  <p>Like most nerds, my first exposure to software was predominantly gaming. I love problem solving and installing mods and skins and things felt like a window into how the games were made. The methodical, logical nature of programming and scientific approach to designing interfaces within constraints satisfies my obsessive tendencies.</p>
+</blockquote>
+
+<h4 id="do-you-have-any-irrational-fears">Do you have any irrational fears?</h4>
+
+<blockquote>
+  <p>I don’t like straws. I can’t handle the sound people make with an almost empty milkshake.</p>
+</blockquote>
+
+<h4 id="do-you-have-any-suggestions-for-someone-wanting-to-get-into-software-development">Do you have any suggestions for someone wanting to get into software development?</h4>
+
+<blockquote>
+  <p>Don’t be afraid to just dive in and try to hack something together from code snippets. It will probably be awful but if it works just about well enough to scratch an itch then you’ll get that feeling of accomplishment that keeps programmers hooked. You can always come back to the theory later and learn to approach things properly once you’ve caught the bug. Then you advance to the meta-level of satisfaction where you can be proud of how your code is structured as well as what it does.</p>
+</blockquote>
+
+<h4 id="what-is-your-favourite-thing-to-eat">What is your favourite thing to eat?</h4>
+
+<blockquote>
+  <p>I eat a lot of cereal at pretty much any time of the day. It’s my go-to dessert or snack. My favourite might have to be fudge though.</p>
+</blockquote>
+
+<h4 id="have-you-ever-had-a-hero-in-your-life-someone-you-look-up-to-and-aspire-to-be">Have you ever had a “hero” in your life, someone you look up to and aspire to be?</h4>
+
+<blockquote>
+  <p>My dad is probably the person I aspire to be like most. There are famous people I admire, like Federer and Obama, but I can’t say I aspire to be like them as I don’t know them intimately as people. He might not be world class at tennis but Dad gets a lot of the important things right.</p>
+</blockquote>
+
+<h4 id="which-celebrity-dowould-you-get-mistaken-for">Which celebrity do/would you get mistaken for?</h4>
+
+<blockquote>
+  <p>Ha, the only time I have ever been ‘mistaken’ for a celebrity was being called <a href="https://en.wikipedia.org/wiki/John_Cena">John Cena</a> by kids in Zimbabwe. I’m sure they knew I wasn’t him though, I just wore a cap and most westerners are big compared to teenage lads out there. I’d love to see their reaction if they actually met a wrestler.</p>
+</blockquote>
+
+<h4 id="what-is-the-most-rewarding-thing-youve-done-so-far">What is the most rewarding thing you’ve done so far?</h4>
+
+<blockquote>
+  <p>Coaching Ultimate is really rewarding. Seeing some of the Sheffield-based players improve over the years has been great. Volunteering in Zimbabwe is hard to beat though. Tinashe, one of the students I taught a little at Makomborero is now studying Computer Science at the <a href="http://www.iztech.edu.tr/">Izmir Institute of Technology</a> in Turkey!</p>
+</blockquote>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Meet the Team: Dominic Wroblewski</title>
+        <link>http://www.terracoding.com/blog/meet-the-team-dominic-wroblewski/</link>
+        <pubDate>Thu, 04 Jun 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/meet-the-team-dominic-wroblewski/</guid>
+
+        <description><![CDATA[ <p>Dominic is Technical Director here at Terracoding. Born in Redditch, a small town just south of Birmingham, he made Sheffield his home when he decided to study Computer Science at the <a href="http://www.sheffield.ac.uk/">University of Sheffield</a>. A strong advocate of almost all things tech-related, he discovered his passion for programming whilst at secondary school, developing some of the first apps for iOS shortly after Apple unveiled the App Store. When he’s not running the <a href="https://twitter.com/sheffieldswift/">Sheffield Swift</a> meetup, he’s busy setting world records on <a href="https://www.guildwars2.com/">Guild Wars 2</a>, or scuba diving in seas both hot and cold.</p>
+
+<p><img src="/blog/meet-the-team-dominic-wroblewski/dominic.jpg" alt="Dominic Wroblewski" class="img-responsive" /></p>
+
+<h4 id="what-is-your-favourite-form-of-exercise">What is your favourite form of exercise?</h4>
+<blockquote>
+  <p>Skateboarding.</p>
+
+  <p>It’s such a great sport for exercise as it’s fun and it’s something I can always improve at, for example learning a new trick is a great feeling of accomplishment.</p>
+</blockquote>
+
+<h4 id="if-you-had-any-advice-for-12-year-old-you-what-would-it-be">If you had any advice for 12 year old you, what would it be?</h4>
+<blockquote>
+  <p>Try not to hate Maths, you’re going to need it an awful lot later.</p>
+</blockquote>
+
+<h4 id="what-is-your-favourite-thing-to-eat">What is your favourite thing to eat?</h4>
+<blockquote>
+  <p>Full English Breakfast OR… A jacket potato (with a Full English Breakfast)</p>
+</blockquote>
+
+<h4 id="favourite-place-in-the-world-and-why">Favourite place in the world (and why)?</h4>
+<blockquote>
+  <p>Blue mountains in Australia. It’s beautiful, the sounds, the birds, the life - you just don’t get that kind of experience in many places.</p>
+</blockquote>
+
+<h4 id="what-were-you-most-proud-of-when-you-were-younger">What were you most proud of when you were younger?</h4>
+<blockquote>
+  <p>Making silly animated claymations.</p>
+</blockquote>
+
+<h4 id="what-is-your-favourite-part-of-the-day">What is your favourite part of the day?</h4>
+<blockquote>
+  <p>Early morning, just before the world wakes up - that period of time where nothing’s going on, it’s just peaceful.</p>
+</blockquote>
+
+<h4 id="if-you-could-meet-any-one-person-living-or-dead-who-would-it-be">If you could meet any one person, living or dead, who would it be?</h4>
+<blockquote>
+  <p>Captain Cook, just to know what it was like to explore an unknown world.</p>
+</blockquote>
+
+<h4 id="what-is-the-hardest-thing-youve-ever-done">What is the hardest thing you’ve ever done?</h4>
+<blockquote>
+  <p>Trying to understand my Maths teacher at University.</p>
+</blockquote>
+
+<h4 id="which-actor-would-play-you-in-a-movie-about-your-life">Which actor would play you in a movie about your life?</h4>
+<blockquote>
+  <p>Tom Hardy</p>
+</blockquote>
+
+<h4 id="are-you-a-cat-person-or-a-dog-person">Are you a cat person or a dog person?</h4>
+<blockquote>
+  <p>Dogs, I think cats are really cool, but kind of scary at the same time.</p>
+</blockquote>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>10 Tips when remote working</title>
+        <link>http://www.terracoding.com/blog/10-tips-when-remote-working/</link>
+        <pubDate>Tue, 02 Jun 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/10-tips-when-remote-working/</guid>
+
+        <description><![CDATA[ <p>As anyone who has done it can attest, working from home or away from the office presents it’s own set of benefits and problems. One of the biggest problems when working remotely is how to keep your focus peaked throughout the day. In this blog post I will share a few tips based on our experiences here at Terracoding.</p>
+
+<h4 id="dont-use-the-same-space-for-relaxing-aka-have-a-dedicated-work-area-or-office">1. Don’t use the same space for relaxing (a.k.a have a dedicated work area or office)</h4>
+
+<p>If you don’t, then you can often find yourself getting distracted easily. Your mind has a dedicated <em>work</em> mode, and a relaxed <em>play</em> mode, and it’s important to make sure that they don’t leak into one-another.</p>
+
+<h4 id="use-changes-in-scenery-to-help-you-feel-refreshed-and-kick-you-back-into-gear">2. Use changes in scenery to help you feel refreshed and kick you back into gear.</h4>
+
+<p>In the same way that having a dedicated work environment helps keep you in work mode, if you do find yourself getting distracted then a quick change in scenery is enough to get you back into the flow of things.</p>
+
+<h4 id="have-a-routine">3. Have a routine</h4>
+
+<p>Your body likes routines, it feels comfortable as you settle into your seat after having the same cup of coffee you have every morning, or suffering the same cramped bus journey to work.</p>
+
+<p>Outside of remote work, workers unconsciously find themselves falling into a regular work pattern. With the freedom and flexibility remote work provides, it can be quite easy to avoid finding a productive daily routine.</p>
+
+<h4 id="dont-over-indulge-on-breakfast-and-lunch">4. Don’t over indulge on breakfast and lunch.</h4>
+
+<p>It sounds like common sense, but given the added flexibility and ease of remote working it is easy to fall into unhealthy eating patterns. As well the immediate lethargic feeling associated with over eating, an unhealthy diet can leave us in a generally low or tired mood, the opposite of what you want when trying to be productive.</p>
+
+<h4 id="utilise-multiple-mediums-of-communication">5. Utilise multiple mediums of communication</h4>
+
+<p>This one is especially important when working across multiple timezones. When in communication with a client or coworker, different methods of communication work best for different scenarios.</p>
+
+<p>Not every discussion needs to be Face to Face (ala Skype), asyncronous communication such as email or IM can be just as important when asking specific questions, or establishing a framework for your next Skype call.</p>
+
+<p>By appropriately organising your interactions across both syncronous and asyncronous communication, it frees up both parties time, allows for a better common understanding of what <em>needs</em> to be spoken about in person,  and promotes a balance of priorities.</p>
+
+<h4 id="prior-planning-prevents">6. Prior planning prevents…</h4>
+
+<p>In conjunction with both asyncronous communication, be sure to plan any Skype calls in advance if possible. When both parties can establish a time that is comfortable for both of them, communication feels a lot less imposing on your personal life.</p>
+
+<h4 id="always-try-to-find-a-finishing-point-for-your-current-work">7. Always try to find a finishing point for your current work</h4>
+
+<p>When working to a schedule, try and break down your work into small enough tasks that you can always wrap things up nicely. When you sit down to work and you find yourself in the middle of a task and you’re unsure of exactly where you were up to, it takes time and effort to get back into the rhythm.</p>
+
+<p><em>Another method I like to use is <a href="http://pomodorotechnique.com/">Pomodoro sessions</a>, by breaking my work down into small tasks, I can dedicate a number of pomodoro session to completing each task in turn. Doing this has made time fly by on numerous occassions.</em></p>
+
+<h4 id="when-youve-found-a-finishing-point-for-your-work-actually-finish">8. When you’ve found a finishing point for your work, <em>actually finish.</em></h4>
+
+<p>As mentioned previously, having a good work-life balance is important, and just like making sure you’re productive when you are working, it’s equally important to disconnect when you’re finished.</p>
+
+<p>Without breaking away from your work properly, it is far too easy to let your work and stresses build up into a sense of being constantly burdened. Who is going to want to work when they associate it with an overarching feeling of stress and resentment?</p>
+
+<h4 id="keep-your-mood-up---stay-sociable">9. Keep your mood up - stay sociable</h4>
+
+<p>Working remotely has a lot of freedoms, but it can sometimes be quite lonely. Sitting in a room alone (or even at a coffeeshop with little real interaction) for hours on end can leave you feeling uncomfortable or down.</p>
+
+<p>Even if you’re the type of person who likes some serious alone time whilst working through a problem, meaningful interaction with coworkers outside of specific work related conversations can really help boost your moral.</p>
+
+<p>The easiest way to maintain productivity is to enjoy the work you do, and enjoying interacting with those you work with can help go along way to accomplishing that.</p>
+
+<h4 id="exercise">10. Exercise</h4>
+
+<p>Finally, my recent favourite - exercise! Waking up an hour earlier and getting outside for a morning run has really helped me when sit down and get cracking when feeling particularly lazy.</p>
+
+<p>Initially it may prove a challenge to push yourself to begin with, but after the first few attempts you really start to notice improvements. I find myself more alert, focussed and quicker in general after having given my body a much needed workout, and it is especially noticeable on days where I haven’t.</p>
+
+<hr />
+
+<p>Overall, remote work can be incredibly rewarding when working alongside both coworkers and clients. It bring additional freedom for all parties involved, as long as steps are taken to ensure things keep moving nicely. I hope that you have found these tips useful, and if you have any of your own then <a href="http://www.terracoding.com/contact/">feel free to let us know!</a></p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Designing for the Apple Watch</title>
+        <link>http://www.terracoding.com/blog/designing-for-the-apple-watch/</link>
+        <pubDate>Fri, 29 May 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/designing-for-the-apple-watch/</guid>
+
+        <description><![CDATA[ <p>Since the release of the Apple Watch, we have already had discussions with clients about how they were interested in releasing a watch app. As the Apple Watch is such a small and personal device, development of apps need to be approached in a completely different way to mobile.</p>
+
+<p>We now have a very limited number of interactions:</p>
+
+<ul>
+  <li>Force Touch (bring up menu options)</li>
+  <li>Tap (tap an menu option or button)</li>
+  <li>Scroll (scroll with the digital crown or using the touch display)</li>
+</ul>
+
+<p>With the Apple Watch being on the wrist, the attention required of the user should be as short as possible. The user has to raise their wrist to use the interface and holding out an arm can get tiring very quickly.</p>
+
+<p>What is being displayed should be exactly what the user needs right now and should cut out any form of fancy images or overlays that do not contribute to the information being conveyed.</p>
+
+<p>As a quick example, a few weeks ago I built an Apple Watch app for <a href="https://itunes.apple.com/app/sprinter/id568151529">Sprinter</a>. Sprinter for iOS allows the user to see which tasks are assigned to whom, and which tasks are being worked on, completed or are yet to be started. It also allows the user to add items, view and reply to comments and view attachments.</p>
+
+<p>Trying to copy as much functionality into a Watch app would have been crazy and borderline impossible technically. Right away I knew exactly what I could change to show only the information that is required by the user:</p>
+
+<ul>
+  <li>Only show what is assigned to me</li>
+  <li>Only show what is in-progress</li>
+  <li>Option to switch project (using a Force Touch interaction)</li>
+</ul>
+
+<p>These made sure that the app showed only what the user cared about. There was no need to scroll through tons of tasks that weren’t assigned to the user, and basically allowed the user to say “So that’s what I’m working on today”.</p>
+
+<p>It’s quick and shortens the attention required of the user. There’s no way to create new tasks, or make and read comments. The user can do that on their phone or desktop if they want to read through lots of text and options.</p>
+
+<p>Overall, Apple Watch apps are designed for short glances and not to consume content. They should be limited to display only what the user needs to see right now, nothing more. That’s not a slight on the device; in fact, the simplified interaction is vital to its usefulness sitting pride of place on your wrist.</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>HSM App Featured By Apple</title>
+        <link>http://www.terracoding.com/blog/hsm-app-launch/</link>
+        <pubDate>Wed, 06 May 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/hsm-app-launch/</guid>
+
+        <description><![CDATA[ <p>We’re excited to announce that <a href="/work/hello-sunday-morning">the app we’ve been working on with Hello Sunday Morning</a> was released last week! On top of that, Apple was kind enough to feature it as App of the Week in Australia.</p>
+
+<p>The app suggests challenges you can do as an alterantive to drinking and provides useful stats on how your health is improving as a result.</p>
+
+<iframe src="//player.vimeo.com/video/126023074?title=0&amp;byline=0&amp;portrait=0" width="960" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
+<p>You can leave comments and tips on your favourite challenges, share what you are doing on your profile and check in each week with how things have been going.</p>
+
+<p>We’re really proud of how it turned out and hope that it will help thousands of people improve their relationship with alcohol!</p>
+
+<p>Interested in taking on some fun challenges and tracking your health? <a href="https://itunes.apple.com/app/hsm/id961582035">Try it out today.</a></p>
+
+<p><a href="https://itunes.apple.com/app/hsm/id961582035"><img src="/assets/images/app-store.png" class="img-rounded" width="165" height="55" /></a></p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Deploying to the App Store</title>
+        <link>http://www.terracoding.com/blog/deploying-to-the-app-store/</link>
+        <pubDate>Thu, 16 Apr 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/deploying-to-the-app-store/</guid>
+
+        <description><![CDATA[ <p>When you or your team has finished developing their new iOS App, the focus then moves over to making sure it is ready for the App Store. This blog post will go over some fundamentals that you and your team will need to think about when submitting an app to the App Store.</p>
+
+<h1 id="testing">Testing</h1>
+
+<p>I can’t stress enough how important testing is when getting your app ready for the App Store. Unlike the web, you can’t release small bug fixes every couple of days. Whilst some may say that this is a huge flaw with Apple having to review apps before they go live, I think it gives you a chance to think about the importance of what the first or latest release of an app will contain.</p>
+
+<p>Apple provides us with two main ways of getting apps onto devices for testing:</p>
+
+<h3 id="xcode--provisioning-profiles">Xcode &amp; Provisioning Profiles</h3>
+
+<p>I’m not going to go into much detail about this as it’s mainly aimed towards developers. The quickest way for an app to go into the developers hands is via Xcode itself. This is the tool that is used to write, debug and package iOS Apps.</p>
+
+<p>It is fine for a small handful of developers who only need to look after their own devices, but when you want to start testing apps with more users who are not tech savvy, you’ll need to look at TestFlight.</p>
+
+<h3 id="testflight">TestFlight</h3>
+
+<p>TestFlight is a service provided by Apple that allows you to give out new builds of an app to users so they can use the app before it’s released on the App Store. Unfortunately there are still some hurdles that need to be looked at before your app can be installed.</p>
+
+<p>There are two types of user that can use TestFlight. These are Internal Testers and External Testers.</p>
+
+<ul>
+  <li>Internal Testing
+    <ul>
+      <li>Limited to users who are counted as part of the organisation</li>
+      <li>Must have an Admin or Technical role on iTunes Connect</li>
+      <li>Limited to 25 members by default</li>
+      <li>Does not require Apple to review the build</li>
+    </ul>
+  </li>
+  <li>External Testing
+    <ul>
+      <li>Can be given to anyone with an email address</li>
+      <li>Must have iOS 8 installed for it to work</li>
+      <li>Limited to 1,000 testers</li>
+      <li>Requires Apple to review the build</li>
+    </ul>
+  </li>
+</ul>
+
+<p>When building for TestFlight, you must try to make sure you get a build reviewed by Apple as early as possible if you want any external testers trying out your application. In our past experience the review time for external testing was around 2 days.</p>
+
+<h1 id="localisation">Localisation</h1>
+
+<p>I’ve seen it happen time and time again, people will spend all their time working on an app and be super excited for it to be submitted to the App Store, only to realise that they’ve forgotten that not everyone speaks English.</p>
+
+<p>Apple allows you to create localised App Store descriptions when submitting, so make sure that if you want the marketing material to be in the users local language, you actually get people to translate the material well before you want to submit the application.</p>
+
+<p>Secondly, don’t forget that it has been localised, if you change major features of the app, make sure you also update the localised versions of the material to keep in line with how the primary language reads. Remember that you will also have to update your screenshots on all localisations.</p>
+
+<h1 id="imagery">Imagery</h1>
+
+<p>When submitting an App for the App Store, you’ll be required to add a large App Icon as well as some screenshots. These are the face of your application, they are as important, if not more, as your app name. The only way users can see if your app is the one they want to download is by browsing through the content they can see on the App Store.</p>
+
+<p>To prevent any hiccups you’ll need icons and screenshots to be of a certain size and quality. Thankfully Apple provides a list of exactly how you should export your images on their <a href="https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Appendices/Properties.html">iTunes Connect Developer Guide</a>.</p>
+
+<h1 id="review-times">Review Times</h1>
+
+<p>Almost all clients ask Terracoding how long it will take from the app to be submitted until it’s actually live on the App Store. All I can say is that it varies. It can also depend on a lot of factors that may include:</p>
+
+<ul>
+  <li>New iOS device being released
+    <ul>
+      <li>Usually when a new device with a different screen size comes out, developers will be pushing out lots of updates to make sure their app looks good on the new device</li>
+    </ul>
+  </li>
+  <li>New major iOS version released
+    <ul>
+      <li>As with any major release, Apple usually brings out new features that can be utilised in apps. Companies love adding in the new popular features into there apps, and with that comes a big spike of new apps or updates being submitted to Apple for review</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Other than that, we can tell you that we’ve had new apps or updates accepted anywhere between 1 day and 1.5 months. Most often it’s between 1-2 weeks for a first app to be reviewed and accepted.</p>
+
+<h1 id="rejections">Rejections</h1>
+
+<p>So you’ve followed all the advice above and your app has been rejected. Don’t panic! Rejections can happen for a long list of reasons, and most of them being from a small bug or a slight complaint about the meta data provided for the application.</p>
+
+<p>Some common rejections could be:</p>
+
+<ul>
+  <li>Link to a site that contains a payment form
+    <ul>
+      <li>If you’re app costs money, and you’re also linking to a site that has a payment form on it, you’ll probably get rejected.</li>
+    </ul>
+  </li>
+  <li>No demo account provided
+    <ul>
+      <li>If you’re app has any form of user accounts, you’ll need to provide Apple with a demo username and password for the app. Without this they will just reject your application</li>
+    </ul>
+  </li>
+  <li>UI Bugs
+    <ul>
+      <li>Make sure you test your application on the iOS Simulator without an onscreen keyboard. Developers can often forget that some users will and do use an external keyboard with their iOS device, and if apps break because of it, you will get rejected.</li>
+    </ul>
+  </li>
+  <li>Crashes
+    <ul>
+      <li>If your app crashes whilst Apple is reviewing the app, they will reject it. Make sure you have tested the app as if you were a brand new user, as well as someone who is logging in with an existing account.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>A really good site to look at when making sure your app is App Store ready, is by having a good read through of <a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/">Apple’s iOS Human Interface Guidelines</a>  (or HIG for short). These contain all kinds of default behaviours for key components of iOS.</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>The 6 Stages of App Development - Part 2</title>
+        <link>http://www.terracoding.com/blog/app-dev-stages-part-2/</link>
+        <pubDate>Sat, 04 Apr 2015 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/app-dev-stages-part-2/</guid>
+
+        <description><![CDATA[ <p>In <a href="/blog/app-dev-stages-part-1">Part 1 of this series</a> I outlined the reasons why we follow a methodical approach to developing apps for clients and discussed the intial stages: analysing the problem, feature design and interaction design.</p>
+
+<p>This post covers the final stages leading up to release: <a href="#stage-4---visual-design">visual design</a>, <a href="#stage-5---building-the-app">building the app</a> and <a href="#stage-6---testing">testing</a>.</p>
+
+<h2 id="stage-4---visual-design">Stage 4 - Visual Design</h2>
+
+<p>With a set of features laid out for our app, we can start to add polish to how it looks. During this design phase we tend to produce mockups of how the app will look in <a href="http://www.photoshop.com/">Photoshop</a> and work closely with the client to make sure everyone is happy with the style, colours and branding.</p>
+
+<p>It’s important to remember that these mockups aren’t exactly how the final app will look. Due to the range of screen sizes and orientations, this stage is more about creating a guide for common elements used throughout the app. Still, focusing on the major views as a whole lets us design elements like toolbars and buttons in the context they’ll be used.</p>
+
+<p><a href="/blog/museum-ibeacon-app/museum-app.jpg"><img src="/blog/museum-ibeacon-app/museum-app.jpg" alt="iBeacon App Mockup" /></a></p>
+
+<p>When we reach this stage it’s easy to think that the bulk of the hard work has been done; we’ve planned out exactly what the app will do and here it is on screen looking great! In fact, there is still a lot of work to do converting these static mockups into a stable, functional app.</p>
+
+<h2 id="stage-5---building-the-app">Stage 5 - Building the App</h2>
+
+<p>This stage - turning our designed app into a reality - is the one that will involve the client the least. We’ll need to get our heads down and write the code that detects the user’s actions (e.g. a button tap or swipe) and does something in response. It might be as easy as presenting the next view or something very complex like running a real-time 3D simulation but it all needs to be programmed.</p>
+
+<p>In this stage we’ll also build any back-end infrastructure that the app needs to communicate with. This is usually a web server that the app sends and receives data to/from.</p>
+
+<p>Progress updates might not be as exciting for a week or two but, given time, we’ll produce a working app that we can install on a device for you to test.</p>
+
+<h2 id="stage-6---testing">Stage 6 - Testing</h2>
+
+<p>Finally, with a working version of the app built, we’re ready to start putting it through its paces.</p>
+
+<p>For saftey-critical applications we will spend time writing automated tests that cover all possible tasks required of the app and can be run at high-speed often. This helps us ensure changes we make in the future don’t break existing functionality elsewhere.</p>
+
+<p>More commonly though, this stage will involve sitting down with the end-user (be that you or potential customers) and observing them and asking questions. We can do a private release targetted at specific email addresses.</p>
+
+<p>We’ll also set up analytics so that we can collect data on user activity. This will help us uncover bugs and see what features are being used most.</p>
+
+<hr />
+
+<p>So that’s it! A well thought out, good looking, first version of your app. Hopefully it will have gone down well with test subjects and be ready for a wider launch.</p>
+
+<p>At each stage, especially based on feedback in Stage 6, we can revisit any of the earlier stages of development and rethink something. It might be that users are put off by the colours used so we jump back to Stage 4 and redesign something. Maybe testers flag up a vital missing feature that we can go back to <a href="/blog/app-dev-stages-part-1#stage-2---feature-design">Stage 2</a> and plan.</p>
+
+<p>The whole process is flexible, but using this framework we can be sure that things progress in a logical way towards a quality app.</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Terracoding - a team, a culture.</title>
+        <link>http://www.terracoding.com/blog/terracoding-a-team/</link>
+        <pubDate>Sun, 15 Mar 2015 11:45:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/terracoding-a-team/</guid>
+
+        <description><![CDATA[ <p>Here at Terracoding we take pride in the software we deliver.</p>
+
+<p>When we first decided to dedicate ourselves to the company, we tried to sit down and come up with a series of values that best describe both ourselves and what we strive for as part of the software development process.</p>
+
+<p>The following is my attempt to best summarise and explain these principles:</p>
+
+<h6 id="speed-is-great-but-take-time-to-figure-out-what-matters-first">1. Speed is great, but take time to figure out what matters first</h6>
+
+<p>You should always strive to deliver software as quickly as possible, whilst making every effort to ensure the result is both correct and well tested.</p>
+
+<p>We achieve the best result by correctly understanding the problem, and moving forward appropriately. Any effort to rush forward without understanding is typically repaid again with any future changes, however pragmatism is king and there are always exceptions.</p>
+
+<h6 id="the-collective-wisdom-is-greater">2. The collective wisdom is greater</h6>
+
+<p>It is almost always worth getting a second opinion on any large decision.</p>
+
+<p>As much as we may dislike the fact, we are all human and as such bound to make mistakes. No one person has the correct answer to every question immediately.</p>
+
+<p>When it comes to major decisions, verify your solution with someone else to check you haven’t missed something. Don’t be scared to make decisions when necessary, but take into account input from others when it’s easy enough to do so.</p>
+
+<p>Note: This typically refers to anything that affects others, and/or is hard to change/adapt further down the line.</p>
+
+<h6 id="we-have-strengths-and-weaknesses">3. We have strengths and weaknesses</h6>
+
+<p>Each team member has a different history and set of experiences. We should respect others for the experience they have, and the strengths and weaknesses cultivated as a result.</p>
+
+<p>Along similar lines to <strong>2</strong>, no one person is the best at everything. We should do our best to maximise the strength of the team, whilst simultaneously improving on our weaknesses.</p>
+
+<p>We should not avoid tasks we are uncomfortable doing, instead we should seek input from those who are particularly proficient at them.</p>
+
+<h6 id="keep-an-open-mind">4. Keep an open mind</h6>
+
+<p>It is too easy to grip tightly to a decision or idea simply because it was <em>ours</em>. Keep an open mind when discussing with colleagues and clients, and make every effort to understand both someone else’s point and the reasoning behind it.</p>
+
+<p>This will not only result in better decisions being made, but less arguments and butting of heads.</p>
+
+<h6 id="check-your-ego-at-the-door">5. Check your ego at the door</h6>
+
+<p>You are not the work you produce, the decisions you make, or the code you write. Constructively criticise the work of others, as well as your own, and expect constructive criticism from others.</p>
+
+<p>Do not take criticism of what you’ve done as a criticism/attack on yourself. Be proud of what you’ve done, and be willing to defend the reasoning behind your actions (keeping in mind <strong>4</strong>).</p>
+
+<p>Finally, try to never collapse a discussion into an argument, and always be willing to take a step back and put everything into perspective. We are a team and there is no benefit in a toxic environment.</p>
+
+<hr />
+<p>Disclaimer</p>
+
+<ul>
+  <li>There will always be exceptional situations.</li>
+  <li>Try to keep in mind that these are guiding principles and not strict rules to adhere to.</li>
+  <li>Pragmatism is king, be as flexible as possible to maximise the end result.</li>
+</ul>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>7 Tools We Use as Remote Workers</title>
+        <link>http://www.terracoding.com/blog/7-remote-working-tools/</link>
+        <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/7-remote-working-tools/</guid>
+
+        <description><![CDATA[ <p>Working in a remote team has its ups and downs. Keeping in touch and working as if we were right next to each other is essential for success.</p>
+
+<p>Here are a bunch of tools that we use to work together efficiently, as well as having everything accessible if someone is at home ill and away from the office</p>
+
+<h2 id="img-srcblog7-remote-working-toolsslackpng-alt-width20-height20-slacksl">1. <a href="https://slack.com/"><img src="/blog/7-remote-working-tools/slack.png" alt="" width="20" height="20" /> Slack</a></h2>
+
+<p><a href="https://slack.com/">Slack</a> is our main form of communication. Whether it be having a general conversation or going over finer points on a project, most of our communication will be through Slack.</p>
+
+<p>The software works across all our devices (iOS, Mac, Web) and is often used instead of calling people during busy times of the day - we can check Slack when we have a few minutes to spare to catch up.</p>
+
+<p>One of the many features of Slack allows us to send all our online notifications into specific channels. As an example, when someone commits new code to GitHub we receive a notification in Slack. Similarly if the Continuous Integration server runs the tests and they fail, then we will get notified.</p>
+
+<p>Slack is fantastic way to cover most of our communication apart from voice/video and screen sharing.</p>
+
+<h2 id="img-srcblog7-remote-working-toolssqwigglepng-alt-width20-height20-sqwigglesq">2. <a href="https://www.sqwiggle.com/"><img src="/blog/7-remote-working-tools/sqwiggle.png" alt="" width="20" height="20" /> Sqwiggle</a></h2>
+
+<p><a href="https://www.sqwiggle.com/">Sqwiggle</a> is one of those apps that is seriously aimed at remote workers like ourselves. Whilst Sqwiggle does have an instant messaging feature, the main focus is making people feel like they are in the same room as their team.</p>
+
+<p>When you load up the app you are instantly greeted with the faces of your colleagues, which can be updated every few minutes. When you want to start a video conversation with them, just tap on their face. No need to mess around with finding contact details or waiting for them to pick up. Just tap and talk.</p>
+
+<p>Even if you don’t chat with them that often, it’s great to feel that someone is always there with you when you need them.</p>
+
+<h2 id="img-srcblog7-remote-working-toolssprintlypng-alt-width20-height20-sprintlyspr">3. <a href="https://sprint.ly/"><img src="/blog/7-remote-working-tools/sprintly.png" alt="" width="20" height="20" /> Sprintly</a></h2>
+
+<p><a href="https://sprint.ly/">Sprintly</a> holds all of the tasks, bugs and features for pretty much every project we work on. Sprintly works very much like a <a href="http://en.wikipedia.org/wiki/Kanban">Kanban board</a>, we know at all times what stage we are up to with our projects, who is working on what feature, and how we are looking for time.</p>
+
+<p>Each item allows comments and uploads attached to them, as well as the ability to <a href="https://sprintly.uservoice.com/knowledgebase/articles/132677-how-is-velocity-calculated-">T-shirt size</a> them so clients have a some understanding on how much effort each item will take to complete.</p>
+
+<p>Other similar tools to Sprintly are things such as PivotalTracker and Trello.</p>
+
+<h2 id="img-srcblog7-remote-working-toolsgoogle-drivepng-alt-width20-height20-google-drivegd">4. <a href="https://www.google.com/drive/"><img src="/blog/7-remote-working-tools/google-drive.png" alt="" width="20" height="20" /> Google Drive</a></h2>
+
+<p><a href="https://www.google.com/drive/">Google Drive</a> is the hub that contains all of our documents and spreadsheets. We often use Google Drive when we’re collaborating on a document or just to share some work with each other to look at over in a Skype call.</p>
+
+<h2 id="img-srcblog7-remote-working-toolsskypepng-alt-width20-height20-skypesk">5. <a href="http://www.skype.com/"><img src="/blog/7-remote-working-tools/skype.png" alt="" width="20" height="20" /> Skype</a></h2>
+
+<p><a href="http://www.skype.com/">Skype</a> feels like one of the most essential tools to use when remote working. Whilst you can go so far using text messages, emails and chat software, hearing and seeing someone is a whole different thing.</p>
+
+<p>Skype is our go-to software for longer discussions within the team and also for chatting with clients. Almost everyone we have dealt with thus far has had a Skype account.</p>
+
+<p>Skype also has a feature of being able to get your own local landline number (or non-local if that’s what you want), with the ability of paying monthly to get minutes to call people in specific countries.</p>
+
+<h2 id="img-srcblog7-remote-working-toolsscreenheropng-alt-width20-height20-screenherosh">6. <a href="https://screenhero.com/"><img src="/blog/7-remote-working-tools/screenhero.png" alt="" width="20" height="20" /> Screenhero</a></h2>
+
+<p>When working we may sometimes get a bit stuck or want to share what we’re working on with someone. This is where <a href="https://screenhero.com/">Screenhero</a> shines.</p>
+
+<p>I’ve spent a very long time going through a bunch of screensharing tools, and Screenhero seems to come out on top in terms of features, simplicity and reliability. Not only can you share your screen with someone, but they get their own mouse and keyboard input so things like pair programming can be done with ease.</p>
+
+<p>Screenhero also has voice and text chat if you want to use it as a basic chat application if needed.</p>
+
+<p>Screenhero has recently announced it is joining Slack, so some pretty interesting integration should be coming soon.</p>
+
+<h2 id="img-srcblog7-remote-working-toolsspotifypng-alt-width20-height20-spotifyspo">7. <a href="https://www.spotify.com/"><img src="/blog/7-remote-working-tools/spotify.png" alt="" width="20" height="20" /> Spotify</a></h2>
+
+<p>As remote workers we can be working in all kinds of cafés, bars, parks, libraries etc. Sometimes you need a bit of music to give you some energy and get back down to work!</p>
+
+<p><a href="https://www.spotify.com/">Spotify</a> is great as you can keep playlists saved onto your computer as well as share your playlists with friends.</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>The 6 Stages of App Development - Part 1</title>
+        <link>http://www.terracoding.com/blog/app-dev-stages-part-1/</link>
+        <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/app-dev-stages-part-1/</guid>
+
+        <description><![CDATA[ <p>With each business that comes to us with an idea for an app or a problem they are facing, we tend to approach designing and building the solution in a similar way. Methodically breaking things down helps us articulate timescales as well as keep track of where we’re heading with development.</p>
+
+<p>Each project is unique and requires flexibility within this loose framework. In a lot of cases we’ll collaborate with third parties to complete all or part of a stage. Sometimes the plan will change mid-way through development and we’ll adapt by revisiting a previous stage or cycling through a number of them for a few iterations. Nothing is nailed down, but hopefully this will give you an insight into the milestones a lot of our projects pass in the lead-up to release.</p>
+
+<h2 id="stage-1---the-problemidea">Stage 1 - The Problem/Idea</h2>
+<p>Before we can start thinking about a software solution, it’s important to really get our heads around what it is we’re solving. In a lot of cases, companies come to us with a pretty clear idea of what they want building. We like to get together and discuss the motivation behind the project in detail before we get started for a number of reasons:</p>
+
+<ul>
+  <li>We need to understand your business to appreciate how the problem affects you and what kind of software would be appropriate.</li>
+  <li>What one person perceives to be the problem might not always turn out to be the thing that needs addressing directly. You know your business better than anyone, but sometimes it takes an outsider to tease out the root cause or a higher-level issue that can be overlooked in the day-to-day running of a company.</li>
+  <li>Sometimes the vision for an app is just not feasible (especially within budget and time constraints). Equally, there might be a solution you hadn’t considered possible. As technical experts we can help analyse the problem in the context of what apps, and the platforms they run on, are capable of.</li>
+</ul>
+
+<h2 id="stage-2---feature-design">Stage 2 - Feature Design</h2>
+<p>Once we have nailed down the problem or need that our application is going to address, we can start designing a solution. Is it going to run natively on a mobile or in a web browser? What operating systems should be supported? Exactly what will users be able to do with the software?</p>
+
+<p>In almost every case, we suggest reducing the scope of an application right down to the bare essentials and focusing on getting those few features right for a first release. This is called a Minimum Viable Product (MVP) and allows us to get something useful into people’s hands as soon as possible. That way, users can benefit from our solution and we get valuable feedback to guide further development, informing decisions and saving money in the long run.</p>
+
+<h2 id="stage-3---interaction-design">Stage 3 - Interaction Design</h2>
+<p>Now we know what form the software is going to take and what the first version will do, we can start considering how users will interact with it, commonly referred to as User Experience (UX). To do this, we tend to produce ‘wireframes’ - low-fidelity mockups of the different views the application might have and how the user will get from one to the other while completing a task. While only made up of boxes, lines and text, the wireframes are coupled with notes on how elements might react to user actions.</p>
+
+<p><img alt="Example of wireframes" src="/blog/app-dev-stages-part-1/wireframes.png" /></p>
+
+<p>After plenty of iteration with the client, the wireframes should eventually provide a complete overview of the layout of the application. They should be detailed enough to demonstrate how a user would navigate the software to complete any task we have chosen to cover in our MVP.</p>
+
+<hr />
+
+<p>That’s all for part one. In part two I’ll cover visual design, programming and testing.</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Automated Testing - What is it, and why should you care?</title>
+        <link>http://www.terracoding.com/blog/automated-testing-what-is-it/</link>
+        <pubDate>Fri, 23 Jan 2015 17:30:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/automated-testing-what-is-it/</guid>
+
+        <description><![CDATA[ <p>You’ve just started working with a software development company on a large project and you want to make sure everything goes smoothly and reliably. Unpredictable changes can cause no end of problems, from increased costs through to missed deadlines.</p>
+
+<p>The software development procedure is rarely cut and dry, instead a series of evolutions as new requirements are discovered and built upon. Naturally, you want to be able to reliably expand on existing features whilst developing new ones that compliment and improve upon them.</p>
+
+<h2 id="how-can-we-reliably-build-without-compromising-existing-functionality">How can we <em>reliably</em> build without compromising existing functionality?</h2>
+
+<p>Take the following example:</p>
+
+<pre class="highlight plaintext"><code> Given I am a user with an account on the website
+ When I visit my profile page
+ Then I should be able to change my contact details.
+</code></pre>
+
+<p>This scenario is simple, and common across numerous websites. As a client you want to be confident that a user is able to update their email address and other contact information. How can we ensure this functionality continues to work properly?</p>
+
+<h3 id="manual-testing">Manual testing</h3>
+
+<p>One option is to manually test out the website yourself, going through each of the features in turn and making sure they work. Whilst this process does work in catching bugs that occur, unless the project is reasonably small, it becomes very costly on your time.</p>
+
+<p>As a system grows and more features are added to it, it becomes an unrealistic burden to be expected of you. Finally, in addition to this, with manual testing comes manual errors, it becomes quite easy without a rigid process to accidentally leave aspects of a system untested.</p>
+
+<h3 id="automated-testing">Automated testing</h3>
+
+<p>Wouldn’t it be awesome if our web browser could somehow visit each of our pages for us, and check that everything works for us? Turns out we can… sort of. We can tell the web browser to visit pages, we just need to tell it exactly what to do on them, and set our expectations for what pages should contain.</p>
+
+<p>This way we perform the test manually when we’re writing it, but then the computer can repeat this test for us over and over, much faster than we can did it in the first place.</p>
+
+<p>The caveat usually associated with automated testing is a predictable overall increase in developer time for implementing features, after all - they need to write the feature and the appropriate tests to go with it. However, this time cost is usually paid back quite quickly, as bugs are detected as they occur, rather than after several days or weeks of development having gone by. As a result, bugs are typically fixed before they even make it out the door, resulting in a better product and development cycle for your product.</p>
+
+<p>So now you know <em>what</em> Automated Testing is, be sure to check your product is being tested.</p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Five Things to Consider When Hiring a Development Team</title>
+        <link>http://www.terracoding.com/blog/five-things-hiring-development-team/</link>
+        <pubDate>Tue, 06 Jan 2015 00:00:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/five-things-hiring-development-team/</guid>
+
+        <description><![CDATA[ <p>A development team is one of the most important parts of building any new software product or startup. Getting the right team is crucial, as developers are the people that turn ideas into something customers will be interacting with and using on a daily basis.</p>
+
+<p>Hiring a bad development team will cause the costs of the project to sky-rocket, and for it to be delivered months behind schedule. Getting a decent selection of developers at the start will ensure your business gets off to good start.</p>
+
+<p>Here are a number of tips for selecting a development team for your product:</p>
+
+<h4 id="what-services-are-required-what-can-the-team-deliver">1. What services are required? What can the team deliver?</h4>
+
+<p>The end goal of shipping your product and making money is a great one, but to reach that goal you will have to decide what services you require. Most importantly, what can the development team provide to help your business run most effectively.</p>
+
+<p>Analytics can help you understand how customers are using your products. Find out if the team you want to hire can provide you with analytics, and record how your customers are using the site.</p>
+
+<p>Do you require your team to have its own product manager? Does your intended team have a user interface (UI) or user experience (UX) designer to provide wireframes, and build and test prototypes?</p>
+
+<h4 id="what-kinds-of-projects-has-the-team-worked-on-before">2. What kinds of projects has the team worked on before?</h4>
+
+<p>Finding a team who have worked on something closely related to your idea can significantly improve how fast and effectively the product is built as they will have touched on areas before. It may be a mistake, for example, to hire a 3D games specialist to build a social network. (It happens, trust us!)</p>
+
+<p>Have a look through their showcase of previous projects. Ask them what they did for each project and what kind of features they built that may help with the product you are building.</p>
+
+<h4 id="what-is-your-budget-how-much-are-the-team-charging">3. What is your budget? How much are the team charging?</h4>
+
+<p>Hiring a cheap development team is all well and good until you realise that the product they have built isn’t quite what you wanted, and doesn’t work that well either. Skimping on budget may look good on your bank balance, but soon you will realise it often costs more to look for another development team to put the product back on track.</p>
+
+<p>Maybe your team haven’t planned enough to cover communicating with you and ensuring that the ideas are fully fleshed out before being implemented. Leading to my next point…</p>
+
+<h4 id="how-does-the-team-want-to-communicate">4. How does the team want to communicate?</h4>
+
+<p>Effective communication and keeping you in the loop is essential for the success of online startups. Thankfully we live in an age where you can voice or video call people from around the globe with ease.</p>
+
+<p>Make sure you and your development team can contact each other easily, and ensure there is a clear understanding of how much communication is expected of one another from the get go. When people stop communicating, your product can soon go downhill.</p>
+
+<p>Turning your idea into a list of features and wireframes can take quite a bit of time and discussion before everyone is ready to get on with their work.</p>
+
+<p>Here are just a few ways in which you can communicate with your team:</p>
+
+<ul>
+  <li>Communication
+    <ul>
+      <li><a href="https://www.hipchat.com/">HipChat</a></li>
+      <li><a href="https://slack.com/">Slack</a></li>
+    </ul>
+  </li>
+  <li>Feature and bug tracking
+    <ul>
+      <li><a href="http://sprint.ly/">Sprint.ly</a></li>
+      <li><a href="http://www.pivotaltracker.com/">PivotalTracker</a></li>
+    </ul>
+  </li>
+  <li>Voice and video conferencing
+    <ul>
+      <li><a href="https://www.sqwiggle.com/">Sqwiggle</a></li>
+      <li><a href="http://www.skype.com/">Skype</a></li>
+      <li><a href="http://www.google.com/+/learnmore/hangouts/">Google Hangouts</a></li>
+      <li><a href="http://www.webex.com/">WebEx</a></li>
+      <li><a href="http://www.gotomeeting.com/online/enter">GoToMeeting</a></li>
+      <li>Also included in <a href="https://www.hipchat.com/">HipChat</a></li>
+    </ul>
+  </li>
+  <li>Screensharing
+    <ul>
+      <li><a href="https://screenhero.com/">Screenhero</a></li>
+      <li><a href="https://www.join.me">Join.me</a></li>
+      <li>Also included in <a href="http://www.skype.com/">Skype</a>, <a href="http://www.google.com/+/learnmore/hangouts/">Google Hangouts</a>, <a href="https://www.hipchat.com/">HipChat</a>, <a href="http://www.gotomeeting.com/online/enter">GoToMeeting</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="get-to-know-your-potential-team-informally">5. Get to know your potential team informally</h4>
+
+<p>It is amazing how much you can gauge about someone through an informal conversation with them.</p>
+
+<p>Getting to know your development team before you hire them can be essential in understanding their background, what type of people they are, and what interests they have.</p>
+
+<p>Having a good relationship with the team often boosts their efforts to make sure your business is built with love and care.</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>How We Design Branding</title>
+        <link>http://www.terracoding.com/blog/brand-design/</link>
+        <pubDate>Thu, 11 Dec 2014 00:00:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/brand-design/</guid>
+
+        <description><![CDATA[ <p>This video by Aaron Draplin of <a href="http://draplin.com/">Draplin Design Co.</a> gives a great insight into the same process I go through when designing branding for our clients.</p>
+
+<iframe src="//player.vimeo.com/video/113751583?title=0&amp;byline=0&amp;portrait=0" width="960" height="540" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
+<p>As a client, you’re included in every step of the process, from sketches to final touches. We really enjoy creating visual identities that our clients can be proud of as representing their business or app.</p>
+
+<p>Below is a selection of branding Terracoding has done for clients. If you’d like to give your company a fresh new look or have an app that needs an icon, <a href="/contact/">get in touch</a>!</p>
+
+<p><a href="/blog/brand-design/brand-design.png"><img alt="Client branding by Terracoding" src="/blog/brand-design/brand-design.png" /></a></p>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Museum iBeacon Application</title>
+        <link>http://www.terracoding.com/blog/museum-ibeacon-app/</link>
+        <pubDate>Wed, 04 Jun 2014 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/museum-ibeacon-app/</guid>
+
+        <description><![CDATA[ <p>iBeacon and BLE technology is often being discussed in the media giving people new and intuitive ways to improve the retail and shopping experience. Here at Terracoding, we are looking at other areas that iBeacon technology could be applied to create rich and immersive encounters.</p>
+
+<h3 id="local-museum-example">Local museum example</h3>
+
+<p>When walking around a museum, children can quickly loose interest, or feel that there is not enough content that is interactive for them. Another issue arises when there are a number of touch displays throughout the museum, and during peak times, those displays have lots of people surrounding them, meaning that unless you wait in a queue, you will miss some great content. Children’s minds need to be stimulated, and need something to keep them busy to prevent them from getting too bored. We want to help museums and other similar institutes by providing them with a platform for increased engagement by children, and adults alike.</p>
+
+<p><a href="/blog/museum-ibeacon-app/museum-app.jpg"><img src="/blog/museum-ibeacon-app/museum-app.jpg" alt="iBeacon App Mockup" /></a></p>
+
+<p>It is well known that there are three main types of learning styles:</p>
+
+<ul>
+  <li>Auditory learners (those who learn by listening)</li>
+  <li>Visual learners (those who learn by looking, or reading)</li>
+  <li>Kinesthetic learners (those who learn by touch, or by “doing”)</li>
+</ul>
+
+<p>We want to provide something that gives a more complete learning environment, a well-rounded approach, that appeals to all three. We want to help build applications that give people a chance to learn more about the current thing they are viewing in a museum, whether that be by watching a related video, playing a related game or listening to auditory commentary. Providing this, and also something that is fun, to use would be extremely beneficial to the experience of learning from the exhibitions.</p>
+
+<p>With iBeacon technology, plus our skills, we wanted to bring something that gives this amazing experience to as many people as possible.</p>
+
+<h3 id="our-proposition">Our proposition</h3>
+
+<p>We want to bring this technology and our platform to a few small or highly interested museums, galleries and similar experiences.</p>
+
+<p>We have built a mobile application that can provide interactive maps, videos, images, and information as well as give the museum holders a way to see which areas of the museum are being visited by the most people, and at which time of the day.</p>
+
+<p>We want a museum that can work together with us to bring an amazing and rich experience to the table for both children and adults alike.</p>
+
+<p>If you think that you would like something like this, please get in touch.</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Hack Day: iBeacons</title>
+        <link>http://www.terracoding.com/blog/ibeacons/</link>
+        <pubDate>Tue, 10 Dec 2013 00:00:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/ibeacons/</guid>
+
+        <description><![CDATA[ <p>Shops and malls are going to get pretty interesting with a relatively new type of technology that could help shoppers navigate around large stores, as well as improve the discovery of available offers in a store.</p>
+
+<p>BLE (Bluetooth Low Energy or Bluetooth Smart) is a technology that was introduced as part of the main Bluetooth standard in 2010 and also included in the Bluetooth 4.0 specification. Apple’s recent announcement of iBeacons alongside OS 7.0 has introduced a number of new ideas to both developers and owners of large shops and businesses.</p>
+
+<p>The standard has been available on iOS devices since the release of the iPhone 4s, and can be utilised on Android devices running version 4.3 and later. However, the market share of Android devices using 4.3+ is only around 4.2%, as measured on <a href="http://developer.android.com/about/dashboards/index.html">December 2, 2013</a>, so the main focus has been primarily with iOS.</p>
+
+<p>So with all of this in mind, I bought some beacons from <a href="http://estimote.com/">Estimote</a> to hack away and see what I could come up with:</p>
+
+<iframe src="//player.vimeo.com/video/81510092" width="500" height="281" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Raptor for iOS</title>
+        <link>http://www.terracoding.com/blog/raptor-for-ios/</link>
+        <pubDate>Fri, 18 Jan 2013 00:00:00 +0000</pubDate>
+        <guid>http://www.terracoding.com/blog/raptor-for-ios/</guid>
+
+        <description><![CDATA[ <p>It’s been quite a while, but we are now announcing the upcoming release of Raptor for iOS.</p>
+
+<p>Raptor is an App.net client for iPhone, and has been in development since the release of the App.net API. The app is now in the App Store review stages and we will release another post when it comes live.</p>
+
+<p>The app has some great features including:</p>
+
+<ul>
+  <li>Global Stream</li>
+  <li>Mentions</li>
+  <li>My Posts</li>
+  <li>My Stream</li>
+  <li>Profiles</li>
+  <li>Pull to refresh</li>
+  <li>Create a post</li>
+  <li>Reply to posts</li>
+  <li>Share posts</li>
+  <li>View followers/following</li>
+  <li>Conversation View</li>
+  <li>Infinite Scroll</li>
+</ul>
+
+<p><a href="http://terracoding.com/raptor">Raptor for iOS</a></p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Sprinter for iOS</title>
+        <link>http://www.terracoding.com/blog/sprinter-for-ios/</link>
+        <pubDate>Sun, 28 Oct 2012 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/sprinter-for-ios/</guid>
+
+        <description><![CDATA[ <p>Recently I have been working closely with the Sprint.ly team to work on the development of our new app for iOS, named “Sprinter”.</p>
+
+<p>Sprinter is an iOS app that enables the user to access all their projects and items that are held on the Sprint.ly website. It works very similar to a Kanban board. Behind the scenes we have been testing the app with a number of close friends of Terracoding to try out our latest new product.</p>
+
+<p>Over the past few days I have been packaging up the app ready for the public! Although not yet fully ready for release, we are making a few last minute fixes and getting the final testing ready for a proper release early November.</p>
+
+<p>We have decided to first release the iPhone version of the app as we would love to hear peoples thoughts on the app before we release a new version alongside the iPad release.</p>
+
+<p>In the mean time, you can check out the <a href="http://terracoding.com/sprintly/index.html">product page</a> that contains a few pre-release screenshots.</p>
+
+<p>If you have any further questions regarding the app, or would like to share your thoughts on the release, feel free to <a href="/contact/">email us</a>.</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>Testing in iOS</title>
+        <link>http://www.terracoding.com/blog/testing-in-ios/</link>
+        <pubDate>Sat, 08 Sep 2012 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/testing-in-ios/</guid>
+
+        <description><![CDATA[ <p>Since doing some programming in a TDD format, I realised the lack of documentation about testing in iOS. A number of the testing documents on the Apple Developer site have now vanished and redirect to “Real-World Testing”, which is not desired.  The community behind Ruby (on Rails) seems to be heavily biased towards writing tests and testing a relatively large percentage of code coverage, if not all of it. Switching from a number of heavily tested projects in Rails to a new iOS application, I thought testing should be a large part of it to make sure everything was working.</p>
+
+<h2 id="test-driven-development">Test-Driven Development</h2>
+
+<p>Test-Driven Development (TDD) is a way of developing websites/applications by writing the most basic of tests, and making them pass with your code. By only writing enough code to past the tests, and nothing more, the coverage of tests can be endless. You will have the knowledge that almost anything you break will get tested and show up in red.</p>
+
+<p>When developing Rails apps, I usually use features such as <code>rspec</code> and <code>cucumber</code> to run all my tests (including user interaction). Moving from testing in Rails to iOS was a little harder to find well documented steps.</p>
+
+<h2 id="testing-in-ios">Testing in iOS</h2>
+
+<p>SenTestingKit (<em>OCUnit</em>) is the default testing library included in the Apple Docs (however some of the docs are pretty old). This is a simple unit testing kit for testing methods return the correct values, and runs very similar to the Java equivalent (JUnit). Most testing will be done with this kit when using Xcode, and with a few other libraries such as OCMock, you can develop iOS in a close-to-TDD way.</p>
+
+<p>Creating tests using OCUnit is a very simple process that for each test, you create a method, and a simple comparison between objects, values etc.</p>
+
+<p>A simple test can look like the following:</p>
+
+<pre class="highlight plaintext"><code>- (void)testFullName
+{
+    Person * person = [[Person alloc] init];
+    [person setFirstName:@"John"];
+    [person setLastName:@"Doe"];
+    STAssertTrue([[person fullName] isEqualToString:@"John Doe"], @"");
+    [person release];
+}
+</code></pre>
+
+<p>Testing certain UI elements can also be done using OCUnit. This requires you to share your view controller and view with the test implementation file. Such that:</p>
+
+<pre class="highlight plaintext"><code>- (void) setUp {
+    app_delegate    = [[UIApplication sharedApplication] delegate];
+    myController    = app_delegate.myController;
+    myView          = myController.view;
+}
+
+- (void)testUI
+{
+    [myController press:[myView viewWithTag:1]];
+    STAssertTrue([[myController.lbl text] isEqualToString:@"John Doe"], @"");
+}
+</code></pre>
+
+<h2 id="mocking">Mocking</h2>
+
+<p>OCMock is a tool that is used for creating and testing mock objects in your application. Mock objects are simulated objects that mimic the behaviour of real objects in an application.</p>
+
+<p>Advantages of using mock objects:</p>
+
+<ul>
+  <li>Testing objects that may not exist yet, or objects that may change behaviour</li>
+  <li>Testing whilst not effecting a database</li>
+  <li>Objects that may contain modified methods just for testing purposes</li>
+</ul>
+
+<p>Mock objects can be tested as follows using OCMock:</p>
+
+<pre class="highlight plaintext"><code>myMock = [OCMockObject mockForClass:[NSString class]];
+[[myMock expect] isEqualToString:@"myString"];
+[myMock isEqualToString:@"myString"];
+</code></pre>
+
+<h2 id="instruments">Instruments</h2>
+
+<p>Xcode’s <a href="http://developer.apple.com/library/ios/#documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/Introduction/Introduction.html">instruments</a> are great for testing your application when using real or test data. This was something that I only started using pretty recently. Basically, Instruments are a set of tools that enable you to profile and track processes when testing your applications.</p>
+
+<p>Originally, I had many problems when learning about memory management in CocoaTouch, I soon learnt the basics, but my only real knowledge came when profiling my applications and actually seeing graphics of where memory was being retained well after it should have been released.</p>
+
+<p>Instruments gives you memory counters and graphics to see where abouts and at what time memory is being retained when it shouldn’t. It also gives great insight into when memory is being allocated to objects, that may never get used. For example, initialising objects in <code>viewDidLoad</code> or in the controller <code>init</code> well before the object is being used may cause threads to hang whilst methods are being called, whereas a user may access the view controller without calling on the object. It also taught me when and where to initialise objects, and where to check if the object has already been initialised previously (for example, in methods that may get called a few times).</p>
+
+<h2 id="real-world-testing">Real-World Testing</h2>
+
+<p>I’ve never been so impressed with any iOS libraries as much as I have been with <a href="https://testflightapp.com/">TestFlight</a>. TestFlight is an awesome site where you can upload IPA’s of your applications and have them delivered to testers over-the-air.</p>
+
+<p>Using something like TestFlight means you can have them register their device using MobileSafari, and having their device id available for you to add them to the AdHoc provisioning on the Apple Developer site. TestFlight gives you an SDK that enables any error logs, NSLogs and checkpoints to be uploaded directly to the build reports on the website. Checkpoints on TestFlight let you check how deep testers are using your application. Other reports include how long a testers session lasts for and what devices the app has been installed onto.</p>
+
+<p>I’d have to say, TestFlight is a god send when you have a group of beta testers that you want to deliver an app update to without having to email or sync any devices to iTunes.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Testing in iOS may not be widely spoken about, however there are definitely some great tools to get you started. I’ve added a list of links below to give you some insight in setting up your iOS testing environment:</p>
+
+<ul>
+  <li><a href="http://www.sente.ch/software/ocunit/">OCUnit</a></li>
+  <li><a href="http://ocmock.org/">OCMock</a></li>
+  <li><a href="https://github.com/gabriel/gh-unit">GHUnit</a></li>
+  <li><a href="http://developer.apple.com/library/ios/#samplecode/iPhoneUnitTests/Introduction/Intro.html">iPhoneUnitTests</a></li>
+</ul>
+
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>NSObject for REST API Calls</title>
+        <link>http://www.terracoding.com/blog/nsobject-for-rest-api-calls/</link>
+        <pubDate>Fri, 07 Sep 2012 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/nsobject-for-rest-api-calls/</guid>
+
+        <description><![CDATA[ <p>In this tutorial I am going to teach you how to create your own <code>NSObject</code> that can make calls to your own web REST API and use it to retrieve the response received from the server. I am going to do this with the help of <code>ASIFormDataRequest</code> (<code>ASIHTTPRequest</code>). This will mean your iOS app will be able to make calls to your web server and download information to your app. The following tutorial is useful for if you want to perform tasks such as logging into an online account or registering a new user from within your application.</p>
+
+<h4 id="getting-started---initial-steps">Getting Started - Initial Steps</h4>
+
+<p>Before we do anything, we need to create a new XCode iOS project. Do this, making sure that the project is a navigation-based project. Then we need to make sure that <code>ASIHTTPRequest</code> builds correctly in your project. So firstly, download it from their GitHub page here: Download Link. You then need to copy the files over into your project making sure iPhone projects have <code>ASIAuthenticationDialog.h/m</code> and <code>Reachability.h/m</code> included.Once you have included the files into your XCode project, the next step is to add the following frameworks into your project as well:</p>
+
+<ul>
+  <li>CFNetwork.framework</li>
+  <li>SystemConfiguration.framework</li>
+  <li>MobileCoreServices.framework</li>
+  <li>CoreGraphics.framework</li>
+  <li>libz.1.2.3.dylib</li>
+</ul>
+
+<p>After these initial steps, you should be able to build your project without any errors. If you do come into any problems, refer to the <code>ASIHTTPRequest</code> setup instructions.</p>
+
+<h4 id="lets-do-this">Let’s Do This!</h4>
+
+<p>Now you have the required classes in your project we can really start to have some fun! Let us start by creating an <code>NSObject</code> that will handle all the calls to your server and return only the necessary data back to your controllers. This is very useful as it keeps all the networking code away from your view controllers. By the end of this tutorial you will be able to use the following few lines of code to make a call to an API and return back information:</p>
+
+<pre class="highlight plaintext"><code>DWNetwork * network = [[DWNetwork alloc] init];
+int response= [network sendTitle:@"My Title" withBody:@"This is the body for the post"];
+</code></pre>
+
+<p>For example, the two lines above would create our own object (in this case called <code>DWNetwork</code>) and the second line will use the object to send two strings to a web API. Later on in the tutorial I will show you how to use threading to make sure your application does not hang whilst this data is being sent.</p>
+
+<h4 id="creating-the-nsobject">Creating the NSObject</h4>
+
+<p>With your project already open, create a new file by clicking</p>
+
+<pre class="highlight plaintext"><code>File &gt; New &gt; New File &gt; Objective-C Class &gt; Subclass of NSObject &gt; Next
+</code></pre>
+
+<p>and then save the file as DWNetwork.</p>
+
+<p>When we initialise the object from our controller, we want to return our <code>DWNetwork</code> object and use this method to initialise any values within our object. So from <code>DWNetwork.h</code>, make the file contain the following:</p>
+
+<pre class="highlight objective_c"><code><span class="cp">#import
+</span><span class="k">@interface</span> <span class="nc">DWNetwork</span> <span class="p">:</span> <span class="nc">NSObject</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">DWNetwork</span> <span class="o">*</span><span class="p">)</span><span class="n">init</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre>
+
+<p>And the counterpart (DWNetwork.m) to contain:</p>
+
+<pre class="highlight objective_c"><code><span class="cp">#import "DWNetwork.h"
+</span>
+<span class="k">@implementation</span> <span class="nc">DWNetwork</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">DWNetwork</span> <span class="o">*</span><span class="p">)</span><span class="n">init</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre>
+
+<p>Now with what we have written we can already create an instance of our object ready to make calls to it. Now we need to include <code>ASIHTTPRequest</code> into the application and make our first API call!</p>
+
+<h4 id="including-asiformdatarequest-in-the-nsobject">Including ASIFormDataRequest in the NSObject</h4>
+
+<p>All we have to do for this is include <code>#import "ASIFormDataRequest.h"</code> at the top of the <code>DWNetwork.m</code> file.</p>
+
+<h4 id="making-our-first-api-call">Making our first API call</h4>
+
+<p>As an example, I am going to use my DWNetwork object to create a blog post on a website using POST data to its API. The URL string that I am going to use is:</p>
+
+<pre class="highlight plaintext"><code>http://website.com/api/blog/new_post
+</code></pre>
+
+<p>On the server this takes the following form POST keys:</p>
+
+<pre class="highlight plaintext"><code>@"post_title"
+@"post_body"
+</code></pre>
+
+<p>So naturally, I want to create a public method in DWNetwork that allows me to pass in the <strong>title</strong> and <strong>body</strong> of a blog post that it will handle and send to the API in the correct format. To do this I first go into the header file and write the following line beneath the <code>init</code>:</p>
+
+<pre class="highlight plaintext"><code>- (int) sendTitle:(NSString *)title withBody:(NSString *)body;
+</code></pre>
+
+<p>This lets other controllers that are using my object to see that this method is available and therefore can be used. Then within the implementation, I will write the following code:</p>
+
+<pre class="highlight plaintext"><code>- (int) sendTitle:(NSString *)title withBody:(NSString *)body
+{
+  return nil;
+}
+</code></pre>
+
+<p>Now our object has its first proper method that can be called (Albiet returns nil)!</p>
+
+<p>Within this method we want to utilize the <strong>title</strong> and <strong>body</strong> that we pass into it plus use the URL that they are going to be posted to. Now we get down implementing ASIFormDataRequest that will take all this information and do something magical with it!</p>
+
+<p>In the line above <code>return nil;</code> we will write the following:</p>
+
+<pre class="highlight plaintext"><code>NSString * urlString = [NSString stringWithFormat:@"http://website.com/api/blog/new_post"];
+</code></pre>
+
+<p>This is the URL that <code>ASIFormDataRequest</code> will use. Then we write:</p>
+
+<pre class="highlight plaintext"><code>ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlString]];
+</code></pre>
+
+<p>If all is written down correctly, then building the project shouldn’t come up with any errors (although it will come up with a warning for a the unused request).Now we can start adding the title and body to our API call:</p>
+
+<pre class="highlight plaintext"><code>[request setPostValue:title forKey:@"post_title"];
+[request setPostValue:body forKey:@"post_body"];
+</code></pre>
+
+<p>As I wrote previously, post_title and post_body are the keys that the REST API on the server will use for the title and body of the new blog post. So we use the <code>[request setPostValue:(id) forKey:(NSString *)];</code> to pass in our variables.</p>
+
+<p>Finally, we call:</p>
+
+<pre class="highlight plaintext"><code>[request startSynchronous];
+</code></pre>
+
+<p>to start up the connection to the API and transmit the data from our application.</p>
+
+<p>Following this correctly so far, your <code>DWNetwork.m</code> file should look like the following:</p>
+
+<pre class="highlight objective_c"><code><span class="cp">#import "DWNetwork.h"
+#import "ASIFormDataRequest.h"
+</span>
+<span class="k">@implementation</span> <span class="nc">DWNetwork</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">DWNetwork</span> <span class="o">*</span><span class="p">)</span><span class="n">init</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">sendTitle</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">title</span> <span class="n">withBody</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">body</span>
+<span class="p">{</span>
+  <span class="n">NSString</span> <span class="o">*</span><span class="n">urlString</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nf">stringWithFormat</span><span class="p">:</span><span class="s">@"http://website.com/api/blog/new_post"</span><span class="p">];</span>
+
+  <span class="n">ASIFormDataRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">ASIFormDataRequest</span> <span class="nf">requestWithURL</span><span class="p">:[</span><span class="n">NSURL</span> <span class="nf">URLWithString</span><span class="p">:</span><span class="n">urlString</span><span class="p">]];</span>
+  <span class="p">[</span><span class="n">request</span> <span class="nf">setPostValue</span><span class="p">:</span><span class="n">title</span> <span class="nf">forKey</span><span class="p">:</span><span class="s">@"post_title"</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">request</span> <span class="nf">setPostValue</span><span class="p">:</span><span class="n">body</span> <span class="nf">forKey</span><span class="p">:</span><span class="s">@"post_body"</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">request</span> <span class="nf">startSynchronous</span><span class="p">];</span>
+
+  <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre>
+
+<p>At the moment (if the server is set up correctly) the request will send the data to the server. However, we are yet to know if this has failed or succeeded. So our next step is to return the response status code from the server.</p>
+
+<h4 id="returning-the-response-status-code">Returning the response status code</h4>
+
+<p>This is a very simple step as ASIFormDataRequest has a built in method to call to retrieve the status code from the server.</p>
+
+<p>All we have to do is replace <code>return nil;</code> with <code>return [request responseStatusCode];</code></p>
+
+<p>This will return an int that can be checked by your application to notify the user of the response from the API call. For example, the following numbers may be returned:</p>
+
+<pre class="highlight plaintext"><code>200 – Successful
+400 – Bad Request
+401 - Unauthorized
+403 – Forbidden
+404 – Not Found
+405 – Method Not Allowed
+</code></pre>
+
+<p>ASIFormDataRequest also allows you to return an NSString with different information. We won’t be using it yet, but in the future you could return methods such as:</p>
+
+<pre class="highlight plaintext"><code>// Returns the status message
+return [request responseStatusMessage];
+// Returns the whole response as a string
+return [request responseString];
+</code></pre>
+
+<p>Now we have an NSObject (DWNetwork) that:</p>
+
+<ul>
+  <li>Can be initialised</li>
+  <li>Get sent an NSString of the post title and post body</li>
+  <li>Send the strings to a server</li>
+  <li>Check the response status code</li>
+</ul>
+
+<p>Now you just have to link this up to the UI!</p>
+
+<h4 id="creating-a-new-thread">Creating a new thread</h4>
+
+<p>Threads are really useful and will come in handy when you create a web heavy application such as a Twitter client, online game etc. And the great thing is, they are so simple to implement! All we need to do is create the method that the actual thread runs, and two other methods that will handle the response once the thread has completed.</p>
+
+<p>Modify your <code>RootViewController.m</code> file so that the following is added:</p>
+
+<pre class="highlight plaintext"><code>- (void)post
+{
+  [NSThread detachNewThreadSelector:@selector(postThread:) toTarget:self withObject:nil];
+}
+
+- (void)postThread:(NSConnection *)connection
+{
+  NSLog(@"New thread started");
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+  DWNetwork * network = [[DWNetwork alloc] init];
+  int response = [network sendTitle:titleField.text withBody:bodyField.text];
+  if (response == 200) {
+    [self performSelectorOnMainThread:@selector(postSuccess) withObject:nil waitUntilDone:YES];
+  } else {
+    [self performSelectorOnMainThread:@selector(postFailure) withObject:nil waitUntilDone:YES];
+  }
+
+  [pool release];
+}
+
+- (void)postSuccess
+{
+  UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                       message:@"Your post has been sent"
+                                                      delegate:self
+                                             cancelButtonTitle:@"Ok"
+                                             otherButtonTitles:nil, nil];
+  [alertView show];
+  [alertView release];
+}
+
+- (void)postFailure
+{
+  UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                       message:@"Your post failed to send"
+                                                      delegate:self
+                                             cancelButtonTitle:@"Ok"
+                                             otherButtonTitles:nil, nil];
+  [alertView show];
+  [alertView release];
+}
+</code></pre>
+
+<p>Now when the user clicks a post button, the UI will not lock up, and also a UIAlertView will be shown with its contents dependant on whether the post succeeded or failed to send!</p>
+ ]]></description>
+
+      </item>
+      <item>
+
+        <title>DWTagList for iOS</title>
+        <link>http://www.terracoding.com/blog/dwtaglist-for-ios/</link>
+        <pubDate>Fri, 07 Sep 2012 01:00:00 +0100</pubDate>
+        <guid>http://www.terracoding.com/blog/dwtaglist-for-ios/</guid>
+
+        <description><![CDATA[ <p>The other day I started development on a new iOS app for a website, but I soon came across the notion of having to list sets of tags in a nice way in a <code>UITableViewCell</code>.</p>
+
+<p>I started off thinking the task would be quick hard compared to the rest of the application, however, with a few methods and a subclass of <code>UIView</code> it was done just short of 20 minutes.</p>
+
+<p><img width="200" src="/blog/dwtaglist-for-ios/dwtaglist.png" /></p>
+
+<p>I’ve set the code that you simply initialise it with the frame size, add an array of tags and then add it to your view. Almost everything is customisable including the padding, margins, background colour and font.</p>
+
+<p>You can see the code <a href="https://github.com/domness/DWTagList">here</a>.</p>
+ ]]></description>
+
+      </item>
+
+  </channel>
+</rss>

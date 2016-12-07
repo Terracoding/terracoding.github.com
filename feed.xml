@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Terracoding</title>
+  <subtitle>Terracoding is a digital agency based in Sheffield, UK. We build high-quality web and mobile apps for awesome clients.</subtitle>
+  <id>http://www.terracoding.com/blog</id>
+  <link href="http://www.terracoding.com/blog"/>
+  <link href="http://www.terracoding.com/feed.xml" rel="self"/>
+  <updated>2016-05-23T15:15:00+01:00</updated>
+  <author>
+    <name>Terracoding</name>
+  </author>
+  <entry>
+    <title>Natural Resource: Avoiding ActiveAdmin</title>
+    <link rel="alternate" href="http://www.terracoding.com/blog/natural-resource/"/>
+    <id>http://www.terracoding.com/blog/natural-resource/</id>
+    <published>2016-05-23T15:15:00+01:00</published>
+    <updated>2016-05-24T08:32:54+01:00</updated>
+    <author>
+      <name>robert</name>
+    </author>
+    <content type="html">&lt;h2 id="background"&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/haar/natural_resource"&gt;Natural Resource&lt;/a&gt; was born from frustrations experienced on legacy projects that used gems like &lt;a href="http://activeadmin.info/"&gt;ActiveAdmin&lt;/a&gt; to provide an admin interface for an app. For the very basics ActiveAdmin is great; it provides you a set of functionality out of the box that you don’t have to implement yourself.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, we are all aware that requirements change and functionality grows. ActiveAdmin forces you to extend it using its own concepts outside of standard Rails practices, sometimes going so far as to mix routing, controller and view details in the same file.&lt;/p&gt;
+
+&lt;h2 id="rolling-your-own-admin-functionality"&gt;Rolling your own admin functionality?&lt;/h2&gt;
+
+&lt;p&gt;After a frustrating few hours grappling with AA’s quirks, it’s easy to understand why someone would resort to rolling their own admin interface. Advanced admin features shouldn’t be any harder to implement than the rest of your app.&lt;/p&gt;
+
+&lt;p&gt;Secondly, it’s often hard to integrate large, opinionated admin gems because they try to blend authentication and/or authorisation logic with their own concepts. Whilst Natural Resource is also opinionated, it exists and performs in a very simple way and is easily overridden.&lt;/p&gt;
+
+&lt;h2 id="enough-talk---show-me-the-code"&gt;Enough talk - show me the code!&lt;/h2&gt;
+
+&lt;p&gt;The following is a typical NR-based controller:&lt;/p&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Controller for generating and displaying Reports for orders received&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Admin&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;OrdersController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;AdminController&lt;/span&gt;
+  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;ReportDownloading&lt;/span&gt;
+
+  &lt;span class="n"&gt;resource&lt;/span&gt; &lt;span class="ss"&gt;:order&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;resource_scope&lt;/span&gt;
+    &lt;span class="no"&gt;Order&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:txns&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;line_items: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:product&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;report_class&lt;/span&gt;
+    &lt;span class="no"&gt;OrderReport&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we take the above to have authenticated our admin-user (via your own &lt;code&gt;AdminController&lt;/code&gt; concern) then our view could look like this:&lt;/p&gt;
+
+&lt;pre class="highlight haml"&gt;&lt;code&gt;&lt;span class="nt"&gt;%h1&lt;/span&gt; Order Report
+
+&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;search_form_for&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;current_context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;input&lt;/span&gt; &lt;span class="ss"&gt;:user_email_cont&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;label: &lt;/span&gt;&lt;span class="s1"&gt;'Recipient Email'&lt;/span&gt;
+  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;input&lt;/span&gt; &lt;span class="ss"&gt;:amount_cents_gt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;label: &lt;/span&gt;&lt;span class="s1"&gt;'Amount greater than'&lt;/span&gt;
+  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;button&lt;/span&gt; &lt;span class="ss"&gt;:submit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Apply filters"&lt;/span&gt;
+  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s1"&gt;'Download report'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:download&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;current_context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:orders&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="ss"&gt;q: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:q&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="nt"&gt;%table&lt;/span&gt;
+  &lt;span class="nt"&gt;%tr&lt;/span&gt;
+    &lt;span class="nt"&gt;%th&lt;/span&gt; Order Reference
+    &lt;span class="nt"&gt;%th&lt;/span&gt; Payment Method
+    &lt;span class="nt"&gt;%th&lt;/span&gt; Recipient Name
+    &lt;span class="nt"&gt;%th&lt;/span&gt; Amount
+    &lt;span class="nt"&gt;%th&lt;/span&gt; Created At
+  &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="n"&gt;resources&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="nt"&gt;%tr&lt;/span&gt;
+      &lt;span class="nt"&gt;%td&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;reference&lt;/span&gt;
+      &lt;span class="nt"&gt;%td&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_type&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;titleize&lt;/span&gt;
+      &lt;span class="nt"&gt;%td&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt;
+      &lt;span class="nt"&gt;%td&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;amount&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;format&lt;/span&gt;
+      &lt;span class="nt"&gt;%td&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;created_at&lt;/span&gt;
+
+&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;will_paginate&lt;/span&gt; &lt;span class="n"&gt;resources&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above controller offers several helper methods:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;current_context&lt;/code&gt; is a method defined to specify the area of the site you are in. It is used for consistently defining routes.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;query&lt;/code&gt; is the &lt;a href="https://github.com/activerecord-hackery/ransack"&gt;Ransack&lt;/a&gt; search object used for defining simple querying using the Ransack syntax.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;resource_scope&lt;/code&gt; is the initial scope of the objects scoped via its respective policy, i.e. &lt;code&gt;policy_scope(resource_scope)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;resources&lt;/code&gt; is the lazy-loaded, &lt;a href="https://github.com/mislav/will_paginate"&gt;paginated&lt;/a&gt; result of applying the Ransack query across the &lt;code&gt;resource_scope&lt;/code&gt; method.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="in-summary"&gt;In Summary&lt;/h2&gt;
+
+&lt;p&gt;The main motivation behind Natural Resource is to be pragmatic. There are further extensions that can be made to it to allow auto-generating initial views if a sensible standard set can be decided upon without introducing too much overhead/complexity.&lt;/p&gt;
+
+&lt;p&gt;It provides a rich set of foundational functionality and tries its best to take a sensible modular, easily overridden approach to standardised components.&lt;/p&gt;
+
+&lt;p&gt;There is an &lt;a href="https://github.com/haar/nr_example"&gt;NR example&lt;/a&gt; repo that contains a more detailed example, but nothing beats &lt;a href="https://github.com/haar/natural_resource"&gt;reading the source&lt;/a&gt;. The majority of functionality is only ~100 lines long. I will add to the NR example repository as we use NR at Terracoding, converting the git history to a series of steps you can follow in &lt;a href="https://github.com/Haar/natural_resource/blob/master/README.md"&gt;the README&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Rails Polymorphic Feed Caching</title>
+    <link rel="alternate" href="http://www.terracoding.com/blog/rails-feed-caching/"/>
+    <id>http://www.terracoding.com/blog/rails-feed-caching/</id>
+    <published>2016-05-21T17:11:00+01:00</published>
+    <updated>2016-05-24T08:14:55+01:00</updated>
+    <author>
+      <name>dominic</name>
+    </author>
+    <content type="html">&lt;p&gt;When building a social platform, we’re often required to build a feed of some sort, usually containing multiple types of content such as posts, photos, etc.&lt;/p&gt;
+
+&lt;p&gt;With this in mind, it’s usually best to have a &lt;code&gt;FeedItem&lt;/code&gt; model with a polymorphic association for the different types of feed items. Let’s say:&lt;/p&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;FeedItem&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:source&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;polymorphic: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:comments&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:user&lt;/span&gt;
+  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:feed_item&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;as: :source&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;dependent: :destroy&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Photo&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:user&lt;/span&gt;
+  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:feed_item&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;as: :source&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;dependent: :destroy&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is all well and good, but when you come to &lt;a href="http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations"&gt;eager-load&lt;/a&gt; associations on the collection to improve performance, this technique becomes problematic. This is where &lt;a href="http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching"&gt;Rails Fragment Caching&lt;/a&gt; comes into play.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://guides.rubyonrails.org/caching_with_rails.html#fragment-caching"&gt;Fragment caching&lt;/a&gt; is a really useful tool in Rails to cache partials and collections so they are pulled straight from memory without needing to access the database (besides checking if new records exist or existing records have been updated).&lt;/p&gt;
+
+&lt;p&gt;In the view that includes our feed partial we have the following:&lt;/p&gt;
+
+&lt;pre class="highlight html"&gt;&lt;code&gt;- cache(cache_key_for_user_feed_items(resource, params[:page])) do
+  = render 'feed_items'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;FragmentCacheHelper&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cache_key_for_user_feed_items&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;feed_items&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt;
+    &lt;span class="n"&gt;max_updated_at&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;feed_items&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;maximum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:updated_at&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:utc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:number&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="s2"&gt;"user/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/feed_items_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;max_updated_at&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;FragmentCacheHelper&lt;/code&gt; generates a key for us to use. If the key differs when the next page is loaded, it will pull the records as usual and skip the cache. This works per page, so each page with &lt;a href="https://github.com/mislav/will_paginate"&gt;will_paginate&lt;/a&gt; will also pull from the database if needs be.&lt;/p&gt;
+
+&lt;p&gt;This cuts down the database calls by only ever needing to check the count of the records for the user and the latest &lt;code&gt;updated_at&lt;/code&gt; value.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Easy Retina Images with Carrierwave</title>
+    <link rel="alternate" href="http://www.terracoding.com/blog/retina-carrierwave-images/"/>
+    <id>http://www.terracoding.com/blog/retina-carrierwave-images/</id>
+    <published>2016-05-19T13:03:00+01:00</published>
+    <updated>2016-05-24T08:15:07+01:00</updated>
+    <author>
+      <name>sam</name>
+    </author>
+    <content type="html">&lt;p&gt;We recently launched &lt;a href="https://dryjuly.com"&gt;Dry July&lt;/a&gt;, a platform where people can raise funds for adults in Australia living with cancer.&lt;/p&gt;
+
+&lt;p&gt;When Dry July approached us, they emphasised that the majority of their traffic comes from smartphones and tablets. With the proliferation of “retina” mobile devices and Macs over the last few years, we wanted to selectively serve high-resolution images to keep things looking crisp for all users.&lt;/p&gt;
+
+&lt;p&gt;Almost every image on the Dry July platform, including for the &lt;a href="/blog/rails-app-themer/"&gt;customisable website theme&lt;/a&gt;, are uploaded through &lt;a href="https://github.com/carrierwaveuploader/carrierwave"&gt;Carrierwave&lt;/a&gt;. That meant we could auto-generate multiple versions of an image on upload. In our uploader, we configured @2x and @3x versions for each version size:&lt;/p&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# image_uploader.rb&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="ss"&gt;:small_3x&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ss"&gt;resize_to_limit: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;900&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="ss"&gt;:small_2x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;from_version: :small_3x&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ss"&gt;resize_to_limit: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="ss"&gt;:small&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;from_version: :small_2x&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ss"&gt;resize_to_limit: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="ss"&gt;:thumb_3x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;from_version: :small&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ss"&gt;resize_to_limit: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="ss"&gt;:thumb_2x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;from_version: :thumb_3x&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ss"&gt;resize_to_limit: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="ss"&gt;:thumb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;from_version: :thumb_2x&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="ss"&gt;resize_to_limit: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href="https://webkit.org/demos/srcset/"&gt;srcset&lt;/a&gt;, the HTML5 &lt;code&gt;img&lt;/code&gt; attribute for serving multiple resolutions is thankfully &lt;a href="http://caniuse.com/#feat=srcset"&gt;widely supported&lt;/a&gt; these days. By adding this method to our &lt;code&gt;application_helper.rb&lt;/code&gt; we could provide retina-capable image tags with ease:&lt;/p&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# application_helper.rb&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;retina_image_tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uploader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{})&lt;/span&gt;
+  &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;symbolize_keys!&lt;/span&gt;
+  &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:srcset&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;multiplier&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+                          &lt;span class="nb"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;multiplier&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;x"&lt;/span&gt;
+                          &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;uploader&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;version_exists?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                            &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;uploader&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;presence&lt;/span&gt;
+                            &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;multiplier&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;x"&lt;/span&gt;
+                          &lt;span class="k"&gt;else&lt;/span&gt;
+                            &lt;span class="kp"&gt;nil&lt;/span&gt;
+                          &lt;span class="k"&gt;end&lt;/span&gt;
+                        &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;', '&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+  &lt;span class="n"&gt;image_tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uploader&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# view.html.haml&lt;/span&gt;
+&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retina_image_tag&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;avatar&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:thumb&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;produces&lt;/p&gt;
+
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"/users/avatars/thumb_me.jpg"&lt;/span&gt; &lt;span class="na"&gt;srcset=&lt;/span&gt;&lt;span class="s"&gt;"/users/avatars/thumb_2x_me.jpg 2x, /users/avatars/thumb_3x_me.jpg 3x"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Feel free to use the code above in your next project. And check out &lt;a href="https://dryjuly.com"&gt;Dry July&lt;/a&gt; to see it in action!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Dynamic Rails App Theming</title>
+    <link rel="alternate" href="http://www.terracoding.com/blog/rails-app-themer/"/>
+    <id>http://www.terracoding.com/blog/rails-app-themer/</id>
+    <published>2015-12-04T14:36:00+00:00</published>
+    <updated>2016-05-24T08:15:20+01:00</updated>
+    <author>
+      <name>sam</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href="https://github.com/samrayner/rails-app-themer"&gt;&lt;img src="/blog/rails-app-themer/icon.png" width="150" alt="Themer UI" class="pull-right" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We started work on an exciting new project this week that requires a single Rails app to power multiple similar websites. The websites are all going to have the same features and basic structure but the client wanted to be able to customise colours, fonts and images for each site themselves.&lt;/p&gt;
+
+&lt;p&gt;To get our heads around the feature, we built a &lt;a href="https://github.com/samrayner/rails-app-themer"&gt;prototype app&lt;/a&gt; that provides a theme editing interface. You can &lt;a href="http://app-themer.herokuapp.com/theme/edit"&gt;try out the demo&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://app-themer.herokuapp.com/theme/edit"&gt;&lt;img src="/blog/rails-app-themer/themer.jpg" alt="Themer UI" class="img-responsive img-thumbnail" /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="technical-details"&gt;Technical Details&lt;/h2&gt;
+
+&lt;p&gt;You include theme style rules in special comment blocks using &lt;code&gt;color()&lt;/code&gt;, &lt;code&gt;font()&lt;/code&gt;, and &lt;code&gt;image_url()&lt;/code&gt; helpers:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;body {
+  /* defaults */
+  background: white;
+  color: black;
+  font-family: sans-serif;
+
+  /* THEME --------
+  background-image: image_url(bg);
+  color: color(text);
+  font-family: font(body);
+  -------- THEME */
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Running &lt;code&gt;rake theme:update&lt;/code&gt; will then generate a theme template from those comments at &lt;code&gt;app/views/themes/show.css.erb&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Theme attributes can be easily added to the &lt;code&gt;Theme&lt;/code&gt; model. The controller &lt;code&gt;:show&lt;/code&gt; action is cached and the generated stylesheet is available at &lt;code&gt;/theme.css&lt;/code&gt; to be included in the &lt;code&gt;head&lt;/code&gt; of any page.&lt;/p&gt;
+
+&lt;p&gt;The theme editor presents a live preview by injecting styles into an &lt;code&gt;iframe&lt;/code&gt; as the theme values are changed. This includes images, using the &lt;a href="https://developer.mozilla.org/en/docs/Web/API/FileReader"&gt;FileReader API&lt;/a&gt; to read them locally in Base64 before they are uploaded to the server.&lt;/p&gt;
+
+&lt;p&gt;To make sure override rules with missing values degrade gracefully, the app utilises browsers’ behaviour of ignoring any invalid rules whilst continuing to render the rest of the styles. This means any default styling can simply be included in the app’s main stylesheet (or anywhere you like).&lt;/p&gt;
+
+&lt;h2 id="open-source"&gt;Open Source&lt;/h2&gt;
+
+&lt;p&gt;All of the source code is &lt;a href="https://github.com/samrayner/rails-app-themer"&gt;available on GitHub&lt;/a&gt;. Please fork and reuse the code as much as you like! Feel free to open an Issue on GitHub or you can reach us on Twitter &lt;a href="http://twitter.com/terracoding"&gt;@terracoding&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Meet the Team: Rob White</title>
+    <link rel="alternate" href="http://www.terracoding.com/blog/meet-the-team-robert-white/"/>
+    <id>http://www.terracoding.com/blog/meet-the-team-robert-white/</id>
+    <published>2015-08-07T01:00:00+01:00</published>
+    <updated>2015-08-13T16:53:04+01:00</updated>
+    <author>
+      <name>dominic</name>
+    </author>
+    <content type="html">&lt;p&gt;Robert is one of the directors of Terracoding. He’s a pragmatic and sensible guy with a sense of humor that is easily found. He helped create the company at the same time as working towards his First Class Masters in Computer Science at University. Here are a few questions he answered so you too can get to know what goes on in this inspirational man’s mind.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/blog/meet-the-team-robert-white/robert-white.png" alt="Robert White" class="img-responsive" /&gt;&lt;/p&gt;
+
+&lt;h4 id="what-is-your-favourite-film"&gt;What is your favourite film?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href="http://www.imdb.com/title/tt0119116/"&gt;The Fifth Element&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="when-you-were-young-what-did-you-want-to-be"&gt;When you were young, what did you want to be?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I never had an idea what I wanted to be when I was young, even going to Uni I wasn’t sure if I was choosing the right course.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="if-you-had-any-advice-for-12-year-old-you-what-would-it-be"&gt;If you had any advice for 12 year old you, what would it be?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Get stuck in and learn hard work when you’re young, don’t cruise by and be your own hardest critic.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="what-inspired-you-to-get-into-software-development"&gt;What inspired you to get into Software Development?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I used to play a lot of video games when I was younger, and my Dad was always quite techie (everything from building PCs to building websites); it seemed a natural progression.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="have-you-ever-had-a-hero-in-your-life-someone-you-look-up-to-and-aspire-to-be"&gt;Have you ever had a “hero” in your life, someone you look up to and aspire to be?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It’s strange to say - but I’d consider one of my friends from secondary school to be huge inspiration. He arrived in the country knowing just shy of no English, and within what felt like a matter of days (more likely weeks) he was semi-fluent and laughing along with the rest of us. It must have been an incredibly daunting experience, and one he handled with immense grace.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="if-you-had-a-time-machine-what-year-would-you-go-to-and-why"&gt;If you had a time machine, what year would you go to and why?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I don’t think I could pick just one year; I’d want to go forward 10, 20, 50, 100+ years into the future to see how everything changes and all the new things that are created.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="if-you-could-be-part-of-any-businessproduct-which-would-you-pick"&gt;If you could be part of any business/product, which would you pick?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Definitely either &lt;a href="https://www.google.co.uk/intl/en/glass/start/"&gt;Google Glass&lt;/a&gt; or the &lt;a href="http://www.apple.com/uk/watch/"&gt;Apple Watch&lt;/a&gt;; they’re both in the very early stages of what I think are going to become very exciting products. Imagine having real-time tracking of your health, fitness, and being alerted within moments of something being detected/diagnosed. We’re a long way off understanding the human body, and there’s no such thing as too much data!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="whats-the-most-rewarding-thing-youve-done-so-far"&gt;What’s the most rewarding thing you’ve done so far?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I think it’s a tie between either learning Mandarin at University, or working on numerous projects for a good cause. Learning a language so completely different from anything else I’d known was a huge challenge, and to do well brought a great sense of accomplishment and pride.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="do-you-have-any-suggestions-for-someone-wanting-to-get-into-software-development"&gt;Do you have any suggestions for someone wanting to get into software development?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Dive in and build something, it doesn’t even have to work great the first time. Get stuck in, release something and enjoy the thrill of your creation being out there for the world to see.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="fast-forward-50-years-how-much-do-you-think-technology-would-have-changed"&gt;Fast forward, 50 years, how much do you think technology would have changed?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I think wearable technology/Internet of Things will have a big impact on our day to day activities, with the world becoming even more interconnected. Whether this is a good thing or not (e.g. potential privacy implications, nanny state etc) only time will tell.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Meet the Team: Sam Rayner</title>
+    <link rel="alternate" href="http://www.terracoding.com/blog/meet-the-team-sam-rayner/"/>
+    <id>http://www.terracoding.com/blog/meet-the-team-sam-rayner/</id>
+    <published>2015-06-26T01:00:00+01:00</published>
+    <updated>2015-08-13T16:53:04+01:00</updated>
+    <author>
+      <name>robert</name>
+    </author>
+    <content type="html">&lt;p&gt;Sam is the Creative Director for Terracoding. When he isn’t working, he’s usually playing &lt;a href="https://en.wikipedia.org/wiki/Ultimate_(sport)"&gt;Ultimate Frisbee&lt;/a&gt; for Great Britain or as captain of &lt;a href="http://www.sheffieldultimate.co.uk/"&gt;Sheffield Steal&lt;/a&gt;. In the summer he likes to help out with &lt;a href="http://www.makomborero.info/"&gt;Makomborero&lt;/a&gt;, a charity dedicated to providing education for underprivileged children in Zimbabwe.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/blog/meet-the-team-sam-rayner/sam.jpg" alt="Sam Rayner" class="img-responsive" /&gt;&lt;/p&gt;
+
+&lt;h4 id="what-is-your-favourite-film"&gt;What is your favourite film?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Casino Royale (looking forward to Spectre!)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="when-you-were-young-what-did-you-want-to-be"&gt;When you were young, what did you want to be?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I’m not sure I had decided when I was very young. Perhaps a tennis player? My dad bought me a book on building websites when I was eleven and I had always been into computers so I knew I wanted to work with them from a fairly young age.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="what-is-your-favourite-season-of-the-year-and-why"&gt;What is your favourite season of the year (and why)?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Summer, mainly because it has the best weather for Ultimate. Sunshine definitely improves my mood too.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="what-inspired-you-to-get-into-software-development"&gt;What inspired you to get into Software Development?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Like most nerds, my first exposure to software was predominantly gaming. I love problem solving and installing mods and skins and things felt like a window into how the games were made. The methodical, logical nature of programming and scientific approach to designing interfaces within constraints satisfies my obsessive tendencies.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="do-you-have-any-irrational-fears"&gt;Do you have any irrational fears?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I don’t like straws. I can’t handle the sound people make with an almost empty milkshake.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="do-you-have-any-suggestions-for-someone-wanting-to-get-into-software-development"&gt;Do you have any suggestions for someone wanting to get into software development?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Don’t be afraid to just dive in and try to hack something together from code snippets. It will probably be awful but if it works just about well enough to scratch an itch then you’ll get that feeling of accomplishment that keeps programmers hooked. You can always come back to the theory later and learn to approach things properly once you’ve caught the bug. Then you advance to the meta-level of satisfaction where you can be proud of how your code is structured as well as what it does.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="what-is-your-favourite-thing-to-eat"&gt;What is your favourite thing to eat?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I eat a lot of cereal at pretty much any time of the day. It’s my go-to dessert or snack. My favourite might have to be fudge though.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="have-you-ever-had-a-hero-in-your-life-someone-you-look-up-to-and-aspire-to-be"&gt;Have you ever had a “hero” in your life, someone you look up to and aspire to be?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;My dad is probably the person I aspire to be like most. There are famous people I admire, like Federer and Obama, but I can’t say I aspire to be like them as I don’t know them intimately as people. He might not be world class at tennis but Dad gets a lot of the important things right.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="which-celebrity-dowould-you-get-mistaken-for"&gt;Which celebrity do/would you get mistaken for?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ha, the only time I have ever been ‘mistaken’ for a celebrity was being called &lt;a href="https://en.wikipedia.org/wiki/John_Cena"&gt;John Cena&lt;/a&gt; by kids in Zimbabwe. I’m sure they knew I wasn’t him though, I just wore a cap and most westerners are big compared to teenage lads out there. I’d love to see their reaction if they actually met a wrestler.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id="what-is-the-most-rewarding-thing-youve-done-so-far"&gt;What is the most rewarding thing you’ve done so far?&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Coaching Ultimate is really rewarding. Seeing some of the Sheffield-based players improve over the years has been great. Volunteering in Zimbabwe is hard to beat though. Tinashe, one of the students I taught a little at Makomborero is now studying Computer Science at the &lt;a href="http://www.iztech.edu.tr/"&gt;Izmir Institute of Technology&lt;/a&gt; in Turkey!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</content>
+  </entry>
+</feed>
