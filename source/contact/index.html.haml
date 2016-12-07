@@ -7,38 +7,42 @@ title: Contact Us
   .container
     .row
       .col-sm-offset-3.col-sm-6
-        %h1 Get in touch
+        %h1 Thanks for stopping by
         :kramdown
-          If you have any questions or a project you would like to talk to us about, drop us an email using the form below. We'll do our best to get back to you the same day.
+          Sorry, Terracoding is no more as of August 2016. Live long and prosper!
 
-    .row
-      .col-sm-12
-        = form_tag "//formspree.io/hello@terracoding.com", method: :post, class: "form-horizontal" do
-          = hidden_field_tag "_next", value: "http://www.terracoding.com/contact/thankyou/"
-          = hidden_field_tag "_subject", value: "Your message to Terracoding"
-          .form-group
-            = label_tag :name, class: "control-label col-sm-3"
-            .col-sm-6
-              = text_field_tag :name, required: true, class: "form-control", autofocus: true, id: :name
-          .form-group
-            = label_tag :email, class: "control-label col-sm-3"
-            .col-sm-6
-              = email_field_tag :email, required: true, name: "_replyto", class: "form-control", id: :email
-          .form-group
-            = label_tag :telephone, class: "control-label col-sm-3"
-            .col-sm-6
-              = telephone_field_tag :telephone, class: "form-control", id: :telephone
-          .form-group
-            = label_tag :company, class: "control-label col-sm-3"
-            .col-sm-6
-              = text_field_tag :company, class: "form-control", id: :company
-          .form-group
-            = label_tag :message, caption: "How can we help you?", class: "control-label col-sm-3"
-            .col-sm-6
-              = text_area_tag :message, required: true, rows: "8", class: "form-control", id: :message
-          .form-group#gotcha
-            = label_tag :ignore, caption: "Please leave blank"
-            = text_field_tag :_gotcha, id: :ignore
-          .form-group
-            .col-sm-offset-3.col-sm-6
-              = submit_tag "Send", class: "btn btn-default pull-right"
+        -# %h1 Get in touch
+        -# :kramdown
+        -#   If you have any questions or a project you would like to talk to us about, drop us an email using the form below. We'll do our best to get back to you the same day.
+
+    -# .row
+    -#   .col-sm-12
+    -#     = form_tag "//formspree.io/hello@terracoding.com", method: :post, class: "form-horizontal" do
+    -#       = hidden_field_tag "_next", value: "http://www.terracoding.com/contact/thankyou/"
+    -#       = hidden_field_tag "_subject", value: "Your message to Terracoding"
+    -#       .form-group
+    -#         = label_tag :name, class: "control-label col-sm-3"
+    -#         .col-sm-6
+    -#           = text_field_tag :name, required: true, class: "form-control", autofocus: true, id: :name
+    -#       .form-group
+    -#         = label_tag :email, class: "control-label col-sm-3"
+    -#         .col-sm-6
+    -#           = email_field_tag :email, required: true, name: "_replyto", class: "form-control", id: :email
+    -#       .form-group
+    -#         = label_tag :telephone, class: "control-label col-sm-3"
+    -#         .col-sm-6
+    -#           = telephone_field_tag :telephone, class: "form-control", id: :telephone
+    -#       .form-group
+    -#         = label_tag :company, class: "control-label col-sm-3"
+    -#         .col-sm-6
+    -#           = text_field_tag :company, class: "form-control", id: :company
+    -#       .form-group
+    -#         = label_tag :message, caption: "How can we help you?", class: "control-label col-sm-3"
+    -#         .col-sm-6
+    -#           = text_area_tag :message, required: true, rows: "8", class: "form-control", id: :message
+    -#       .form-group#gotcha
+    -#         = label_tag :ignore, caption: "Please leave blank"
+    -#         = text_field_tag :_gotcha, id: :ignore
+    -#       .form-group
+    -#         .col-sm-offset-3.col-sm-6
+    -#           = submit_tag "Send", class: "btn btn-default pull-right"

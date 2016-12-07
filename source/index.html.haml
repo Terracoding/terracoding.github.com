@@ -8,7 +8,7 @@ title: Digital agency in Sheffield, UK building web and mobile apps
   %h1.sr-only Testimonials
   .container
     .row
-      .col-sm-9
+      .col-sm-12
         #testimonials-carousel.carousel.slide{ data: { ride: "carousel", interval: 12000 }}
           %ol.carousel-indicators
             - data.testimonials.each do |i, t|
@@ -21,15 +21,17 @@ title: Digital agency in Sheffield, UK building web and mobile apps
               %div{ class: "item #{'active' if i == 0}" }
                 = partial "index/testimonial", locals: { testimonial: t }
 
-      #testimonials-action.col-sm-3
-        %p Interested in a Web or mobile app?
-        %p= link_to "Email us", "/contact/", class: "btn btn-inverse"
+      -# #testimonials-action.col-sm-3
+      -#   %p Interested in a Web or mobile app?
+      -#   %p= link_to "Email us", "/contact/", class: "btn btn-inverse"
 
-%section#blog
-  .container
-    %h1 Latest from the blog
-    - post = blog.articles.first
-    %h2= link_to post.title, post.url
+-# %section#blog
+-#   .container
+-#     %h1 Latest from the blog
+-#     - post = blog.articles.first
+-#     %h2= link_to post.title, post.url
+
+= partial "shared/closed"
 
 %section#services
   %h1.sr-only Our Services
@@ -40,10 +42,13 @@ title: Digital agency in Sheffield, UK building web and mobile apps
           Terracoding is a digital agency based in Sheffield. We work closely with businesses in the UK and Australia to improve customer experience, increase sales, and streamline work with great software.
 
         .row.gutters-xs
-          .col-md-6.col-sm-7
-            = link_to "More on our services", "/work/", class: "btn btn-default btn-full-width"
-          .col-md-6.col-sm-5.pad-above-xs
-            = link_to "Get in touch", "/contact/", class: "btn btn-default btn-full-width"
+          .col-xs-12
+            = link_to "More on our services", "/work/", class: "btn btn-default"
+
+          -# .col-md-6.col-sm-7
+          -#   = link_to "More on our services", "/work/", class: "btn btn-default btn-full-width"
+          -# .col-md-6.col-sm-5.pad-above-xs
+          -#   = link_to "Get in touch", "/contact/", class: "btn btn-default btn-full-width"
 
       .col-sm-6.hidden-xs
         .services-image
@@ -71,7 +76,7 @@ title: Digital agency in Sheffield, UK building web and mobile apps
 
           We value testing and like to work in an #{define("Agile")} way, iterating on an idea with the client to produce the best solution.
 
-          For a free consultation about a technical problem your business is facing or an app idea you've had, #{link_to "get in touch", "/contact/"}!
+        //For a free consultation about a technical problem your business is facing or an app idea you've had, #{link_to "get in touch", "/contact/"}!
 
 %section#partners
   .container
